@@ -1,0 +1,1267 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Khoáng vật &amp; Thạch học – Học tương tác</title>
+<style>
+:root{
+  --bg:#f6f7fb;--panel:#fff;--ink:#1c2333;--muted:#5d6780;--line:#dfe3ee;
+  --brand:#1f5fbf;--brand2:#0f3d82;--accent:#e8912d;--ok:#1b9a5b;--bad:#d24545;
+  --c1:#1f5fbf;--c2:#7a3fb8;--c3:#0e8a7d;
+  --shadow:0 2px 10px rgba(20,30,60,.08);
+}
+:root[data-theme=dark]{
+  --bg:#12151e;--panel:#1b2030;--ink:#e6e9f2;--muted:#9aa4bd;--line:#2c3348;
+  --brand:#6ea3ff;--brand2:#9dc1ff;--accent:#f0a850;--shadow:0 2px 10px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.65 "Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--brand)}
+#app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+aside{background:var(--panel);border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow:auto;padding:16px 14px}
+aside h1{font-size:18px;margin:0 0 2px;color:var(--brand2)}
+aside .sub{font-size:12px;color:var(--muted);margin-bottom:14px}
+.chap{margin:6px 0}
+.chap>button{width:100%;text-align:left;background:none;border:0;padding:8px 10px;border-radius:8px;font:600 14px inherit;color:var(--ink);cursor:pointer;display:flex;gap:8px;align-items:center}
+.chap>button:hover{background:var(--bg)}
+.chap.open>button{background:var(--bg)}
+.chap .num{width:24px;height:24px;border-radius:50%;color:#fff;display:grid;place-items:center;font-size:12px;flex:none}
+.sec{display:none;margin:2px 0 6px 18px;border-left:2px solid var(--line)}
+.chap.open .sec{display:block}
+.sec a{display:flex;justify-content:space-between;padding:4px 10px;font-size:13px;color:var(--muted);text-decoration:none;border-radius:6px}
+.sec a:hover{background:var(--bg);color:var(--ink)}
+.sec a.active{color:var(--brand);font-weight:600;background:var(--bg)}
+.sec a .tick{color:var(--ok)}
+.tools{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.tools button,.btn{background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:6px 11px;border-radius:8px;cursor:pointer;font:13px inherit}
+.tools button:hover,.btn:hover{border-color:var(--brand)}
+.btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+main{padding:28px min(5vw,56px) 80px;max-width:1080px;width:100%}
+.topbar{display:none}
+.hero{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;border-radius:16px;padding:28px;margin-bottom:22px}
+.hero h2{margin:0 0 6px;font-size:26px}
+.hero p{margin:0;opacity:.92}
+.hero .pill{display:inline-block;background:rgba(255,255,255,.18);padding:2px 10px;border-radius:99px;font-size:12px;margin-bottom:8px}
+h2.st{font-size:24px;margin:0 0 4px;color:var(--brand2)}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:17px}
+.card h4{margin:14px 0 6px;font-size:15px}
+.note,.warn,.key,.check{border-radius:12px;padding:12px 16px;margin:14px 0;font-size:15px;border-left:5px solid}
+.note{background:rgba(31,95,191,.08);border-color:var(--brand)}
+.key{background:rgba(232,145,45,.12);border-color:var(--accent)}
+.warn{background:rgba(210,69,69,.09);border-color:var(--bad)}
+.check{background:rgba(27,154,91,.1);border-color:var(--ok)}
+.note b:first-child,.key b:first-child,.warn b:first-child,.check b:first-child{display:block;margin-bottom:2px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:rgba(31,95,191,.1)}
+.tw{overflow-x:auto}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.mini{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--panel)}
+.mini h4{margin:0 0 4px}
+.mini.click{cursor:pointer;transition:.15s}
+.mini.click:hover,.mini.sel{border-color:var(--brand);transform:translateY(-1px);box-shadow:var(--shadow)}
+.lab{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0;font-size:14px}
+.lab input[type=range]{flex:1;min-width:140px}
+.lab select,.lab input[type=number],.lab input[type=text]{padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.val{font-weight:700;color:var(--brand);min-width:52px}
+canvas,svg.w{max-width:100%;background:var(--bg);border-radius:12px;border:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tag{display:inline-block;font-size:12px;padding:1px 9px;border-radius:99px;background:var(--bg);border:1px solid var(--line);margin:2px 3px 2px 0}
+.tag.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.bar{height:14px;background:var(--bg);border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),#6ea3ff)}
+.tl{position:relative;margin:14px 0 6px;padding-left:20px;border-left:3px solid var(--brand)}
+.tl .ev{position:relative;margin:0 0 12px;padding:8px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.tl .ev:before{content:"";position:absolute;left:-30px;top:14px;width:14px;height:14px;border-radius:50%;background:var(--panel);border:3px solid var(--brand)}
+.tl .ev.open{border-color:var(--brand)}
+.tl .ev .d{display:none;color:var(--muted);font-size:14px;margin-top:4px}
+.tl .ev.open .d{display:block}
+.tl .ev b{color:var(--brand2)}
+.pager{display:flex;justify-content:space-between;margin-top:30px;gap:10px}
+.mtab{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.mtab button{padding:5px 11px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;cursor:pointer;font:13px inherit}
+.mtab button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+sub,sup{line-height:0}
+.ov{text-decoration:overline}
+.res{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+.sw{display:inline-block;width:18px;height:18px;border-radius:4px;vertical-align:middle;border:1px solid var(--line)}
+@media(max-width:860px){
+  #app{grid-template-columns:1fr}
+  aside{position:fixed;left:-310px;width:290px;z-index:20;transition:.2s;box-shadow:var(--shadow)}
+  aside.on{left:0}
+  .topbar{display:flex;position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--line);padding:8px 14px;gap:10px;align-items:center}
+  .two{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar"><button class="btn" id="menuBtn">☰ Mục lục</button><b>Khoáng vật &amp; Thạch học</b></div>
+<div id="app">
+  <aside id="side"></aside>
+  <main id="main"></main>
+</div>
+<script>
+window.CHAPTERS = [];
+window.CHAPTERS.push({
+ id:'c1', num:1, title:'Tổng quan Khoáng vật & Thạch học',
+ blurb:'Học phần, khoáng vật/thạch học là gì, vai trò – ứng dụng, lịch sử phát triển.',
+ sections:[
+ {id:'gioi-thieu', title:'1. Giới thiệu học phần', html:`
+ <div class="card"><h3>Thông tin học phần</h3>
+ <div class="tw"><table><tr><th>Mã học phần</th><td>GE2079 – Khoáng vật và Thạch học (<i>Mineralogy and Petrology</i>)</td></tr>
+ <tr><th>Số tín chỉ</th><td>3 (30 tiết lý thuyết + 30 tiết thực tập tại CS1 – P.202B8, theo thời khoá biểu)</td></tr>
+ <tr><th>Giảng viên</th><td>Đổng Uyên Thanh – Khoa Kỹ thuật Địa chất và Dầu khí (khoáng vật, thạch học, địa chất môi trường; xử lý môi trường đất, nước, khoáng hoá CO₂)</td></tr>
+ <tr><th>Giáo trình</th><td>[1] <i>Khoáng vật học</i> – La Thị Chích, NXB ĐHQG TP.HCM<br>[2] <i>Thạch học</i> – La Thị Chích, NXB ĐHQG TP.HCM</td></tr></table></div></div>
+
+ <div class="card"><h3>Cấu trúc 8 chương</h3>
+ <div class="tw"><table><tr><th>Chương</th><th>Nội dung chính</th></tr>
+ <tr><td>1. Tổng quan</td><td>Đề cương; định nghĩa và vai trò của khoáng vật học, thạch học; lịch sử phát triển</td></tr>
+ <tr><td>2. Tinh thể học</td><td>Cấu trúc chất rắn; liên kết hoá học; các hệ tinh thể; đối xứng; quan hệ cấu trúc – tính chất</td></tr>
+ <tr><td>3. Khoáng vật học</td><td>Thành phần hoá học; tính chất vật lý; tính chất quang học cơ bản; hình thành – biến đổi; phân loại; khoáng vật phổ biến</td></tr>
+ <tr><td>4. Đá magma</td><td>Nguồn gốc magma; kết tinh; thành phần; kiến trúc, cấu tạo; phân loại; các đá phổ biến</td></tr>
+ <tr><td>5. Đá trầm tích</td><td>Quá trình hình thành; phân loại; kiến trúc, cấu tạo; môi trường trầm tích; các đá phổ biến</td></tr>
+ <tr><td>6. Đá biến chất</td><td>Yếu tố và kiểu biến chất; kiến trúc, cấu tạo; khoáng vật chỉ thị; tướng biến chất; các đá phổ biến</td></tr>
+ <tr><td>7. Phương pháp nghiên cứu</td><td>Kính hiển vi phân cực; nhiễu xạ tia X (XRD); phân tích thành phần hoá học</td></tr>
+ <tr><td>8. Đá quý và khoáng sản</td><td>Đá quý; khoáng sản công nghiệp; ứng dụng; giá trị kinh tế và phát triển bền vững</td></tr></table></div>
+ <p>Ngoài ra có <b>bài tập ứng dụng</b> (tổng hợp, vận dụng và trình bày kết quả).</p></div>
+
+ <div class="card"><h3>Lịch thực hành (tuần 8 → 13)</h3>
+ <div class="tw"><table><tr><th>Tuần</th><th>Bài</th><th>Trọng tâm</th><th>CĐR</th></tr>
+ <tr><td>8</td><td>TH1. Tính đối xứng của tinh thể</td><td>Nhận biết, thực hành các yếu tố và phép đối xứng</td><td>L.O.2.1, 3.1</td></tr>
+ <tr><td>9</td><td>TH2. Hình thái và tính chất khoáng vật</td><td>Quan sát hình thái, xác định tính chất đặc trưng, nhận dạng</td><td>L.O.2.1</td></tr>
+ <tr><td>10</td><td>TH3. Kính hiển vi phân cực</td><td>Làm quen kính, quan sát đặc điểm khoáng vật dưới kính</td><td>L.O.2.1</td></tr>
+ <tr><td>11</td><td>TH4. Đá magma</td><td>Quan sát, mô tả, nhận dạng từ mẫu thực hành</td><td>L.O.2.1</td></tr>
+ <tr><td>12</td><td>TH5. Đá trầm tích và đá biến chất</td><td>Quan sát, mô tả, phân biệt, nhận dạng</td><td>L.O.2.1</td></tr>
+ <tr><td>13</td><td>Thi thực hành</td><td>Kiểm tra kỹ năng quan sát và nhận dạng mẫu</td><td>L.O.2.1</td></tr></table></div></div>
+
+ <div class="card"><h3>Chuẩn đầu ra (CĐR) – bạn cần đạt gì?</h3>
+ <div class="tw"><table><tr><th>CĐR</th><th>Nội dung</th><th>Đánh giá qua</th></tr>
+ <tr><td>L.O.1.1</td><td>Mô tả và phân loại các nhóm khoáng vật, đá dựa trên thành phần hoá học, cấu trúc tinh thể, tính chất vật lý</td><td>Thi cuối kỳ, quá trình</td></tr>
+ <tr><td>L.O.1.2</td><td>So sánh, giải thích khác biệt giữa khoáng vật, đá magma, đá trầm tích và đá biến chất</td><td>Thi cuối kỳ, quá trình</td></tr>
+ <tr><td>L.O.2.1</td><td>Quan sát, nhận dạng, trình bày đặc điểm khoáng vật và đá từ mẫu cầm tay và lát mỏng</td><td>Thực hành, quá trình</td></tr>
+ <tr><td>L.O.2.2</td><td>Diễn giải và áp dụng kết quả kính hiển vi, XRD, phân tích hoá học vào tình huống thực tế</td><td>Thi cuối kỳ, bài tập ứng dụng, quá trình</td></tr>
+ <tr><td>L.O.3.1</td><td>Tuân thủ quy định an toàn, quy trình thực hành, chuẩn mực học thuật</td><td>Thực hành, quá trình</td></tr>
+ <tr><td>L.O.3.2</td><td>Phối hợp làm việc nhóm, trình bày kết quả học tập và thực hành</td><td>Bài tập ứng dụng, quá trình</td></tr></table></div></div>
+
+ <div class="card"><h3>Cơ cấu điểm – tính thử điểm của bạn</h3><div data-w="grading"></div>
+ <div class="note"><b>Hình thức thi cuối kỳ</b>Trắc nghiệm 50 câu MCQ / 60 phút. Thi thực hành tại Phòng thí nghiệm Thạch học: quan sát, mô tả, nhận dạng khoáng vật và đá từ mẫu cầm tay và lát mỏng dưới kính hiển vi.</div></div>`},
+
+ {id:'la-gi', title:'2. Khoáng vật học và thạch học là gì?', html:`
+ <p>Hai ngành này là “hai mặt của một đồng xu”: một bên nghiên cứu <b>viên gạch</b> (khoáng vật), một bên nghiên cứu <b>ngôi nhà</b> (đá).</p>
+ <div class="two">
+  <div class="card" style="border-top:5px solid var(--c1)"><h3>Khoáng vật học</h3><p>Ngành khoa học nghiên cứu <b>khoáng vật</b> – những thành phần cơ bản cấu tạo nên đá.</p>
+   <b>Nội dung nghiên cứu:</b><ul><li>Thành phần hoá học</li><li>Cấu trúc tinh thể</li><li>Hình thái và tính chất vật lý</li><li>Nguồn gốc và điều kiện hình thành</li><li>Phân loại và ứng dụng</li></ul>
+   <b>Đối tượng:</b> thạch anh, feldspar, calcite, mica…</div>
+  <div class="card" style="border-top:5px solid var(--c2)"><h3>Thạch học</h3><p>Ngành khoa học nghiên cứu <b>đá</b> – vật liệu tự nhiên cấu tạo nên vỏ Trái Đất.</p>
+   <b>Nội dung nghiên cứu:</b><ul><li>Thành phần khoáng vật và hoá học</li><li>Kiến trúc và cấu tạo</li><li>Nguồn gốc và quá trình hình thành</li><li>Phân loại các nhóm đá</li><li>Sự biến đổi và ứng dụng</li></ul>
+   <b>Đối tượng:</b> đá magma, đá trầm tích, đá biến chất</div></div>
+ <div class="card"><h3>Mối liên hệ – bấm từng mũi tên để hiểu “suy luận địa chất”</h3><div data-w="chain"></div></div>
+ <div class="key"><b>Ghi nhớ</b>Khoáng vật → đá → lịch sử địa chất. Nhận dạng khoáng vật là cơ sở để phân loại đá và giải thích nguồn gốc của nó.</div>
+ <div class="note"><b>Mở rộng – định nghĩa “khoáng vật”</b>Theo cách hiểu chung của khoa học: khoáng vật là chất rắn tự nhiên, thành phần hoá học tương đối xác định, có cấu trúc tinh thể trật tự, thường được hình thành bởi các quá trình địa chất. Điều này nối trực tiếp sang Chương 2 (Tinh thể học).</div>`},
+
+ {id:'vai-tro', title:'3. Vai trò và ứng dụng', html:`
+ <h3>Sáu vai trò chính</h3>
+ <div class="grid">
+  <div class="mini"><h4>🌍 Hiểu thành phần Trái Đất</h4>Khoáng vật và đá là vật liệu cơ bản cấu tạo nên vỏ Trái Đất.</div>
+  <div class="mini"><h4>⚙ Giải thích quá trình địa chất</h4>Thành phần, kiến trúc, cấu tạo của đá phản ánh điều kiện và quá trình hình thành chúng.</div>
+  <div class="mini"><h4>⏳ Tái lập lịch sử địa chất</h4>Lưu giữ bằng chứng về hoạt động magma, trầm tích, biến chất và kiến tạo trong quá khứ.</div>
+  <div class="mini"><h4>🔍 Nhận dạng và phân loại</h4>Dùng tính chất vật lý, hoá học, quang học để xác định, so sánh, phân loại khoáng vật và đá.</div>
+  <div class="mini"><h4>⛏ Đánh giá tài nguyên</h4>Cơ sở cho tìm kiếm, thăm dò và đánh giá khoáng sản.</div>
+  <div class="mini"><h4>♻ Phát triển bền vững</h4>Giúp khai thác, sử dụng tài nguyên hiệu quả và giảm tác động môi trường.</div></div>
+ <h3>Ứng dụng theo lĩnh vực – bấm lọc</h3><div data-w="apps"></div>`},
+
+ {id:'lich-su', title:'4. Lịch sử phát triển', html:`
+ <p>Bấm vào từng mốc để xem ý nghĩa. Sáu giai đoạn cho thấy môn học đi từ <b>mô tả</b> → <b>hình học</b> → <b>phân loại</b> → <b>kính hiển vi</b> → <b>cấu trúc nguyên tử</b> → <b>định lượng, liên ngành</b>.</p>
+ <div data-w="timeline"></div>
+ <div class="key"><b>Ghi nhớ nhanh (dễ ra thi)</b><ul style="margin:4px 0 0"><li>Haüy – cấu trúc có trật tự bên trong tinh thể (XVII–XVIII).</li><li>Mohs – thang độ cứng; Dana – hệ thống phân loại (đầu–giữa XIX).</li><li>Sorby – lát mỏng + ánh sáng phân cực (giữa–cuối XIX).</li><li>Nhiễu xạ tia X 1912; W.H. Bragg &amp; W.L. Bragg – xác định cấu trúc tinh thể.</li><li>XRD, XRF, SEM–EDS, Raman, đồng vị, mô hình hoá – hiện đại (XX–XXI).</li></ul></div>`},
+
+ {id:'thao-luan', title:'5. Thảo luận và tổng kết', html:`
+ <p>Chín câu hỏi đặt vấn đề của giảng viên. Hãy tự trả lời trước, rồi bấm để xem gợi ý.</p><div data-w="discuss"></div>
+ <div class="check"><b>Tổng kết chương 1</b>Khoáng vật học nghiên cứu “viên gạch”, thạch học nghiên cứu “ngôi nhà”; cả hai là nền tảng để hiểu Trái Đất, tìm tài nguyên, xây dựng, bảo vệ môi trường và phát triển vật liệu. Môn học đánh giá 50% thực hành + 50% thi, nên phải học cả lý thuyết lẫn nhận dạng mẫu.</div>`}
+ ]
+});
+
+</script>
+<script>
+window.CHAPTERS.push({
+ id:'c2', num:2, title:'Tinh thể học',
+ blurb:'Chất rắn kết tinh, mạng và ô mạng, 7 hệ – 14 mạng Bravais, đối xứng, chỉ số Miller, hình đơn – hình ghép, cấu trúc → tính chất.',
+ sections:[
+ {id:'ket-tinh', title:'1. Chất rắn kết tinh – từ cấu trúc đến hình dạng', html:`
+ <p><b>Câu hỏi đặt ra:</b> Tại sao khoáng vật lại có những hình dạng đặc trưng? Vì hình dạng bên ngoài là “dấu vân tay” của <b>cấu trúc bên trong</b>: halite (NaCl) → khối lập phương; thạch anh (SiO₂) → lăng trụ sáu phương; calcite (CaCO₃) → mặt thoi (hệ ba phương); pyrite (FeS₂) → khối lập phương (hệ lập phương).</p>
+ <div class="key"><b>Định nghĩa</b>Tinh thể là chất rắn có các nguyên tử / ion / phân tử được sắp xếp <b>có trật tự và tuần hoàn</b> trong không gian ba chiều.</div>
+ <div class="card"><h3>So sánh chất rắn kết tinh và vô định hình</h3>
+ <div class="tw"><table><tr><th></th><th>Chất rắn kết tinh (tinh thể)</th><th>Chất rắn vô định hình</th></tr>
+ <tr><td>Sắp xếp hạt</td><td>Trật tự, tuần hoàn xa (trật tự xa) trong không gian 3D</td><td>Không có trật tự xa, không tuần hoàn</td></tr>
+ <tr><td>Mạng tinh thể</td><td>Có mạng tinh thể xác định</td><td>Không có</td></tr>
+ <tr><td>Hình dạng</td><td>Khi phát triển thuận lợi → có mặt phẳng, hình dạng đặc trưng</td><td>Không có mặt phẳng hay hình dạng đặc trưng</td></tr>
+ <tr><td>Nhiễu xạ tia X (XRD)</td><td>Đỉnh nhiễu xạ sắc, hẹp</td><td>Dải rộng, không có đỉnh sắc nét</td></tr>
+ <tr><td>Ví dụ</td><td>Thạch anh (SiO₂)</td><td>Obsidian (thuỷ tinh núi lửa)</td></tr></table></div>
+ <div data-w="order"></div></div>
+ <div class="key"><b>Ghi nhớ</b>Trật tự và tuần hoàn trong cấu trúc chính là điểm cốt lõi giúp phân biệt chất rắn <b>kết tinh</b> với chất rắn <b>vô định hình</b>. XRD là phép thử phân biệt “quyết định”.</div>
+ <div class="note"><b>Cùng thành phần – khác tính chất?</b> Kim cương và than chì đều là carbon nhưng một loại cứng nhất, một loại mềm gần nhất. Lý do nằm ở cấu trúc – bạn sẽ tự khám phá ở mục 9 của chương này.</div>`},
+
+ {id:'mang', title:'2. Cấu trúc tuần hoàn: nút mạng, cơ sở, ô mạng', html:`
+ <p>Để mô tả một tinh thể chỉ cần biết hai thứ: <b>“khuôn” lặp lại</b> (mạng) và <b>“vật” đặt vào khuôn</b> (cơ sở).</p>
+ <div class="grid">
+  <div class="mini"><h4>🔵 Nút mạng (lattice point)</h4>Vị trí lý tưởng trong mạng, gắn với một nhóm nguyên tử / ion hoặc không có nguyên tử.</div>
+  <div class="mini"><h4>🕸 Mạng tinh thể (lattice)</h4>Tập hợp vô hạn các nút mạng sắp xếp tuần hoàn trong không gian.</div>
+  <div class="mini"><h4>⚛ Cơ sở (basis)</h4>Nhóm một hoặc nhiều nguyên tử / ion gắn vào mỗi nút mạng.</div></div>
+ <div class="key"><b>Công thức cốt lõi</b>Cấu trúc tinh thể = <b>Mạng tinh thể + Cơ sở</b>. Chỉ cần biết mạng cơ sở và cơ sở là mô tả được toàn bộ cấu trúc.</div>
+ <div class="card"><h3>Thử ngay: dựng mạng 2D từ ô cơ sở</h3><div data-w="lattice2d"></div></div>
+ <div class="card"><h3>Ví dụ: Halite (NaCl)</h3><ul><li>Hệ lập phương, mạng <b>F</b> (lập phương tâm mặt – FCC).</li><li>Cơ sở gồm 2 ion: Cl⁻ và Na⁺ đặt theo phương chéo khối.</li><li>Công thức: NaCl. Sự lặp lại của cơ sở ở mọi nút mạng tạo nên cấu trúc halite.</li></ul></div>
+ <div class="card"><h3>Ô mạng cơ sở (unit cell)</h3><p>Đơn vị nhỏ nhất của mạng tinh thể, lặp lại tuần hoàn trong không gian tạo nên cấu trúc. Một ô mạng bao gồm vị trí các nút mạng và (nếu có) các nguyên tử/ion thuộc cơ sở nằm trong ô. Ô mạng giống như viên gạch – lặp lại theo ba trục a, b, c để xây nên cả tinh thể.</p>
+ <div class="note"><b>Ghi nhớ</b>Mỗi mạng tinh thể được mô tả đầy đủ nếu biết: <b>ô mạng + cơ sở + thông số mạng (a, b, c; α, β, γ)</b>. Nhiều ô mạng khác nhau có thể biểu diễn cùng một mạng, nhưng ta thường chọn ô đơn giản nhất.</div></div>`},
+
+ {id:'he-tinh-the', title:'3. Thông số mạng và 7 hệ tinh thể', html:`
+ <p>Ô mạng có <b>6 thông số</b>: ba cạnh <b>a, b, c</b> và ba góc <b>α, β, γ</b>.</p>
+ <div class="grid">
+  <div class="mini"><h4>Ba cạnh</h4>a: dọc trục x · b: dọc trục y · c: dọc trục z (chiều dài cạnh ô mạng).</div>
+  <div class="mini"><h4>Ba góc</h4>α: giữa trục b và c · β: giữa trục a và c · γ: giữa trục a và b (0° &lt; α, β, γ &lt; 180°).</div></div>
+  <div class="key"><b>Ý nghĩa</b>Thông số mạng là “địa chỉ” của ô mạng và là cơ sở để xác định hệ tinh thể, kiểu mạng Bravais và nhiều tính chất của tinh thể.</div>
+ <div class="card"><h3>Phòng thí nghiệm: kéo thông số, xem hệ tinh thể tự đổi</h3>
+ <p style="margin-top:0">Kéo chuột trên hình để xoay. Chọn nhanh một hệ hoặc tự chỉnh 6 thông số; web sẽ nhận diện hệ tinh thể.</p>
+ <div data-w="cell3d" data-mode="params"></div></div>
+ <div class="card"><h3>Bảng 7 hệ tinh thể</h3><div class="tw"><table>
+ <tr><th>Hệ</th><th>Cạnh</th><th>Góc</th><th>Ví dụ khoáng vật</th></tr>
+ <tr><td>1. Lập phương (cubic)</td><td>a = b = c</td><td>α = β = γ = 90°</td><td>Halite (NaCl), pyrite (FeS₂)</td></tr>
+ <tr><td>2. Tứ phương (tetragonal)</td><td>a = b ≠ c</td><td>α = β = γ = 90°</td><td>Zircon (ZrSiO₄), rutile (TiO₂)</td></tr>
+ <tr><td>3. Trực thoi (orthorhombic)</td><td>a ≠ b ≠ c</td><td>α = β = γ = 90°</td><td>Olivine (Mg,Fe)₂SiO₄, topaz</td></tr>
+ <tr><td>4. Ba phương (trigonal)</td><td>a = b = c</td><td>α = β = γ ≠ 90° (ô thoi)</td><td>Calcite (CaCO₃), quartz (SiO₂)*</td></tr>
+ <tr><td>5. Sáu phương (hexagonal)</td><td>a = b ≠ c</td><td>α = β = 90°, γ = 120°</td><td>Beryl, graphite (C)</td></tr>
+ <tr><td>6. Một nghiêng (monoclinic)</td><td>a ≠ b ≠ c</td><td>α = γ = 90°, β ≠ 90°</td><td>Gypsum, muscovite, orthoclase</td></tr>
+ <tr><td>7. Ba nghiêng (triclinic)</td><td>a ≠ b ≠ c</td><td>α ≠ β ≠ γ ≠ 90°</td><td>Albite, microcline</td></tr></table></div>
+ <p style="font-size:14px;color:var(--muted)">* Thạch anh α thuộc nhóm điểm 32 (ba phương) nhưng ô mạng có dạng lục giác nên hình dạng trông “sáu phương”. Điều này cho thấy <b>hệ tinh thể xác định bằng đối xứng chứ không chỉ bằng thông số mạng</b>; thông số mạng chỉ là bước đầu tiên để dự đoán.</p></div>
+ <div class="warn"><b>Chú ý khi làm bài</b>Chỉ cần biết 6 thông số (a, b, c, α, β, γ) là có thể xác định được 1 trong 7 hệ tinh thể. Nhưng đảo lại thì không: ví dụ có thể có ô mạng “trông như” lập phương nhưng đối xứng thực thấp hơn.</div>`},
+
+ {id:'lien-ket', title:'4. Liên kết hoá học và phối trí', html:`
+ <p>Các nguyên tử / ion trong tinh thể được giữ với nhau bằng liên kết hoá học – <b>kiểu liên kết và độ mạnh liên kết chi phối cấu trúc tinh thể</b> và các tính chất vật lý của khoáng vật.</p>
+ <div class="tw"><table><tr><th>Liên kết</th><th>Bản chất</th><th>Ví dụ</th><th>Đặc điểm</th></tr>
+ <tr><td>1. Cộng hoá trị</td><td>Các nguyên tử chia sẻ cặp electron</td><td>Kim cương (C), thạch anh (SiO₂)</td><td>Rất mạnh, định hướng; nhiệt độ nóng chảy cao; cứng, giòn</td></tr>
+ <tr><td>2. Ion</td><td>Lực hút tĩnh điện giữa cation và anion</td><td>Halite (NaCl), fluorite (CaF₂)</td><td>Mạnh, định hướng ít; nóng chảy khá cao; cứng, giòn</td></tr>
+ <tr><td>3. Kim loại</td><td>Cation kim loại nằm trong “biển electron” tự do</td><td>Đồng (Cu), sắt tự nhiên (Fe)</td><td>Trung bình – mạnh; dẫn điện, dẫn nhiệt tốt; dẻo, dát mỏng</td></tr>
+ <tr><td>4. Hydrogen</td><td>Lực hút giữa H (δ⁺) gần với nguyên tử âm điện và nguyên tử âm điện khác</td><td>Băng (H₂O), khoáng vật nhóm OH</td><td>Yếu – trung bình; ảnh hưởng nhiệt độ nóng chảy, độ bền</td></tr>
+ <tr><td>5. Van der Waals</td><td>Lực hút yếu giữa các lưỡng cực tức thời</td><td>Graphite (giữa các lớp)</td><td>Rất yếu; mềm, tách lớp dễ dàng</td></tr></table></div>
+ <div class="note"><b>Nhiều kiểu liên kết cùng lúc</b>Calcite có liên kết cộng hoá trị C–O trong nhóm CO₃²⁻ và tương tác ion giữa Ca²⁺ với CO₃²⁻. Graphite: cộng hoá trị trong lớp + Van der Waals giữa lớp. Mỗi khoáng vật thường có một loại liên kết chiếm ưu thế, các loại khác đóng vai trò bổ sung.</div>
+ <h3>Phối trí</h3>
+ <p><b>Số phối trí (CN)</b> là số nguyên tử/ion lân cận gần nhất bao quanh một nguyên tử/ion trung tâm. Nó quyết định hình học đơn vị cấu trúc cơ bản (đa diện phối trí), từ đó ảnh hưởng đến liên kết hoá học và tính chất vật lý. Bấm từng kiểu:</p>
+ <div data-w="coord"></div>
+ <div class="key"><b>Ghi nhớ</b>Mỗi nguyên tử/ion trung tâm có một số phối trí xác định, tạo hình học đặc trưng cho đơn vị cấu trúc. Các đơn vị cấu trúc (tứ diện, bát diện…) liên kết với nhau tạo nên mạng tinh thể khoáng vật.</div>`},
+
+ {id:'bravais', title:'5. 14 kiểu mạng Bravais', html:`
+ <p>Ô mạng cơ sở Bravais là ô nhỏ nhất lặp lại trong không gian ba chiều để tạo nên mạng tinh thể; nó phản ánh đầy đủ đối xứng của tinh thể. Có <b>14 kiểu</b> tương ứng với 7 hệ tinh thể. Mỗi hệ chỉ cho phép những kiểu ô nhất định:</p>
+ <div class="tw"><table><tr><th>Hệ</th><th>Kiểu mạng</th><th>Số kiểu</th></tr>
+ <tr><td>Lập phương</td><td>P, I, F</td><td>3</td></tr><tr><td>Tứ phương</td><td>P, I</td><td>2</td></tr><tr><td>Trực thoi</td><td>P, C, I, F</td><td>4</td></tr>
+ <tr><td>Ba phương</td><td>R</td><td>1</td></tr><tr><td>Sáu phương</td><td>P</td><td>1</td></tr><tr><td>Một nghiêng</td><td>P, C</td><td>2</td></tr><tr><td>Ba nghiêng</td><td>P</td><td>1</td></tr>
+ <tr><th>Tổng</th><th></th><th>14</th></tr></table></div>
+  <div class="key"><b>Ký hiệu</b>P = nguyên thuỷ (Primitive, 1 nút/ô) · I = tâm khối (Body-centered, 2 nút/ô) · F = tâm mặt (Face-centered, 4 nút/ô) · C = tâm đáy (Base-centered, 2 nút/ô) · R = thoi lục giác (Rhombohedral, 1 nút/ô).</div>
+ <div class="card"><h3>Khám phá 14 mạng Bravais</h3><div data-w="cell3d" data-mode="bravais"></div></div>`},
+
+ {id:'doi-xung', title:'6. Đối xứng tinh thể và 32 lớp đối xứng', html:`
+ <div class="key"><b>Định nghĩa</b>Tinh thể có tính đối xứng khi thực hiện các phép đối xứng nhất định thì hình dạng và cấu trúc của tinh thể không thay đổi. Đối xứng xuất hiện vì cấu trúc <b>trật tự và tuần hoàn</b>, và là cơ sở để hiểu hình dạng và tính chất khoáng vật.</div>
+ <h3>Các yếu tố đối xứng</h3>
+ <div class="grid">
+  <div class="mini"><h4>1. Trục đối xứng (n)</h4>Quay quanh trục một góc 360°/n thì tinh thể lặp lại vị trí ban đầu.</div>
+  <div class="mini"><h4>2. Mặt đối xứng (m)</h4>Mặt phẳng chia vật thể thành hai phần đối xứng như gương.</div>
+  <div class="mini"><h4>3. Tâm đối xứng (i)</h4>Điểm sao cho mọi điểm A có điểm tương ứng A' đối diện qua tâm.</div>
+  <div class="mini"><h4>4. Trục xoắn (nₛ)</h4>Kết hợp quay quanh trục và tịnh tiến theo trục (tuần hoàn – có trong cấu trúc, không có ở hình dạng ngoài).</div>
+  <div class="mini"><h4>5. Mặt trượt</h4>Phản xạ qua mặt phẳng kết hợp với tịnh tiến song song với mặt đó.</div></div>
+ <h3>Trục đối xứng và bậc n</h3>
+ <div class="card"><div data-w="symaxis"></div></div>
+ <div class="key"><b>Ghi nhớ</b>Bậc trục (n) càng cao → tính đối xứng càng lớn. Trong tinh thể chỉ có các bậc <b>1, 2, 3, 4 và 6</b>. Ví dụ: thạch anh – trục 3 (dọc c); halite – trục 4, 3 và 2; zircon – trục 4; beryl – trục 6.</div>
+ <h3>32 lớp đối xứng theo 7 hệ tinh thể</h3>
+ <p>Lớp đối xứng (nhóm điểm) là tập hợp các yếu tố đối xứng có thể có của một tinh thể, kết hợp lại. Có <b>32 lớp</b>. Ký hiệu Hermann–Mauguin: <b>n</b> trục bậc n; <b>n̄</b> trục nghịch đảo (trục n kết hợp tâm đối xứng); <b>m</b> mặt đối xứng; <b>n/m</b> trục n vuông góc mặt đối xứng; “<b>mm2, 422, …</b>” tổ hợp nhiều yếu tố; <b>1̄</b> = tâm đối xứng.</p>
+ <div class="tw"><table>
+ <tr><th>Hạng</th><th>Hệ</th><th>Số lớp</th><th>Các lớp (Hermann–Mauguin)</th><th>Ví dụ</th></tr>
+ <tr><td rowspan="3">Thấp</td><td>Ba nghiêng</td><td>2</td><td>1, <span class="ov">1</span></td><td>Albite, microcline</td></tr>
+ <tr><td>Một nghiêng</td><td>3</td><td>2, m, 2/m</td><td>Gypsum, muscovite, orthoclase</td></tr>
+ <tr><td>Trực thoi</td><td>3</td><td>222, mm2, mmm</td><td>Olivine, topaz</td></tr>
+ <tr><td rowspan="3">Trung</td><td>Tứ phương</td><td>7</td><td>4, <span class="ov">4</span>, 4/m, 422, 4mm, <span class="ov">4</span>2m, 4/mmm</td><td>Zircon, rutile</td></tr>
+ <tr><td>Ba phương</td><td>5</td><td>3, <span class="ov">3</span>, 32, 3m, <span class="ov">3</span>m</td><td>Calcite (<span class="ov">3</span>m), thạch anh α (32), tourmaline (3m)</td></tr>
+ <tr><td>Sáu phương</td><td>7</td><td>6, <span class="ov">6</span>, 6/m, 622, 6mm, <span class="ov">6</span>m2, 6/mmm</td><td>Beryl (6/mmm), graphite (6/mmm), apatite (6/m)</td></tr>
+ <tr><td>Cao</td><td>Lập phương</td><td>5</td><td>23, m<span class="ov">3</span>, 432, <span class="ov">4</span>3m, m<span class="ov">3</span>m</td><td>Halite, kim cương, fluorite (m<span class="ov">3</span>m); pyrite (m<span class="ov">3</span>)</td></tr>
+ <tr><th colspan="2">Tổng</th><th>32</th><td colspan="2">2 + 3 + 3 + 7 + 5 + 7 + 5</td></tr></table></div>
+  <div class="note"><b>Ý nghĩa</b>32 lớp đối xứng giúp phân loại và nhận dạng khoáng vật, xác định tính chất vật lý (chiết suất, lưỡng chiết…) và là nền tảng phân tích cấu trúc tinh thể, ứng dụng trong công nghệ vật liệu.</div>`},
+
+ {id:'miller', title:'7. Mặt tinh thể và chỉ số Miller', html:`
+ <p>Chỉ số Miller <b>(hkl)</b> là hệ chỉ số dùng để xác định phương hướng của một mặt tinh thể dựa trên giao điểm của mặt với các trục toạ độ.</p>
+ <h3>5 bước xác định (hkl)</h3>
+ <ol><li>Xác định <b>giao điểm</b> của mặt với các trục a, b, c (theo đơn vị a, b, c).</li>
+ <li>Lấy <b>nghịch đảo</b> các giao điểm: 1/a, 1/b, 1/c.</li>
+ <li>Khử mẫu chung nhỏ nhất → được <b>ba số nguyên tối giản</b> h, k, l.</li>
+ <li>Nếu giao điểm ở phía âm của trục → đặt dấu gạch ngang trên chỉ số (<span class="ov">h</span>).</li>
+ <li>Viết trong ngoặc tròn: <b>(hkl)</b>.</li></ol>
+ <div class="tw"><table><tr><th>Mặt</th><th>Giao điểm (a, b, c)</th><th>Nghịch đảo</th><th>Miller</th></tr>
+ <tr><td>⊥ a (mặt bên)</td><td>1, ∞, ∞</td><td>1, 0, 0</td><td>(100)</td></tr>
+ <tr><td>⊥ b</td><td>∞, 1, ∞</td><td>0, 1, 0</td><td>(010)</td></tr>
+ <tr><td>⊥ c</td><td>∞, ∞, 1</td><td>0, 0, 1</td><td>(001)</td></tr>
+ <tr><td>Mặt chéo</td><td>1, 1, 1</td><td>1, 1, 1</td><td>(111)</td></tr></table></div>
+ <div class="card"><h3>Thử ngay: nhập giao điểm → ra chỉ số Miller và mặt được vẽ</h3><div data-w="miller"></div></div>
+ <div class="key"><b>Ghi nhớ</b>(hkl): mặt cắt không song song với ba trục. 0 nghĩa là mặt <b>song song</b> với trục đó (giao điểm ở vô cực). {hkl}: <b>họ mặt</b> tương đương do đối xứng (dùng ngoặc nhọn – xem mục 8). [uvw] là phương của một trục. Với tinh thể không vuông (hệ ba, sáu phương) người ta dùng thêm chỉ số thứ tư (hkil) với i = −(h+k).</div>`},
+
+ {id:'hinh-don', title:'8. Hình đơn và hình ghép', html:`
+ <div class="two">
+  <div class="card" style="border-top:5px solid var(--c1)"><h3>Hình đơn</h3>Tất cả các mặt được suy ra từ <b>1 mặt</b> cho trước thông qua các yếu tố đối xứng. Tinh thể chỉ giới hạn bởi các mặt cùng một hình. Ví dụ: halite {100} (hình lập phương).</div>
+  <div class="card" style="border-top:5px solid var(--c2)"><h3>Hình ghép</h3>Tất cả các mặt suy ra từ <b>2 hay nhiều mặt khác nhau</b> (hai hình đơn trở lên). Ví dụ: thạch anh (lăng trụ + hai hình thoi), calcite, fenspat kali.</div></div>
+ <div class="key"><b>Ghi nhớ</b>Hình đơn thường có hình dạng đơn giản, cân đối; hình ghép phổ biến hơn trong tự nhiên; hình thái tinh thể chịu ảnh hưởng của điều kiện thành tạo, môi trường và tốc độ phát triển các mặt. Có tất cả <b>47 hình đơn</b> trong tinh thể học.</div>
+ <div class="tw"><table><tr><th>Hạng đối xứng</th><th>Các hình đơn tiêu biểu </th></tr>
+ <tr><td><b>Hạng thấp</b> (ba nghiêng, một nghiêng, trực thoi)</td><td>1. Một mặt · 2. Đôi mặt · 3. Nhị diện · 4. Lăng trụ thoi · 5. Tứ diện thoi · 6. Tháp thoi · 7. Tháp đôi hệ thoi</td></tr>
+ <tr><td><b>Hạng trung</b> (tứ, ba, sáu phương)</td><td>Nhóm lăng trụ (đơn, kép) · nhóm tháp (đơn, kép) · nhóm tháp đôi (đơn, kép) · tứ diện bốn phương · tam giác lệch bốn phương · hình mặt thoi · tam giác lệch ba phương · nhóm hình mặt thang</td></tr>
+ <tr><td><b>Hạng cao</b> (lập phương) – 15 hình</td><td>Tứ diện, tứ diện ba tam giác, ba tứ giác, ba ngũ giác, sáu tứ diện · sáu mặt (lập phương), sáu mặt bốn · tám mặt, tám mặt ba tam giác, ba tứ giác, ba ngũ giác, sáu tám mặt · 12 mặt ngũ giác, 24 mặt tứ giác, 12 mặt thoi </td></tr></table></div>
+ <div class="note"><b>Cách nhớ</b>Hạng thấp: không có trục bậc &gt; 2. Hạng trung: có <b>một</b> trục bậc &gt; 2 (3, 4 hoặc 6). Hạng cao: có nhiều trục bậc 3 (hệ lập phương). </div>`},
+
+ {id:'tinh-chat', title:'9. Tính chất tinh thể & quan hệ cấu trúc – tính chất', html:`
+ <h3>Năm tính chất cơ bản của tinh thể</h3>
+ <div class="grid">
+  <div class="mini"><h4>1. Tính đồng nhất</h4>Phần khác nhau của tinh thể có cấu trúc và thành phần tương ứng giống nhau. VD: halite đồng nhất trong toàn bộ tinh thể.</div>
+  <div class="mini"><h4>2. Tính dị hướng</h4>Một số tính chất vật lý thay đổi theo phương trong tinh thể. VD: calcite có chiết suất khác nhau theo các phương khác nhau.</div>
+  <div class="mini"><h4>3. Tính đối xứng</h4>Các yếu tố của tinh thể lặp lại qua phép quay, phản xạ hoặc nghịch đảo. VD: halite có đối xứng cao (hệ lập phương).</div>
+  <div class="mini"><h4>4. Tính tự tạo mặt</h4>Khi phát triển trong điều kiện thuận lợi, tinh thể có khả năng tự hình thành các mặt phẳng giới hạn. VD: thạch anh (quartz) lăng trụ sáu cạnh với mặt chóp ở đầu.</div>
+  <div class="mini"><h4>5. Góc giữa các mặt không đổi</h4>Góc giữa hai mặt tinh thể tương ứng của cùng một khoáng vật là <b>không đổi</b> ở cùng điều kiện, dù kích thước mặt thay đổi (định luật hằng số góc – Steno).</div></div>
+ <h3>Cấu trúc tinh thể → tính chất khoáng vật</h3>
+ <p>Cấu trúc tinh thể là <b>nguyên nhân gốc rễ</b> quyết định mọi tính chất của khoáng vật. Chuỗi suy luận: <i>loại liên kết, khoảng cách, phối trí, hình học mạng, đối xứng, kích thước ion, khuyết tật</i> → <i>tính chất</i>.</p>
+ <div class="tw"><table><tr><th>Tính chất</th><th>Liên quan đến</th><th>Ví dụ</th></tr>
+ <tr><td>Hình dạng</td><td>Hệ tinh thể và mặt ưu tiên phát triển</td><td>Halite: lập phương</td></tr>
+ <tr><td>Cát khai</td><td>Mặt liên kết yếu theo một số hướng</td><td>Mica: cát khai hoàn hảo (001); halite: theo (100)</td></tr>
+ <tr><td>Độ cứng</td><td>Liên kết trong mạng, độ bền liên kết</td><td>Kim cương (cộng hoá trị 3D) rất cứng; graphite (liên kết yếu giữa lớp) rất mềm</td></tr>
+ <tr><td>Nhiệt độ nóng chảy</td><td>Liên kết trong mạng, năng lượng mạng</td><td>Corundum ≈ 2050 °C; halite ≈ 801 °C</td></tr>
+ <tr><td>Dẫn điện</td><td>Loại liên kết, cấu trúc điện tử</td><td>Kim loại và graphite dẫn tốt; halite, thạch anh cách điện</td></tr>
+ <tr><td>Độ hoà tan</td><td>Năng lượng mạng và mức độ phân cực</td><td>Halite tan dễ trong nước; thạch anh gần như không</td></tr>
+ <tr><td>Tỷ trọng</td><td>Khối lượng nguyên tử và độ đóng gói</td><td>Galena (PbS) cao; thạch anh trung bình</td></tr>
+ <tr><td>Màu sắc, vết vạch</td><td>Thành phần hoá học và cấu trúc điện tử</td><td>Malachite xanh lục; hematite vết đỏ nâu</td></tr>
+ <tr><td>Từ tính</td><td>Sắp xếp moment từ</td><td>Magnetite từ mạnh; thạch anh không từ tính</td></tr></table></div>
+ <div class="card"><h3>Ví dụ điển hình: Kim cương – Graphite (cùng là carbon)</h3><div data-w="dg"></div></div>
+ <div class="check"><b>Kết luận chương</b>Cùng một nguyên tố hoá học (C) nhưng khác cấu trúc tinh thể → khác tính chất vật lý và hoá học → khác ứng dụng. Hiểu cấu trúc là “chìa khoá” để nhận biết, mô tả, giải thích và ứng dụng khoáng vật một cách khoa học.</div>`}
+ ]
+});
+
+</script>
+<script>
+window.CHAPTERS.push({
+ id:'c3', num:3, title:'Khoáng vật học (Phần 1)',
+ blurb:'Thành phần hoá học, thay thế đồng hình, dung dịch rắn, đa hình; toàn bộ tính chất vật lý; tính chất quang học cơ bản, PPL – XPL.',
+ sections:[
+ {id:'thanh-phan', title:'1. Thành phần hoá học (1.1–1.3)', html:`
+ <div class="card"><h3>Mục tiêu chương</h3><ul>
+ <li>Trình bày thành phần hoá học và các dạng biến đổi thành phần của khoáng vật.</li>
+ <li>Giải thích mối liên hệ giữa cấu trúc tinh thể, liên kết hoá học và tính chất khoáng vật.</li>
+ <li>Nhận biết khoáng vật dựa trên tính chất vật lý cơ bản; mô tả tính chất quang học cơ bản.</li>
+ <li>Giải thích quá trình hình thành, biến đổi, phá huỷ; phân loại theo thành phần hoá học và anion chủ đạo; nhận diện khoáng vật tạo đá và khoáng vật quặng phổ biến.</li></ul>
+ <div class="note"><b>Phạm vi</b>Hiện có mục 1, 2, 3 (Phần 1). Các mục 4–6 (hình thành – biến đổi; phân loại; khoáng vật phổ biến) sẽ bổ sung sau.</div></div>
+ <h3>1.1. Khái niệm thành phần hoá học</h3>
+ <ul><li>Nguyên tố hoá học cấu tạo nên khoáng vật.</li><li>Công thức hoá học của khoáng vật.</li><li>Thành phần <b>lý tưởng</b> và thành phần <b>thực tế</b> (thường lệch vì thay thế đồng hình, tạp chất).</li>
+ <li>Khoáng vật <b>đơn chất</b> (vàng Au, kim cương C, than chì C) và <b>hợp chất</b> (calcite CaCO₃, orthoclase KAlSi₃O₈, thạch anh SiO₂).</li></ul>
+ <h3>1.2. Các nguyên tố phổ biến trong vỏ Trái Đất</h3>
+ <p><b>Chỉ số Clarke</b> là hàm lượng trung bình của một nguyên tố trong vỏ Trái Đất (% khối lượng hoặc ppm). Rê chuột / bấm vào từng cột:</p>
+ <div data-w="clarke"></div>
+ <div class="key"><b>Ghi nhớ</b>Chỉ <b>8 nguyên tố</b> (O, Si, Al, Fe, Ca, Na, K, Mg) chiếm <b>98,5%</b> khối lượng vỏ Trái Đất; hơn 90 nguyên tố còn lại chỉ ≈ 1,5%. Vì oxy và silic áp đảo nên <b>silicat</b> là nhóm khoáng vật phổ biến nhất – đơn vị cấu trúc cơ bản là tứ diện SiO₄.</div>
+ <h3>1.3. Công thức hoá học khoáng vật – đọc “mật mã” của olivine (Mg,Fe)₂SiO₄</h3>
+ <div class="tw"><table><tr><th>Phần</th><th>Ý nghĩa</th></tr>
+ <tr><td>SiO₄</td><td>Đơn vị cấu trúc dạng <b>tứ diện</b>: Si⁴⁺ ở giữa, 4 O²⁻ ở đỉnh</td></tr>
+ <tr><td>(Mg,Fe)</td><td>Hai cation <b>cùng chiếm một vị trí tinh thể học</b> (vị trí bát diện M) – dấu phẩy nghĩa là “thay thế lẫn nhau”</td></tr>
+ <tr><td>Chỉ số dưới 2</td><td>Có 2 vị trí M cho mỗi Si</td></tr>
+ <tr><td>Mg²⁺ ↔ Fe²⁺</td><td><b>Thay thế đồng hình</b>: cùng điện tích +2, bán kính gần nhau</td></tr></table></div>
+ <p>Như vậy một công thức khoáng vật cho biết cùng lúc: <b>thành phần – cấu trúc – vị trí tinh thể học – khả năng thay thế đồng hình</b>.</p>`},
+
+ {id:'thay-the', title:'2. Liên kết và thay thế đồng hình (1.4–1.5)', html:`
+ <h3>1.4. Liên kết hoá học trong khoáng vật</h3>
+ <p>(Đã học ở Chương 2, mục 4.) Tóm tắt nhanh:</p>
+ <div class="tw"><table><tr><th>Kiểu liên kết</th><th>Đặc điểm chính</th><th>Tính chất thường gặp</th></tr>
+ <tr><td>Ion</td><td>Lực hút giữa các ion trái dấu</td><td>Giòn, độ cứng trung bình</td></tr>
+ <tr><td>Cộng hoá trị</td><td>Dùng chung electron</td><td>Bền, thường có độ cứng cao</td></tr>
+ <tr><td>Kim loại</td><td>Electron chuyển động tự do</td><td>Dẫn điện, ánh kim</td></tr>
+ <tr><td>Van der Waals</td><td>Liên kết yếu</td><td>Mềm, dễ tách</td></tr>
+ <tr><td>Hydrogen</td><td>Liên quan đến nhóm OH hoặc H₂O</td><td>Ảnh hưởng độ bền và nhiệt</td></tr></table></div>
+ <div class="note">Calcite có nhiều kiểu liên kết: cộng hoá trị C–O trong CO₃²⁻ và tương tác ion giữa Ca²⁺ với CO₃²⁻.</div>
+ <h3>1.5. Hiện tượng thay thế đồng hình</h3>
+ <div class="key"><b>Định nghĩa</b>Các ion có <b>kích thước tương đương</b> thay thế nhau tại cùng vị trí tinh thể học.</div>
+ <div class="grid"><div class="mini"><h4>Đồng hoá trị</h4>Mg²⁺ ↔ Fe²⁺ (olivine). Điện tích như nhau (+2 ↔ +2) nên cân bằng điện tích sẵn.</div>
+ <div class="mini"><h4>Dị hoá trị</h4>Na⁺ + Si⁴⁺ ↔ Ca²⁺ + Al³⁺ (plagioclase). Điện tích tổng (+5 = +5) vẫn cân bằng nhờ <b>thay thế ghép cặp</b>.</div></div>
+ <p>Ba yếu tố quyết định khả năng thay thế: <b>bán kính ion gần nhau</b>, <b>điện tích phù hợp</b>, <b>nhiệt độ – áp suất thích hợp</b> (nhiệt độ cao làm thay thế dễ hơn).</p>
+ <div class="card"><h3>Bảng bán kính ion theo số phối trí (Å) + máy kiểm tra thay thế</h3><div data-w="iso"></div></div>
+ <div class="warn"><b>Nhớ</b>Bán kính ion <b>không cố định</b>: phụ thuộc số phối trí (CN), trạng thái oxy hoá và spin. Vì vậy phải so sánh các ion ở <b>cùng CN</b>.</div>`},
+
+ {id:'dung-dich-ran', title:'3. Dung dịch rắn, đa hình, tạp chất & màu (1.6–1.8)', html:`
+ <h3>1.6. Dung dịch rắn</h3>
+ <p>Dung dịch rắn là cấu trúc tinh thể có <b>thành phần hoá học biến đổi</b>: giữ nguyên khung tinh thể, chỉ thay đổi tỷ lệ các ion thay thế.</p>
+ <div class="grid"><div class="mini"><h4>Hoàn toàn</h4>Có thể trộn ở mọi tỷ lệ 0–100%. VD: forsterite Mg₂SiO₄ – fayalite Fe₂SiO₄; albite NaAlSi₃O₈ – anorthite CaAl₂Si₂O₈ (chuỗi plagioclase).</div>
+ <div class="mini"><h4>Không hoàn toàn (hạn chế)</h4>Chỉ thay thế được trong khoảng giới hạn; có khoảng không trộn lẫn. VD: calcite CaCO₃ – magnesite MgCO₃ (khoảng không trộn lẫn ở nhiệt độ thấp); sphalerite (Zn,Fe)S chỉ chứa Fe hạn chế.</div></div>
+ <div class="card"><h3>Trượt thử: thay đổi thành phần dung dịch rắn</h3><div data-w="solid"></div></div>
+ <h3>1.7. Đa hình và đồng hình</h3>
+ <div class="two"><div class="mini"><h4>Đa hình (polymorphism)</h4>Cùng thành phần hoá học nhưng <b>khác cấu trúc</b> (→ khác tính chất).</div>
+ <div class="mini"><h4>Đồng hình (isomorphism)</h4>Cấu trúc tương tự nhưng <b>thành phần khác</b> (VD: forsterite – fayalite).</div></div>
+ <div class="tw"><table><tr><th>Thành phần</th><th>Các dạng đa hình</th><th>Điều kiện / đặc điểm</th></tr>
+ <tr><td>C</td><td>Kim cương – graphite</td><td>Cấu trúc và độ cứng khác nhau</td></tr>
+ <tr><td>CaCO₃</td><td>Calcite – aragonite</td><td>Hệ tinh thể khác nhau (ba phương – trực thoi)</td></tr>
+ <tr><td>Al₂SiO₅</td><td>Andalusite – kyanite – sillimanite</td><td>Chỉ thị nhiệt độ – áp suất</td></tr>
+ <tr><td>SiO₂</td><td>Quartz – tridymite – cristobalite</td><td>Bền ở các khoảng nhiệt độ khác nhau</td></tr></table></div>
+ <div class="card"><h3>Chỉ thị nhiệt độ – áp suất: Al₂SiO₅ (nhấp chuột vào giản đồ)</h3><div data-w="poly"></div></div>
+ <h3>1.8. Tạp chất và màu sắc khoáng vật</h3>
+ <p>Thạch anh trong suốt vốn không màu, nhưng có thể tím, khói, hồng… vì các nguyên nhân sau (bấm thẻ để xem):</p>
+ <div data-w="colors"></div>`},
+
+ {id:'hinh-dang', title:'4. Hình dạng, song tinh, màu sắc (2.1–2.2)', html:`
+ <p>Tính chất vật lý là công cụ <b>nhận dạng nhanh</b> ở ngoài thực địa và trong phòng thực tập – không cần máy móc phức tạp.</p>
+ <h3>2.1. Hình dạng tinh thể và tập hợp khoáng vật</h3>
+ <div class="two"><div class="card"><h4>Mức độ tự hình</h4><ul><li><b>Tự hình (euhedral)</b>: đủ mặt tinh thể</li><li><b>Nửa tự hình (subhedral)</b>: một phần mặt</li><li><b>Tha hình (anhedral)</b>: không có mặt tinh thể (mọc chen chúc)</li></ul></div>
+ <div class="card"><h4>Dạng tinh thể</h4>Đẳng thước · dạng tấm · dạng lá · dạng kim · dạng sợi · dạng trụ.</div></div>
+ <div class="card"><h4>Dạng tập hợp</h4>Dạng hạt · khối đặc sít · toả tia · dạng sợi · chùm nho (botryoidal) · dạng thận · dạng nhũ (thạch nhũ) · dạng đất · dendrite (hình cây).</div>
+ <h4>Song tinh (twinning)</h4>
+ <div class="grid"><div class="mini"><h4>1. Đơn giản</h4>Hai cá thể chung một mặt song tinh. VD: calcite.</div><div class="mini"><h4>2. Chữ thập</h4>Hai cá thể xuyên vào nhau. VD: staurolite.</div>
+ <div class="mini"><h4>3. Đa hợp</h4>Nhiều cá thể lặp lại song song → “vân” song tinh. VD: plagioclase (luật albite).</div><div class="mini"><h4>4. Vòng</h4>Nhiều cá thể sắp xếp quanh một trục. VD: aragonite.</div></div>
+ <h3>2.2. Màu sắc</h3>
+ <div class="grid">
+ <div class="mini"><h4>Tự sắc (idiochromatic)</h4>Do nguyên tố chính trong thành phần. Malachite xanh lục, azurite xanh lam (Cu²⁺), sulfur vàng.</div>
+ <div class="mini"><h4>Ngoại sắc (allochromatic)</h4>Do tạp chất hoặc khuyết tật mạng. Thạch anh: không màu, tím (amethyst), khói, hồng…</div>
+ <div class="mini"><h4>Giả sắc (pseudochromatic)</h4>Do hiệu ứng quang học – màu đổi theo góc nhìn. VD: labradorite.</div></div>
+ <div class="warn"><b>Cẩn thận</b>Màu sắc không phải lúc nào cũng có giá trị chẩn đoán cao. Luôn kết hợp với vết vạch, độ cứng, cát khai.</div>`},
+
+ {id:'vet-vach', title:'5. Vết vạch, ánh, độ trong suốt (2.3–2.5)', html:`
+ <h3>2.3. Vết vạch (streak)</h3>
+ <p><b>Vết vạch là màu của bột khoáng vật.</b> Cách thử: (1) chọn bề mặt khoáng vật; (2) kéo trên tấm sứ không tráng men; (3) quan sát màu bột.</p>
+ <div class="tw"><table><tr><th>Khoáng vật</th><th>Màu khoáng vật</th><th>Vết vạch</th></tr>
+ <tr><td>Hematite</td><td>Xám đen (hoặc đỏ)</td><td><b>Đỏ nâu</b></td></tr>
+ <tr><td>Magnetite</td><td>Đen</td><td>Đen</td></tr>
+ <tr><td>Pyrite</td><td>Vàng đồng</td><td>Đen hơi xanh</td></tr></table></div>
+ <div class="warn"><b>Giới hạn</b>Khoáng vật cứng hơn tấm sứ (H ≈ 6,5–7) chỉ làm xước bề mặt sứ chứ không cho bột vết vạch (ví dụ thạch anh H = 7).</div>
+ <h3>2.4. Ánh (luster)</h3>
+ <p>Ánh là khả năng ánh sáng phản xạ trên bề mặt khoáng vật.</p>
+ <div class="grid"><div class="mini"><h4>Ánh kim</h4>Như kim loại, không trong suốt. VD: galena.</div><div class="mini"><h4>Ánh bán kim</h4>Kim loại mờ. VD: hematite.</div>
+ <div class="mini"><h4>Ánh phi kim</h4>Thuỷ tinh (quartz) · kim cương (diamond) · ngọc trai (muscovite) · tơ (satin spar – gypsum dạng sợi) · nhựa (sphalerite) · sáp (chalcedony) · đất (kaolinite).</div></div>
+ <h3>2.5. Độ trong suốt</h3>
+ <div class="grid"><div class="mini"><h4>Trong suốt</h4>Nhìn rõ vật phía sau (thạch anh).</div><div class="mini"><h4>Bán trong</h4>Ánh sáng truyền qua một phần, không nhìn rõ (chalcedony – mã não).</div><div class="mini"><h4>Không trong suốt</h4>Ánh sáng không truyền qua (galena).</div></div>
+ <p><b>Các yếu tố ảnh hưởng:</b> chiều dày (mỏng → sáng hơn), khe nứt (tán xạ ánh sáng), tạp chất (giảm độ trong).</p>
+ <div class="key"><b>Mẹo</b>Hầu hết khoáng vật ánh kim đều <i>không trong suốt</i>, và khoáng vật ánh kim thường có vết vạch đậm màu.</div>`},
+
+ {id:'do-cung', title:'6. Độ cứng và thang Mohs (2.6)', html:`
+ <p>Độ cứng là khả năng chống lại sự làm xước bề mặt. <b>Thang Mohs</b> là thang tương đối (không tuyến tính) gồm 10 khoáng vật chuẩn:</p>
+ <div data-w="mohs"></div>
+ <div class="key"><b>Quy tắc thử</b>Khoáng vật cứng hơn làm xước được khoáng vật mềm hơn. Vật thử tiện dụng: móng tay ≈ 2,5 · đồng xu ≈ 3–3,5 · kính ≈ 5,5. Phải quan sát <b>vết xước thật</b>, đừng nhầm với vệt bột (vạch) do khoáng vật mềm để lại.</div>
+ <div class="warn"><b>Độ cứng ≠ độ bền cơ học</b>Kim cương (H = 10) cứng nhất nhưng rất giòn, có cát khai nên đập vỡ được; ngọc jade (nephrite) có độ cứng thấp hơn nhưng rất dai, chống vỡ tốt.</div>
+ <div class="note"><b>Tính không tuyến tính</b>Từ 9 (corundum) lên 10 (kim cương), độ cứng tuyệt đối tăng rất nhiều lần, lớn hơn cả khoảng từ 1 đến 9 gộp lại – nên đừng coi thang Mohs là thước đo đều.</div>`},
+
+ {id:'cat-khai', title:'7. Cát khai, vết vỡ, dai – giòn (2.7–2.9)', html:`
+ <h3>2.7. Cát khai (cleavage)</h3>
+ <p>Cát khai là khả năng khoáng vật tách theo các <b>mặt phẳng cấu trúc nhất định</b> (nơi liên kết yếu). Ví dụ trong cấu trúc lớp: liên kết mạnh trong lớp, liên kết yếu giữa các lớp → tách theo mặt lớp.</p>
+ <p>Mô tả cát khai theo 3 tiêu chí: <b>mức độ</b> (hoàn toàn – tốt – kém), <b>số phương</b>, và <b>góc</b> giữa các phương.</p>
+ <div data-w="cleave"></div>
+ <h3>2.8. Vết vỡ (fracture)</h3>
+ <div class="grid"><div class="mini"><h4>Vỏ sò</h4>Bề mặt cong như vỏ sò – quartz (không có cát khai).</div><div class="mini"><h4>Không đều</h4>Magnetite.</div><div class="mini"><h4>Dạng sợi</h4>Chrysotile.</div><div class="mini"><h4>Dạng móc</h4>Bề mặt gồ ghề, nhọn – đồng tự sinh.</div></div>
+ <div class="key"><b>Phân biệt</b>Mặt cát khai: <b>phẳng, lặp lại theo phương xác định, liên quan cấu trúc tinh thể</b> (ví dụ feldspar K). Mặt vỡ: cong hoặc không đều, không lặp lại theo phương cố định, không theo mặt cát khai (ví dụ quartz). Cát khai ≠ mặt vỡ.</div>
+ <h3>2.9. Tính dai – giòn</h3>
+ <div class="grid">
+ <div class="mini"><h4>Giòn</h4>Vỡ vụn khi chịu lực – quartz.</div><div class="mini"><h4>Dễ dát mỏng</h4>Vàng → lá mỏng.</div><div class="mini"><h4>Dễ kéo sợi</h4>Đồng → dây.</div>
+ <div class="mini"><h4>Dễ cắt</h4>Gypsum cắt được bằng dao.</div><div class="mini"><h4>Dẻo (flexible)</h4>Uốn cong, không trở lại – chlorite.</div><div class="mini"><h4>Đàn hồi</h4>Uốn cong rồi trở lại hình dạng ban đầu – mica.</div></div>`},
+
+ {id:'ty-trong', title:'8. Tỷ trọng và tính chất đặc biệt (2.10–2.11)', html:`
+ <h3>2.10. Tỷ trọng</h3>
+ <div class="key"><b>Công thức</b>Tỷ trọng = ρ<sub>khoáng vật</sub> / ρ<sub>nước</sub> (cùng thể tích). Không có đơn vị; nước = 1.</div>
+ <p>Hai yếu tố quyết định: <b>thành phần hoá học</b> (nguyên tố có khối lượng nguyên tử lớn → tỷ trọng cao) và <b>cấu trúc tinh thể</b> (sắp xếp càng chặt → tỷ trọng càng cao; xem kim cương 3,51 vs graphite 2,26).</p>
+ <div data-w="density"></div>
+ <p>Khoáng vật chứa nguyên tố kim loại nặng thường có tỷ trọng cao.</p>
+ <h3>2.11. Các tính chất đặc biệt</h3>
+ <div class="tw"><table><tr><th>Tính chất</th><th>Cách thử / ví dụ</th></tr>
+ <tr><td>Từ tính</td><td>Magnetite hút nam châm</td></tr>
+ <tr><td>Phản ứng với HCl</td><td>Calcite sủi bọt mạnh; dolomite yếu / chỉ khi ở dạng bột</td></tr>
+ <tr><td>Vị</td><td>Halite có vị mặn</td></tr>
+ <tr><td>Mùi</td><td>Có mùi khi cọ xát hoặc tác động (ví dụ khoáng vật chứa lưu huỳnh)</td></tr>
+ <tr><td>Cảm giác trơn</td><td>Talc</td></tr>
+ <tr><td>Phát quang</td><td>Fluorite dưới tia UV</td></tr>
+ <tr><td>Phóng xạ</td><td>Uraninite</td></tr>
+ <tr><td>Dẫn điện</td><td>Graphite</td></tr>
+ <tr><td>Song tinh</td><td>Plagioclase (vân song tinh)</td></tr>
+ <tr><td>Khúc xạ kép</td><td>Calcite (nhìn chữ qua tinh thể thấy hai ảnh)</td></tr></table></div>
+ <div class="warn"><b>An toàn phòng thí nghiệm (L.O.3.1)</b><ul style="margin:4px 0 0"><li>Không nếm mẫu lạ (chỉ nếm mẫu halite khi được hướng dẫn).</li><li>HCl cần kính bảo hộ và găng tay.</li><li>Không cầm mẫu phóng xạ.</li></ul></div>`},
+
+ {id:'nhan-dang', title:'9. Thực hành: công cụ nhận dạng khoáng vật', html:`
+ <p>Trong thực hành và thi thực hành, bạn phải nhận dạng mẫu bằng tổ hợp tính chất. Hãy chọn các tính chất quan sát được và xem những khoáng vật còn phù hợp. (Dữ liệu tổng hợp từ các tính chất chuẩn của khoáng vật thông dụng.)</p>
+ <div data-w="ident"></div>
+ <div class="note"><b>Quy trình gợi ý</b>Ánh (kim / phi kim) → độ cứng (thử móng tay, đồng xu, kính) → vết vạch → cát khai / vết vỡ → tính chất đặc biệt (HCl, từ tính, tỷ trọng). Ghi chép có hệ thống.</div>`},
+
+ {id:'anh-sang', title:'10. Ánh sáng và chiết suất (3.1–3.3)', html:`
+ <h3>3.1. Bản chất của ánh sáng</h3>
+ <ul><li>Ánh sáng là <b>sóng điện từ</b> gồm điện trường <b>E</b> và từ trường <b>B</b>; E, B và phương truyền k vuông góc với nhau.</li>
+ <li>Ánh sáng nhìn thấy có bước sóng khoảng <b>380–700 nm</b>: tím – bước sóng ngắn; đỏ – bước sóng dài.</li>
+ <li><b>Ánh sáng tự nhiên</b> dao động theo nhiều phương ngẫu nhiên. Sau khi qua kính phân cực, ánh sáng chỉ còn dao động theo <b>một phương xác định</b> (vuông góc với phương truyền) = ánh sáng phân cực.</li></ul>
+ <div class="card"><h4>Mô phỏng: hai kính phân cực (định luật Malus)</h4><div data-w="polar"></div></div>
+ <h3>3.2. Tương tác giữa ánh sáng và khoáng vật</h3>
+ <div class="grid"><div class="mini"><h4>Truyền qua</h4>Khoáng vật trong suốt, cường độ ít giảm.</div><div class="mini"><h4>Hấp thụ</h4>Khoáng vật có màu: hấp thụ một số bước sóng, phần còn lại tạo màu ta thấy.</div><div class="mini"><h4>Phản xạ</h4>Trên bề mặt (góc tới i = góc phản xạ r) → ánh.</div>
+ <div class="mini"><h4>Khúc xạ</h4>Tia bị bẻ khi vào môi trường khác (n &gt; 1).</div><div class="mini"><h4>Tán sắc</h4>Ánh sáng trắng tách màu qua lăng kính khoáng vật.</div><div class="mini"><h4>Khúc xạ kép</h4>Tia bị tách thành 2 tia: thường (o) và bất thường (e) – calcite.</div></div>
+ <h3>3.3. Chiết suất</h3>
+ <div class="key"><b>Công thức</b>n = c / v (c ≈ 3,00×10⁸ m/s – vận tốc ánh sáng trong chân không; v – vận tốc trong khoáng vật; n ≥ 1). Tần số không đổi khi vào môi trường; bước sóng λ = λ₀/n. Chiết suất tương đối n₂₁ = n₂/n₁ = v₁/v₂.</div>
+ <div class="card"><h4>Mô phỏng: khúc xạ (định luật Snell)</h4><div data-w="snell"></div></div>
+ <div class="card"><h4>Ảnh hưởng dưới kính hiển vi: độ nổi</h4><p style="margin-top:0">Độ nổi phụ thuộc <b>|n<sub>khoáng vật</sub> − n<sub>môi trường</sub>|</b>. Độ tương phản (độ nổi) thấp: đường viền mờ; cao: đường viền rõ.</p><div data-w="relief"></div></div>
+ <div class="check"><b>Kết luận</b>Chiết suất là tính chất quang học đặc trưng → hỗ trợ nhận diện khoáng vật.</div>`},
+
+ {id:'dang-huong', title:'11. Đẳng hướng, dị hướng, một trục – hai trục (3.4–3.5)', html:`
+ <h3>3.4. Khoáng vật đẳng hướng và dị hướng</h3>
+ <div class="two"><div class="card" style="border-top:5px solid var(--c1)"><h4>Đẳng hướng</h4><ul><li>Tính chất quang học giống nhau theo mọi phương.</li><li>Hệ lập phương và vật liệu vô định hình.</li><li>Chỉ thị quang học: <b>hình cầu</b> (một chiết suất n).</li><li>Dưới hai nicol vuông góc (XPL): <b>luôn tối</b>, dù xoay bàn kính.</li><li>VD: garnet, spinel, fluorite.</li></ul></div>
+ <div class="card" style="border-top:5px solid var(--c2)"><h4>Dị hướng</h4><ul><li>Tính chất quang học thay đổi theo phương.</li><li>Chỉ thị quang học: <b>hình elip</b> (hai hoặc ba chiết suất chính).</li><li>Dưới XPL: xuất hiện <b>màu giao thoa</b> và sáng – tối khi xoay bàn kính (4 lần sáng, 4 lần tối trong 360°).</li><li>VD: quartz, feldspar, mica, calcite, pyroxene, amphibole.</li></ul></div></div>
+ <h3>3.5. Khoáng vật một trục và hai trục</h3>
+ <div class="two"><div class="mini"><h4>Một trục</h4>Hệ bốn phương, ba phương, sáu phương. Một trục quang. Chỉ thị: elipsoid tròn xoay với hai chiết suất chính n<sub>o</sub> (thường) và n<sub>e</sub> (bất thường). <br><b>Dấu (+)</b>: n<sub>e</sub> &gt; n<sub>o</sub>; <b>dấu (−)</b>: n<sub>e</sub> &lt; n<sub>o</sub>. Quartz (+), calcite (−).</div>
+ <div class="mini"><h4>Hai trục</h4>Hệ trực thoi, một nghiêng, ba nghiêng. Hai trục quang. Ba chiết suất chính: n<sub>α</sub> &lt; n<sub>β</sub> &lt; n<sub>γ</sub>. Góc trục quang 2V. Dấu (+): phân giác góc nhọn là Z; dấu (−): là X. Olivine (+), biotite (−).</div></div>
+ <div class="card"><h4>Chỉ thị quang học (indicatrix) tương tác</h4><div data-w="indic"></div></div>
+ <div class="note"><b>Trục quang</b>Là phương truyền ánh sáng mà khoáng vật không biểu hiện khúc xạ kép: tia tới theo trục quang không bị tách tia, chỉ có một tia truyền qua; tia tới xiên (không theo trục quang) bị tách thành tia thường (n<sub>o</sub>) và tia bất thường (n<sub>e</sub>).</div>`},
+
+ {id:'ppl-xpl', title:'12. Kính hiển vi: PPL, XPL (3.6–3.8)', html:`
+ <h3>3.6. Dưới ánh sáng phân cực phẳng – PPL</h3>
+ <p>Các đặc điểm quan sát (chỉ dùng <b>một</b> nicol phân cực): màu sắc · đa sắc (pleochroism) · độ nổi · hình dạng hạt · cát khai · khe nứt · sản phẩm biến đổi · bao thể.</p>
+ <div class="tw"><table><tr><th>Khoáng vật</th><th>Màu</th><th>Độ nổi</th><th>Đặc điểm khác dưới PPL</th></tr>
+ <tr><td>Biotite</td><td>Nâu; <b>đa sắc mạnh</b> (nâu nhạt ↔ nâu sẫm khi quay bàn kính 90°)</td><td>—</td><td>Một phương cát khai</td></tr>
+ <tr><td>Hornblende</td><td>Xanh hoặc nâu; đa sắc (xanh lục ↔ nâu)</td><td>—</td><td>Hai phương cát khai cắt nhau 56°/124°</td></tr>
+ <tr><td>Quartz</td><td>Không màu</td><td>Thấp</td><td>Không cát khai, bề mặt sạch</td></tr>
+ <tr><td>Olivine</td><td>Không màu</td><td><b>Cao</b></td><td>Nhiều khe nứt</td></tr></table></div>
+ <div class="key"><b>Trình tự quan sát</b>màu – đa sắc → độ nổi → hình dạng → cát khai / khe nứt → biến đổi và bao thể.</div>
+ <h3>3.7. Dưới hai nicol vuông góc – XPL</h3>
+ <ul><li>Ánh sáng phân cực đi qua khoáng vật dị hướng bị tách thành hai tia dao động vuông góc – một tia <b>nhanh</b> (n nhỏ), một tia <b>chậm</b> (n lớn).</li>
+ <li>Lưỡng chiết suất: <b>Δn = n<sub>chậm</sub> − n<sub>nhanh</sub></b>. Độ trễ quang: <b>δ = t · Δn</b> (t: bề dày lát mỏng, chuẩn ≈ 0,03 mm).</li>
+ <li>Màu giao thoa phụ thuộc bậc (bậc thấp → bậc cao) – xem mô phỏng.</li>
+ <li><b>Hiện tượng tắt</b>: xảy ra khi phương dao động chính của khoáng vật trùng với phương dao động của nicol → không có ánh sáng đi qua. Góc tắt là góc giữa phương cát khai (hoặc phương kéo dài chuẩn) và vị trí tắt. Có tắt thẳng (0°), tắt xiên, tắt đối xứng; ngoài ra còn song tinh và phân đới.</li></ul>
+ <div class="card"><h4>Phòng thí nghiệm XPL: xoay bàn kính, đổi bề dày, chọn khoáng vật</h4><div data-w="xpl"></div></div>
+ <table><tr><th>Khoáng vật</th><th>Màu giao thoa</th></tr><tr><td>Quartz</td><td>Bậc thấp (xám – trắng – vàng), có tắt lượn sóng</td></tr><tr><td>Plagioclase</td><td>Bậc thấp; nổi bật <b>song tinh đa hợp</b></td></tr><tr><td>Calcite</td><td><b>Bậc cao</b> (rất rực rỡ)</td></tr><tr><td>Pyroxene</td><td>Bậc trung bình; cát khai gần 90° (87°/93°)</td></tr></table>
+ <h3>3.8. Mối liên hệ giữa cấu trúc và tính chất quang học</h3>
+ <div class="grid"><div class="mini"><h4>Tính đối xứng</h4>Lập phương → đẳng hướng; bốn, ba, sáu phương → dị hướng một trục; các hệ còn lại → hai trục.</div>
+ <div class="mini"><h4>Sắp xếp nguyên tử theo phương</h4>Mật độ nguyên tử và liên kết khác nhau theo phương → dị hướng → nhiều chiết suất; liên kết yếu / mạnh khác nhau.</div>
+ <div class="mini"><h4>Thành phần hoá học</h4>Loại ion, hàm lượng và khả năng phân cực electron chi phối chiết suất, màu sắc, lưỡng chiết suất (Fe/Mg → chiết suất; Cr/Fe → màu).</div>
+ <div class="mini"><h4>Biến đổi khoáng vật</h4>Sản phẩm thứ sinh, vi khe nứt làm thay đổi độ trong, màu, độ nổi.</div></div>
+ <div class="check"><b>Kết luận</b>Cấu trúc + thành phần + mức độ biến đổi → đặc điểm nhận diện dưới kính hiển vi.</div>
+ <div class="key"><b>Hết Phần 1.</b> Phần 2 (mục 4–6: hình thành – biến đổi, phân loại, khoáng vật phổ biến) sẽ bổ sung khi có tài liệu.</div>`}
+ ]
+});
+
+</script>
+<script>
+/* Các hình minh hoạ tương tác */
+const W = {};
+const D2R = Math.PI / 180;
+function cssv(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#888'; }
+function ink() { return getComputedStyle(document.body).color; }
+function mk(el, html) { el.innerHTML = html; return el; }
+function q(el, s) { return el.querySelector(s); }
+function qa(el, s) { return [...el.querySelectorAll(s)]; }
+function slider(id, label, min, max, step, val, unit) {
+  return `<label class="lab"><span style="min-width:120px">${label}</span><input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}"><span class="val" id="${id}v">${val}${unit || ''}</span></label>`;
+}
+function bindSlider(el, id, fn, unit) {
+  const s = q(el, '#' + id), v = q(el, '#' + id + 'v');
+  s.addEventListener('input', () => { v.textContent = s.value + (unit || ''); fn(+s.value); });
+  return s;
+}
+function mountWidgets(root) {
+  qa(root, '[data-w]').forEach(el => {
+    if (el.dataset.mounted) return; el.dataset.mounted = 1;
+    const f = W[el.dataset.w]; if (f) try { f(el); } catch (e) { el.textContent = 'Lỗi hình: ' + e.message; console.error(e); }
+  });
+}
+window.mountWidgets = mountWidgets;
+function fr(s) { // phân số/số/∞ -> {n,d}; null nếu vô cực
+  s = String(s).trim().toLowerCase().replace('∞', 'inf');
+  if (s === 'inf' || s === 'vc' || s === 'oo') return null;
+  const m = s.match(/^(-?\d+)\s*(?:\/\s*(\d+))?$/);
+  if (!m) return undefined;
+  const d = m[2] ? +m[2] : 1; if (d === 0) return undefined;
+  return { n: +m[1], d };
+}
+const gcd = (a, b) => b ? gcd(b, a % b) : Math.abs(a);
+const lcm = (a, b) => a * b / gcd(a, b);
+
+/* ============ CHƯƠNG 1 ============ */
+W.grading = el => {
+  const comps = [['Chuyên cần, điểm thưởng', 7, 5, 2], ['Trắc nghiệm trên LMS', 3, 0, 3], ['Bài tập ứng dụng, báo cáo thực hành', 15, 10, 5], ['Thi thực hành (tại PTN)', 35, 35, 0], ['Thi cuối kỳ (50 MCQ / 60 phút)', 40, 0, 40]];
+  mk(el, `<div class="tw"><table><tr><th>Hoạt động</th><th>Thực hành (50%)</th><th>Thi (50%)</th><th>Trọng số</th><th>Điểm của bạn (/10)</th></tr>` +
+    comps.map((c, i) => `<tr><td>${c[0]}</td><td>${c[2]}</td><td>${c[3]}</td><td><b>${c[1]}%</b></td><td><input type="number" min="0" max="10" step="0.25" value="8" data-i="${i}" style="width:70px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)"></td></tr>`).join('') +
+    `<tr><th>Tổng</th><th>50</th><th>50</th><th>100%</th><th></th></tr></table></div>
+  <div style="display:flex;height:22px;border-radius:8px;overflow:hidden;margin:6px 0">${comps.map((c, i) => `<div title="${c[0]}" style="width:${c[1]}%;background:${['#7a3fb8', '#0e8a7d', '#e8912d', '#1f5fbf', '#d24545'][i]}"></div>`).join('')}</div>
+  <div class="res" id="g_res"></div>`);
+  const calc = () => {
+    const v = qa(el, 'input').map(i => Math.max(0, Math.min(10, +i.value || 0)));
+    const tot = comps.reduce((s, c, i) => s + c[1] * v[i] / 10, 0);
+    const th = comps.reduce((s, c, i) => s + c[2] * v[i] / 10, 0), thi = comps.reduce((s, c, i) => s + c[3] * v[i] / 10, 0);
+    q(el, '#g_res').innerHTML = `Điểm tổng kết ≈ <b>${(tot / 10).toFixed(2)}/10</b> · phần thực hành ${th.toFixed(1)}/50 · phần thi ${thi.toFixed(1)}/50`;
+  };
+  el.addEventListener('input', calc); calc();
+};
+W.chain = el => {
+  const it = [['Khoáng vật', 'Đá', 'Khoáng vật là thành phần cơ bản cấu tạo nên đá.'], ['Tổ hợp khoáng vật', 'Điều kiện thành tạo', 'Tổ hợp khoáng vật phản ánh nhiệt độ, áp suất và môi trường hình thành đá.'], ['Kiến trúc, cấu tạo', 'Quá trình hình thành', 'Kiến trúc và cấu tạo cho biết cách thức đá được hình thành và biến đổi.'], ['Đá', 'Lịch sử địa chất', 'Đá lưu giữ bằng chứng về các quá trình và sự kiện trong lịch sử Trái Đất.'], ['Nhận dạng khoáng vật', 'Phân loại đá', 'Nhận dạng khoáng vật là cơ sở để phân loại và giải thích nguồn gốc của đá.']];
+  mk(el, `<div class="tl">${it.map(x => `<div class="ev"><b>${x[0]}</b> → <b>${x[1]}</b><div class="d">${x[2]}</div></div>`).join('')}</div>`);
+  qa(el, '.ev').forEach(e => e.onclick = () => e.classList.toggle('open'));
+};
+W.timeline = el => {
+  const it = [['Thời cổ đại – thế kỷ XVI', 'Con người nhận biết và sử dụng đá, khoáng vật làm công cụ, vật liệu xây dựng, kim loại và trang sức.', 'Hình thành các kiến thức mô tả ban đầu về khoáng vật và đá.'],
+  ['Thế kỷ XVII–XVIII', 'Nghiên cứu hình dạng và quy luật hình học của tinh thể; René Just Haüy phát triển quan niệm về cấu trúc có trật tự bên trong tinh thể.', 'Đặt nền móng cho tinh thể học và khoáng vật học hiện đại.'],
+  ['Đầu – giữa thế kỷ XIX', 'Thang độ cứng Mohs được đề xuất; James D. Dana xây dựng hệ thống phân loại khoáng vật dựa trên thành phần và cấu trúc.', 'Khoáng vật được nhận dạng và phân loại một cách có hệ thống.'],
+  ['Giữa – cuối thế kỷ XIX', 'Henry C. Sorby sử dụng lát mỏng và ánh sáng phân cực để nghiên cứu đá dưới kính hiển vi.', 'Đặt nền móng cho thạch học dưới kính hiển vi và nghiên cứu nguồn gốc đá.'],
+  ['Đầu thế kỷ XX', 'Phát hiện nhiễu xạ tia X năm 1912; William H. Bragg và Lawrence Bragg phát triển phương pháp xác định cấu trúc tinh thể.', 'Cho phép nghiên cứu sự sắp xếp nguyên tử trong khoáng vật, mở đầu tinh thể học tia X hiện đại.'],
+  ['Thế kỷ XX–XXI', 'Phát triển XRD, XRF, SEM–EDS, Raman, phân tích đồng vị, địa hoá và mô hình hoá.', 'Khoáng vật học và thạch học trở thành các ngành khoa học định lượng, liên ngành và có độ chính xác cao.']];
+  mk(el, `<div class="tl">${it.map((x, i) => `<div class="ev ${i === 0 ? 'open' : ''}"><b>${x[0]}</b><div class="d"><b style="color:var(--ink)">Dấu mốc:</b> ${x[1]}<br><b style="color:var(--ink)">Ý nghĩa:</b> ${x[2]}</div></div>`).join('')}</div>`);
+  qa(el, '.ev').forEach(e => e.onclick = () => e.classList.toggle('open'));
+};
+W.apps = el => {
+  const A = [['Điều tra và lập bản đồ địa chất', 'Nhận dạng các loại đá, xác định ranh giới địa chất và giải thích lịch sử hình thành khu vực.', 'Khoa học – văn hoá'],
+  ['Tìm kiếm và thăm dò khoáng sản', 'Xác định khoáng vật quặng, khoáng vật chỉ thị và các dấu hiệu liên quan đến quá trình tạo khoáng.', 'Tài nguyên'],
+  ['Địa chất dầu khí', 'Phân tích thành phần khoáng vật, độ rỗng, độ thấm và mức độ biến đổi của đá chứa.', 'Tài nguyên'],
+  ['Địa chất công trình', 'Đánh giá độ bền, khả năng phong hoá, nứt nẻ và mức độ ổn định của đá nền.', 'Xây dựng – công nghiệp'],
+  ['Vật liệu xây dựng', 'Lựa chọn đá xây dựng, cốt liệu, nguyên liệu sản xuất xi măng, gốm, thuỷ tinh và đá ốp lát.', 'Xây dựng – công nghiệp'],
+  ['Khai thác và chế biến khoáng sản', 'Lựa chọn phương pháp nghiền, tuyển và thu hồi khoáng vật có ích dựa trên thành phần và tính chất.', 'Tài nguyên'],
+  ['Khoa học đất và môi trường', 'Giải thích quá trình hình thành đất, khả năng giữ dinh dưỡng, hấp phụ kim loại và phản ứng giữa khoáng vật với nước.', 'Môi trường'],
+  ['Tài nguyên nước', 'Đánh giá ảnh hưởng của thành phần đá và khoáng vật đến sự lưu chuyển và chất lượng nước dưới đất.', 'Môi trường'],
+  ['Đá quý', 'Nhận dạng, phân loại, đánh giá chất lượng và xác định nguồn gốc đá quý.', 'Tài nguyên'],
+  ['Di sản và khảo cổ', 'Xác định nguồn gốc vật liệu đá, đồ gốm và các hiện vật có thành phần khoáng vật.', 'Khoa học – văn hoá'],
+  ['Lưu trữ carbon', 'Đánh giá khả năng phản ứng của khoáng vật với CO₂ để tạo thành các khoáng vật cacbonat bền vững.', 'Môi trường'],
+  ['Nghiên cứu hành tinh', 'Phân tích khoáng vật và đá để tìm hiểu sự hình thành, tiến hoá của Trái Đất và các hành tinh khác.', 'Khoa học – văn hoá']];
+  const tags = ['Tất cả', 'Tài nguyên', 'Xây dựng – công nghiệp', 'Môi trường', 'Khoa học – văn hoá'];
+  mk(el, `<div class="mtab">${tags.map((t, i) => `<button class="${i ? '' : 'on'}" data-t="${t}">${t}</button>`).join('')}</div><div class="grid" id="ag"></div>`);
+  const draw = t => q(el, '#ag').innerHTML = A.filter(a => t === 'Tất cả' || a[2] === t).map(a => `<div class="mini"><h4>${a[0]}</h4><span style="font-size:14px">${a[1]}</span></div>`).join('');
+  draw('Tất cả');
+  qa(el, '.mtab button').forEach(b => b.onclick = () => { qa(el, '.mtab button').forEach(x => x.classList.remove('on')); b.classList.add('on'); draw(b.dataset.t); });
+};
+W.discuss = el => {
+  const D = [['Tại sao cần nghiên cứu khoáng vật và đá?', 'Vì chúng là vật liệu cấu tạo Trái Đất, lưu giữ lịch sử địa chất và là nguồn tài nguyên (kim loại, vật liệu, năng lượng) cho xã hội.'],
+  ['Khoáng vật học và thạch học liên quan đến những ngành khoa học nào?', 'Địa chất, hoá học, vật lý, sinh học (khoáng vật sinh học), khoa học vật liệu, môi trường, xây dựng, khai thác mỏ, dầu khí, khảo cổ, thiên văn hành tinh.'],
+  ['Một mẫu đá có thể cung cấp những thông tin gì về lịch sử Trái Đất?', 'Nguồn gốc (magma, trầm tích, biến chất), điều kiện nhiệt độ – áp suất, môi trường thành tạo, các sự kiện kiến tạo, và (nhờ đồng vị) tuổi.'],
+  ['Kiến thức về khoáng vật và đá giúp tìm kiếm tài nguyên khoáng sản như thế nào?', 'Nhận dạng khoáng vật quặng và khoáng vật chỉ thị, hiểu quá trình tạo khoáng để dự đoán nơi có quặng, định hướng thăm dò.'],
+  ['Tại sao kỹ sư xây dựng cần biết thành phần khoáng vật và đặc điểm của đá?', 'Để đánh giá độ bền, khả năng phong hoá, nứt nẻ, độ ổn định của nền móng; chọn đá làm cốt liệu, vật liệu ốp lát; tránh khoáng vật trương nở (sét) hoặc dễ hoà tan.'],
+  ['Khoáng vật có thể góp phần xử lý ô nhiễm đất và nước như thế nào?', 'Khoáng sét, zeolite, oxit sắt… hấp phụ kim loại nặng; khoáng vật phản ứng với nước/axit làm trung hoà; kết tủa khoáng vật giữ chất ô nhiễm; khoáng hoá CO₂ thành carbonat.'],
+  ['Sự phong hoá khoáng vật ảnh hưởng như thế nào đến sự hình thành và độ phì của đất?', 'Phong hoá phá huỷ khoáng vật gốc, giải phóng các cation dinh dưỡng (K, Ca, Mg…) và tạo khoáng sét – nền tảng giữ nước và dinh dưỡng của đất.'],
+  ['Tại sao cùng là khoáng vật nhưng có loại dùng làm vật liệu xây dựng, loại khác dùng trong công nghệ cao?', 'Do khác thành phần, cấu trúc và độ tinh khiết: calcite làm xi măng; thạch anh tinh khiết làm chip, thuỷ tinh quang học; graphite, kim cương, lithium… cho pin, dụng cụ, điện tử.'],
+  ['Nếu không có kiến thức về khoáng vật học và thạch học, những ngành nào bị ảnh hưởng nhiều nhất?', 'Khai khoáng, dầu khí, xây dựng – địa kỹ thuật, vật liệu, môi trường/đất/nước, đá quý – đều mất cơ sở nhận dạng và đánh giá vật liệu địa chất.']];
+  mk(el, `<div class="tl">${D.map((x, i) => `<div class="ev"><b>${i + 1}. ${x[0]}</b><div class="d">💡 Gợi ý: ${x[1]}</div></div>`).join('')}</div>`);
+  qa(el, '.ev').forEach(e => e.onclick = () => e.classList.toggle('open'));
+};
+
+/* ============ CHƯƠNG 2 ============ */
+W.order = el => {
+  mk(el, `<canvas width="680" height="340" style="width:100%"></canvas><div style="font-size:13px;color:var(--muted)">Trái: chất rắn kết tinh (trật tự xa) · Phải: vô định hình (ngắn hạn, không tuần hoàn). Dưới: giản đồ XRD minh hoạ. <button class="btn" id="re">Vẽ lại</button></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const draw = () => {
+    g.clearRect(0, 0, 680, 340); const I = ink();
+    g.font = '13px sans-serif';
+    for (let p = 0; p < 2; p++) {
+      const ox = 20 + p * 340;
+      g.fillStyle = I; g.fillText(p ? 'Vô định hình (SiO₂ – obsidian)' : 'Kết tinh (SiO₂ – thạch anh)', ox, 16);
+      for (let i = 0; i < 9; i++) for (let j = 0; j < 6; j++) {
+        let x = ox + 20 + i * 34, y = 40 + j * 30, jx = 0, jy = 0;
+        if (p) { jx = (Math.random() - .5) * 22; jy = (Math.random() - .5) * 18; if (Math.random() < .12) { x += (Math.random() - .5) * 20; } }
+        g.beginPath(); g.arc(x + jx, y + jy, 6, 0, 7); g.fillStyle = (i + j) % 2 ? '#d24545' : '#1f5fbf'; g.fill();
+      }
+      // XRD
+      const bx = ox, by = 300, w = 300, h = 80;
+      g.strokeStyle = I; g.globalAlpha = .5; g.beginPath(); g.moveTo(bx, by - h); g.lineTo(bx, by); g.lineTo(bx + w, by); g.stroke(); g.globalAlpha = 1;
+      g.beginPath(); g.strokeStyle = p ? '#e8912d' : '#1b9a5b'; g.lineWidth = 2;
+      for (let x = 0; x <= w; x++) {
+        let y;
+        if (p) y = 10 + 55 * Math.exp(-Math.pow((x - 110) / 55, 2)) + 3 * Math.random();
+        else { y = 4 + 3 * Math.random(); [[40, 30], [70, 60], [105, 45], [140, 75], [180, 35], [225, 50], [265, 28]].forEach(([m, a]) => y += a * Math.exp(-Math.pow((x - m) / 2.2, 2))); }
+        x ? g.lineTo(bx + x, by - y) : g.moveTo(bx + x, by - y);
+      }
+      g.stroke(); g.lineWidth = 1; g.fillStyle = I; g.fillText('2θ →', bx + w - 32, by + 16);
+    }
+  };
+  draw(); q(el, '#re').onclick = draw;
+};
+W.lattice2d = el => {
+  mk(el, `<canvas width="680" height="340" style="width:100%"></canvas>` + slider('a2', 'a', 30, 80, 1, 60) + slider('b2', 'b', 30, 80, 1, 60) + slider('g2', 'góc γ', 60, 120, 1, 90, '°') +
+    `<div class="lab">Cơ sở: <select id="bs"><option value="1">1 nguyên tử</option><option value="2" selected>2 ion (kiểu NaCl)</option><option value="3">3 nguyên tử (kiểu phân tử)</option></select> <span id="sys2" class="tag on"></span></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d'); const S = {};
+  const draw = () => {
+    const a = +q(el, '#a2').value, b = +q(el, '#b2').value, ga = +q(el, '#g2').value * D2R, bs = +q(el, '#bs').value;
+    g.clearRect(0, 0, 680, 340);
+    const ax = a, ay = 0, bx = b * Math.cos(ga), by = -b * Math.sin(ga);
+    const o = [200, 240];
+    const P = (u, v) => [o[0] + u * ax + v * bx, o[1] + u * ay + v * by];
+    // lưới
+    for (let i = -5; i < 12; i++) for (let j = -5; j < 8; j++) {
+      const pts = bs === 1 ? [[0, 0, '#1f5fbf', 8]] : bs === 2 ? [[0, 0, '#1f5fbf', 9], [.5, .5, '#d24545', 6]] : [[0, 0, '#1f5fbf', 8], [.3, .2, '#d24545', 5], [.6, .35, '#1b9a5b', 5]];
+      pts.forEach(([u, v, col, r]) => { const [x, y] = P(i + u, j + v); if (x > -10 && x < 690 && y > -10 && y < 350) { g.beginPath(); g.arc(x, y, r, 0, 7); g.fillStyle = col; g.fill(); } });
+      const [x, y] = P(i, j); if (x > 0 && x < 680 && y > 0 && y < 340) { g.strokeStyle = 'rgba(120,130,150,.35)'; g.strokeRect(x - 2, y - 2, 4, 4); }
+    }
+    // ô mạng
+    g.strokeStyle = '#e8912d'; g.lineWidth = 3; g.beginPath(); [[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]].forEach(([u, v], i) => { const [x, y] = P(u, v); i ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke(); g.lineWidth = 1;
+    g.fillStyle = ink(); g.font = 'bold 14px sans-serif'; let [x, y] = P(1.05, 0); g.fillText('a', x, y + 4); [x, y] = P(0, 1.05); g.fillText('b', x - 4, y - 6);
+    g.fillText('Ô mạng (cam) lặp lại theo a và b → mạng 2D', 14, 20);
+    const eq = Math.abs(a - b) < 2, r90 = Math.abs(ga / D2R - 90) < 1, r120 = Math.abs(ga / D2R - 120) < 1;
+    q(el, '#sys2').textContent = r90 ? (eq ? 'Mạng vuông (a = b, γ = 90°)' : 'Mạng chữ nhật (a ≠ b, γ = 90°)') : (eq && (r120 || Math.abs(ga / D2R - 60) < 1) ? 'Mạng lục giác (a = b, γ = 120° hoặc 60°)' : 'Mạng xiên tổng quát');
+  };
+  qa(el, 'input,select').forEach(i => i.addEventListener('input', draw)); draw();
+  ['a2', 'b2', 'g2'].forEach(id => { const s = q(el, '#' + id); s.addEventListener('input', () => q(el, '#' + id + 'v').textContent = s.value + (id === 'g2' ? '°' : '')); });
+};
+
+// ---- Hình 3D chung ----
+function rotXY(p, rx, ry) {
+  let [x, y, z] = p;
+  const cy = Math.cos(ry), sy = Math.sin(ry); [x, z] = [x * cy + z * sy, -x * sy + z * cy];
+  const cx = Math.cos(rx), sx = Math.sin(rx); [y, z] = [y * cx - z * sx, y * sx + z * cx];
+  return [x, y, z];
+}
+function drag3(c, st, redraw) {
+  let d = null;
+  const dn = e => { d = [e.clientX, e.clientY]; c.setPointerCapture(e.pointerId); };
+  c.addEventListener('pointerdown', dn);
+  c.addEventListener('pointermove', e => { if (!d) return; st.ry += (e.clientX - d[0]) * .01; st.rx += (e.clientY - d[1]) * .01; d = [e.clientX, e.clientY]; redraw(); });
+  c.addEventListener('pointerup', () => d = null);
+  c.style.cursor = 'grab'; c.style.touchAction = 'none';
+}
+const SYS = {
+  cubic: { name: 'Lập phương', p: [1, 1, 1, 90, 90, 90], cent: ['P', 'I', 'F'], ex: 'Halite, pyrite' },
+  tetra: { name: 'Tứ phương', p: [1, 1, 1.5, 90, 90, 90], cent: ['P', 'I'], ex: 'Zircon, rutile' },
+  ortho: { name: 'Trực thoi', p: [1, 1.3, 1.7, 90, 90, 90], cent: ['P', 'C', 'I', 'F'], ex: 'Olivine, topaz' },
+  trig: { name: 'Ba phương', p: [1, 1, 1, 72, 72, 72], cent: ['R'], ex: 'Calcite, thạch anh' },
+  hex: { name: 'Sáu phương', p: [1, 1, 1.6, 90, 90, 120], cent: ['P'], ex: 'Beryl, graphite' },
+  mono: { name: 'Một nghiêng', p: [1, 1.3, 1.6, 90, 105, 90], cent: ['P', 'C'], ex: 'Gypsum, muscovite, orthoclase' },
+  tri: { name: 'Ba nghiêng', p: [1, 1.25, 1.6, 80, 95, 105], cent: ['P'], ex: 'Albite, microcline' }
+};
+function detectSys(a, b, c, al, be, ga) {
+  const e = (x, y, t = .03) => Math.abs(x - y) <= t * Math.max(x, y), an = (x, y) => Math.abs(x - y) < 1;
+  if (e(a, b) && e(b, c)) { if (an(al, 90) && an(be, 90) && an(ga, 90)) return 'cubic'; if (an(al, be) && an(be, ga) && !an(al, 90)) return 'trig'; }
+  if (e(a, b) && !e(b, c) && an(al, 90) && an(be, 90)) { if (an(ga, 90)) return 'tetra'; if (an(ga, 120)) return 'hex'; }
+  if (!e(a, b) && !e(b, c) && !e(a, c) && an(al, 90) && an(be, 90) && an(ga, 90)) return 'ortho';
+  if (!e(a, b) && !e(b, c) && !e(a, c) && an(al, 90) && an(ga, 90) && !an(be, 90)) return 'mono';
+  if (!e(a, b) && !e(b, c) && !e(a, c) && !an(al, 90) && !an(be, 90) && !an(ga, 90) && !an(al, be) && !an(be, ga) && !an(al, ga)) return 'tri';
+  return null;
+}
+W.cell3d = el => {
+  const mode = el.dataset.mode;
+  const st = { rx: -.45, ry: .6, auto: mode === 'bravais', sys: 'cubic', cent: 'P', rep: 1 };
+  let ui = `<div style="display:grid;grid-template-columns:${mode === 'bravais' ? '1fr' : '1.3fr 1fr'};gap:14px"><div><canvas width="520" height="400" style="width:100%"></canvas>
+  <div class="lab"><label><input type="checkbox" id="auto" ${st.auto ? 'checked' : ''}> Tự xoay</label> <label>Lặp lại: <select id="rep"><option value="1">1 ô</option><option value="2">2×2×2 ô (thấy mạng)</option></select></label></div></div><div>`;
+  ui += `<div class="mtab" id="sysTabs">${Object.entries(SYS).map(([k, v]) => `<button data-k="${k}">${v.name}</button>`).join('')}</div>`;
+  if (mode === 'bravais') ui += `<div class="lab">Kiểu ô: <span class="mtab" id="centTabs"></span></div>`;
+  else ui += `<div class="lab">Kiểu ô: <select id="cent"><option>P</option><option>I</option><option>F</option><option>C</option></select></div>`;
+  if (mode !== 'bravais') ui += slider('pa', 'a', .6, 2.5, .05, 1) + slider('pb', 'b', .6, 2.5, .05, 1) + slider('pc', 'c', .6, 2.5, .05, 1) + slider('pal', 'α', 55, 125, 1, 90, '°') + slider('pbe', 'β', 55, 125, 1, 90, '°') + slider('pga', 'γ', 55, 125, 1, 90, '°');
+  ui += `<div class="res" id="info"></div></div></div>`;
+  mk(el, ui);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const P = () => mode === 'bravais' ? SYS[st.sys].p : ['pa', 'pb', 'pc', 'pal', 'pbe', 'pga'].map(i => +q(el, '#' + i).value);
+  const setParams = p => { if (mode === 'bravais') return; ['pa', 'pb', 'pc', 'pal', 'pbe', 'pga'].forEach((i, k) => { q(el, '#' + i).value = p[k]; q(el, '#' + i + 'v').textContent = p[k] + (k > 2 ? '°' : ''); }); };
+  function frac(cent) {
+    const pts = []; const cor = [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]]; cor.forEach(p => pts.push(p));
+    if (cent === 'I') pts.push([.5, .5, .5]);
+    if (cent === 'F') [[.5, .5, 0], [.5, .5, 1], [.5, 0, .5], [.5, 1, .5], [0, .5, .5], [1, .5, .5]].forEach(p => pts.push(p));
+    if (cent === 'C') [[.5, .5, 0], [.5, .5, 1]].forEach(p => pts.push(p));
+    return pts;
+  }
+  const npc = { P: 1, R: 1, I: 2, C: 2, F: 4 };
+  function draw() {
+    if (!el.isConnected) return;
+    const [a, b, cc, al, be, ga] = P(); const A = al * D2R, B = be * D2R, G = ga * D2R;
+    g.clearRect(0, 0, 520, 400);
+    const cg = Math.cos(G), sg = Math.sin(G);
+    const cy = (Math.cos(A) - Math.cos(B) * cg) / sg; const cz2 = 1 - Math.cos(B) ** 2 - cy ** 2;
+    const info = q(el, '#info');
+    if (cz2 <= 0.001) { g.fillStyle = cssv('--bad'); g.font = '16px sans-serif'; g.fillText('Bộ thông số không tạo được ô mạng (góc không hợp lệ)', 30, 200); info.innerHTML = '<b style="color:var(--bad)">Thông số không hợp lệ</b>'; return; }
+    const va = [a, 0, 0], vb = [b * cg, b * sg, 0], vc = [cc * Math.cos(B), cc * cy, cc * Math.sqrt(cz2)];
+    const N = st.rep, cent = st.cent;
+    const cell = (u, v, w) => [0, 1, 2].map(k => u * va[k] + v * vb[k] + w * vc[k]);
+    const ctr = cell(N / 2, N / 2, N / 2);
+    const ext = Math.max(...[[0, 0, 0], [N, N, N], [N, 0, 0], [0, N, 0], [0, 0, N], [N, N, 0], [N, 0, N], [0, N, N]].map(p => { const q_ = cell(...p); return Math.hypot(q_[0] - ctr[0], q_[1] - ctr[1], q_[2] - ctr[2]); }));
+    const S = 150 / ext;
+    const T = p => { const r = rotXY([(p[0] - ctr[0]), -(p[1] - ctr[1]), (p[2] - ctr[2])].map(x => x * S), st.rx, st.ry); const f = 1 + r[2] / 900; return [260 + r[0] * f, 210 + r[1] * f, r[2]]; };
+    // cạnh
+    const edges = [];
+    for (let i = 0; i <= N; i++) for (let j = 0; j <= N; j++) {
+      edges.push([[i, j, 0], [i, j, N]], [[i, 0, j], [i, N, j]], [[0, i, j], [N, i, j]]);
+    }
+    const outer = e => { const p = e[0], q_ = e[1]; return [p, q_].every(x => x.every(v => v === 0 || v === N)); };
+    edges.forEach(e => {
+      const t0 = T(cell(...e[0])), t1 = T(cell(...e[1]));
+      const o = outer(e); g.strokeStyle = o ? '#e8912d' : 'rgba(120,130,160,.45)'; g.lineWidth = o ? 2.2 : 1; g.beginPath(); g.moveTo(t0[0], t0[1]); g.lineTo(t1[0], t1[1]); g.stroke();
+    });
+    g.lineWidth = 1;
+    // điểm
+    const seen = new Set(), dots = [];
+    for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) for (let k = 0; k < N; k++) frac(cent).forEach(f => {
+      const p = [i + f[0], j + f[1], k + f[2]], key = p.join(','); if (seen.has(key)) return; seen.add(key);
+      const isCorner = f.every(v => v === 0 || v === 1); dots.push([T(cell(...p)), isCorner]);
+    });
+    dots.sort((x, y) => x[0][2] - y[0][2]);
+    dots.forEach(([t, cor]) => { const r = 6 + t[2] / 60; g.beginPath(); g.arc(t[0], t[1], Math.max(3, r), 0, 7); g.fillStyle = cor ? '#1f5fbf' : '#d24545'; g.fill(); g.strokeStyle = '#fff'; g.stroke(); });
+    // trục
+    g.font = 'bold 13px sans-serif'; g.fillStyle = ink();
+    [['a', va], ['b', vb], ['c', vc]].forEach(([n, v]) => { const t = T(cell(...(n === 'a' ? [N * 1.12, 0, 0] : n === 'b' ? [0, N * 1.12, 0] : [0, 0, N * 1.12]))); g.fillText(n, t[0], t[1]); });
+    const sys = detectSys(a, b, cc, al, be, ga);
+    const vol = a * b * cc * Math.sqrt(1 - Math.cos(A) ** 2 - Math.cos(B) ** 2 - Math.cos(G) ** 2 + 2 * Math.cos(A) * Math.cos(B) * Math.cos(G));
+    const okc = sys && SYS[sys].cent.includes(cent);
+    info.innerHTML = `<b>Hệ nhận diện:</b> ${sys ? SYS[sys].name : 'không khớp hệ đặc biệt (xem là ba nghiêng nếu đối xứng thấp)'}<br><b>Ví dụ:</b> ${sys ? SYS[sys].ex : '—'}<br>a=${a}, b=${b}, c=${cc}, α=${al}°, β=${be}°, γ=${ga}° · V ≈ ${vol.toFixed(2)}<br><b>Số nút / ô:</b> ${npc[cent]} (kiểu ${cent})` +
+      (mode === 'bravais' ? '' : (okc ? '' : `<br><span style="color:var(--bad)">Kiểu ${cent} không nằm trong 14 mạng Bravais của hệ này (có thể quy về một kiểu khác đơn giản hơn).</span>`)) +
+      `<br><span style="font-size:12px;color:var(--muted)">🔵 nút đỉnh · 🔴 nút tâm khối / tâm mặt / tâm đáy</span>`;
+  }
+  const setSys = k => {
+    st.sys = k; qa(el, '#sysTabs button').forEach(b => b.classList.toggle('on', b.dataset.k === k)); setParams(SYS[k].p);
+    if (mode === 'bravais') {
+      st.cent = SYS[k].cent[0]; const ct = q(el, '#centTabs');
+      ct.innerHTML = SYS[k].cent.map(x => `<button data-c="${x}" class="${x === st.cent ? 'on' : ''}">${x}${{ P: ' nguyên thuỷ', I: ' tâm khối', F: ' tâm mặt', C: ' tâm đáy', R: ' thoi lục giác' }[x]}</button>`).join('');
+      qa(ct, 'button').forEach(b => b.onclick = () => { st.cent = b.dataset.c; qa(ct, 'button').forEach(x => x.classList.toggle('on', x === b)); draw(); });
+    } else { if (!SYS[k].cent.includes(st.cent)) { st.cent = 'P'; q(el, '#cent').value = 'P'; } }
+    draw();
+  };
+  qa(el, '#sysTabs button').forEach(b => b.onclick = () => setSys(b.dataset.k));
+  if (mode !== 'bravais') {
+    ['pa', 'pb', 'pc', 'pal', 'pbe', 'pga'].forEach(i => { const s = q(el, '#' + i); s.addEventListener('input', () => { q(el, '#' + i + 'v').textContent = s.value + (['pal','pbe','pga'].includes(i) ? '°' : ''); qa(el, '#sysTabs button').forEach(b => b.classList.remove('on')); draw(); }); });
+    q(el, '#cent').onchange = e => { st.cent = e.target.value; draw(); };
+  }
+  q(el, '#auto').onchange = e => { st.auto = e.target.checked; loop(); };
+  q(el, '#rep').onchange = e => { st.rep = +e.target.value; draw(); };
+  drag3(c, st, draw);
+  let raf = 0; const loop = () => { cancelAnimationFrame(raf); if (!st.auto || !el.isConnected) return; st.ry += .008; draw(); raf = requestAnimationFrame(loop); };
+  setSys('cubic'); if (st.auto) loop();
+};
+W.coord = el => {
+  const sq = Math.sqrt, sh = [];
+  const perm = (() => { const r = []; [[1, 1, 0], [1, 0, 1], [0, 1, 1]].forEach(b => [1, -1].forEach(s1 => [1, -1].forEach(s2 => { let k = 0; const p = b.map(v => v ? (k++ ? s2 : s1) : 0); if (!r.some(x => x.join() === p.join())) r.push(p); }))); return r; })();
+  const cube = []; [1, -1].forEach(x => [1, -1].forEach(y => [1, -1].forEach(z => cube.push([x, y, z]))));
+  const hexp = []; for (let i = 0; i < 6; i++) [.5, -.5].forEach(z => hexp.push([Math.cos(i * 60 * D2R), Math.sin(i * 60 * D2R), z]));
+  const tri = []; for (let i = 0; i < 3; i++) [.87, -.87].forEach(z => tri.push([Math.cos(i * 120 * D2R), Math.sin(i * 120 * D2R), z])); for (let i = 0; i < 3; i++) tri.push([1.3 * Math.cos((60 + i * 120) * D2R), 1.3 * Math.sin((60 + i * 120) * D2R), 0]);
+  const list = [
+    { cn: 4, n: 'Tứ diện (tetrahedral)', v: [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]], t: 1.05, ex: 'Si⁴⁺, P⁵⁺ (SiO₄, PO₄), Be²⁺, Al³⁺ (trong cấu trúc tứ diện)' },
+    { cn: 6, n: 'Bát diện (octahedral)', v: [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]], t: 1.05, ex: 'Al³⁺, Fe²⁺, Fe³⁺, Mg²⁺ (trong cấu trúc bát diện)' },
+    { cn: 8, n: 'Lập phương (cubic)', v: cube, t: 1.05, ex: 'Ca²⁺ trong fluorite (CaF₂); Ba²⁺, K⁺ trong một số khoáng vật' },
+    { cn: 12, n: 'Lập phương – bát diện (cuboctahedral)', v: perm, t: 1.05, ex: 'Kim loại tự nhiên (Cu, Au – mạng FCC); K⁺, Na⁺ ở vị trí lớn của mica, amphibole' },
+    { cn: '6+6', n: 'Lăng trụ lục giác (12)', v: hexp, t: 1.05, ex: 'Vị trí lớn A trong một số silicat (lăng trụ 6+6)' },
+    { cn: 9, n: 'Lăng trụ tam giác 3 mũ (9)', v: tri, t: 1.25, ex: 'Ca²⁺ trong aragonite (CN = 9); Pb²⁺ trong một số silicat/carbonat' }
+  ];
+  mk(el, `<div class="two"><div class="grid" style="grid-template-columns:1fr 1fr">${list.map((l, i) => `<div class="mini click" data-i="${i}"><h4>CN = ${l.cn}</h4><span style="font-size:13px">${l.n}</span></div>`).join('')}</div><div><canvas width="360" height="300" style="width:100%"></canvas><div class="res" id="cinfo"></div></div></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d'); const st = { rx: -.5, ry: .5, i: 1 };
+  const draw = () => {
+    if (!el.isConnected) return; const L = list[st.i]; g.clearRect(0, 0, 360, 300);
+    const V = L.v.map(p => { const m = Math.max(...L.v.map(x => Math.hypot(...x))); return p.map(x => x / m * 105); });
+    const T = p => { const r = rotXY(p, st.rx, st.ry); return [180 + r[0], 150 + r[1], r[2]]; };
+    let mn = 1e9; for (let i = 0; i < V.length; i++) for (let j = i + 1; j < V.length; j++) mn = Math.min(mn, Math.hypot(V[i][0] - V[j][0], V[i][1] - V[j][1], V[i][2] - V[j][2]));
+    const t = V.map(T), cen = T([0, 0, 0]);
+    g.strokeStyle = 'rgba(120,130,160,.6)';
+    for (let i = 0; i < V.length; i++) for (let j = i + 1; j < V.length; j++) { const d = Math.hypot(V[i][0] - V[j][0], V[i][1] - V[j][1], V[i][2] - V[j][2]); if (d <= mn * L.t) { g.beginPath(); g.moveTo(t[i][0], t[i][1]); g.lineTo(t[j][0], t[j][1]); g.stroke(); } }
+    g.strokeStyle = 'rgba(232,145,45,.9)'; g.lineWidth = 2; t.forEach(p => { g.beginPath(); g.moveTo(cen[0], cen[1]); g.lineTo(p[0], p[1]); g.stroke(); }); g.lineWidth = 1;
+    g.beginPath(); g.arc(cen[0], cen[1], 13, 0, 7); g.fillStyle = '#1f5fbf'; g.fill();
+    t.slice().sort((a, b) => a[2] - b[2]).forEach(p => { g.beginPath(); g.arc(p[0], p[1], 8 + p[2] / 30, 0, 7); g.fillStyle = '#d24545'; g.fill(); g.strokeStyle = '#fff'; g.stroke(); });
+    q(el, '#cinfo').innerHTML = `<b>CN = ${L.cn} – ${L.n}</b><br>${L.ex}<br><span style="font-size:12px;color:var(--muted)">🔵 cation trung tâm · 🔴 anion / nguyên tử lân cận. Kéo để xoay.</span>`;
+  };
+  qa(el, '.mini.click').forEach(m => m.onclick = () => { st.i = +m.dataset.i; qa(el, '.mini.click').forEach(x => x.classList.toggle('sel', x === m)); draw(); });
+  qa(el, '.mini.click')[1].classList.add('sel'); drag3(c, st, draw);
+  const loop = () => { if (!el.isConnected) return; st.ry += .006; draw(); requestAnimationFrame(loop); }; loop();
+};
+W.symaxis = el => {
+  mk(el, `<div class="two"><div><canvas width="340" height="300" style="width:100%"></canvas></div><div>
+  <div class="mtab" id="ns">${[1, 2, 3, 4, 5, 6, 7, 8].map(n => `<button data-n="${n}" class="${n === 4 ? 'on' : ''}">n = ${n}</button>`).join('')}</div>
+  <button class="btn primary" id="rot">↻ Quay 360°/n</button> <label style="font-size:14px"><input type="checkbox" id="mir"> hiện mặt gương</label>
+  <div class="res" id="sinfo"></div></div></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d'); const st = { n: 4, ang: 0, target: 0 };
+  const motif = () => [[0, -8], [22, 0], [42, 10], [26, 14], [14, 5], [10, 30], [-2, 8]];
+  const draw = () => {
+    if (!el.isConnected) return; g.clearRect(0, 0, 340, 300); const n = st.n, ok = [1, 2, 3, 4, 6].includes(n);
+    g.save(); g.translate(170, 150);
+    g.strokeStyle = 'rgba(120,130,160,.5)'; g.setLineDash([4, 4]); g.beginPath(); g.arc(0, 0, 110, 0, 7); g.stroke(); g.setLineDash([]);
+    for (let k = 0; k < n; k++) {
+      g.save(); g.rotate((k * 360 / n) * D2R * 1 - Math.PI / 2 + 0); g.translate(60, 0);
+      g.beginPath(); motif().forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.closePath();
+      g.fillStyle = ok ? `hsla(${210 + k * 25},70%,55%,.55)` : 'rgba(210,69,69,.4)'; g.fill(); g.strokeStyle = ok ? '#1f5fbf' : '#d24545'; g.stroke(); g.restore();
+    }
+    // vật đang quay
+    g.save(); g.rotate(st.ang * D2R - Math.PI / 2); g.translate(60, 0); g.beginPath(); motif().forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.closePath(); g.lineWidth = 3; g.strokeStyle = '#e8912d'; g.stroke(); g.restore(); g.lineWidth = 1;
+    g.beginPath(); g.arc(0, 0, 5, 0, 7); g.fillStyle = ink(); g.fill();
+    if (q(el, '#mir').checked) { g.strokeStyle = '#7a3fb8'; g.lineWidth = 2; g.beginPath(); g.moveTo(0, -125); g.lineTo(0, 125); g.stroke(); g.lineWidth = 1; g.fillStyle = '#7a3fb8'; g.fillText('mặt gương m', 6, -112); }
+    g.restore();
+    const inter = 180 - 360 / n, fill = 360 / inter;
+    q(el, '#sinfo').innerHTML = `<b>Trục bậc ${n}:</b> quay ${(360 / n).toFixed(1)}° thì hình lặp lại ⇒ trong 360° hình lặp lại ${n} lần.<br>` + (ok ? '<span style="color:var(--ok)"><b>✓ Tồn tại trong tinh thể</b></span> – tương thích với mạng tuần hoàn.' : `<span style="color:var(--bad)"><b>✗ Không tồn tại trong tinh thể</b></span> – trực quan: đa giác đều ${n} cạnh có góc trong ${inter.toFixed(1)}°, cần ${fill.toFixed(2)} đa giác quanh một đỉnh (không nguyên) ⇒ không thể lát kín mặt phẳng.`) +
+      `<br><span style="font-size:12px;color:var(--muted)">Đường cam = vật đang quay. Tinh thể chỉ có các bậc 1, 2, 3, 4, 6.</span>`;
+  };
+  qa(el, '#ns button').forEach(b => b.onclick = () => { st.n = +b.dataset.n; qa(el, '#ns button').forEach(x => x.classList.toggle('on', x === b)); st.ang = 0; draw(); });
+  q(el, '#mir').onchange = draw;
+  q(el, '#rot').onclick = () => { const to = st.ang + 360 / st.n; const step = () => { st.ang += 3; if (st.ang >= to - 0.01) { st.ang = to % 360; draw(); return; } draw(); requestAnimationFrame(step); }; step(); };
+  draw();
+};
+W.miller = el => {
+  mk(el, `<div class="two"><div><canvas width="380" height="340" style="width:100%"></canvas></div><div>
+  <div class="lab">Giao điểm trên a: <input type="text" id="ix" value="1" size="5"> b: <input type="text" id="iy" value="1" size="5"> c: <input type="text" id="iz" value="1" size="5"></div>
+  <div style="font-size:12px;color:var(--muted)">Nhập số nguyên, phân số (1/2) hoặc “inf” (song song trục).</div>
+  <div class="mtab" id="pre">${['100', '010', '001', '110', '111', '210', '211', '012', '221'].map(s => `<button data-h="${s}">(${s})</button>`).join('')}</div>
+  <div class="res" id="minfo"></div></div></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const proj = (x, y, z) => [70 + (x + .55 * y) * 190, 290 - (z + .4 * y) * 190 + 0];
+  const draw = () => {
+    g.clearRect(0, 0, 380, 340); const I = ink();
+    const inp = ['ix', 'iy', 'iz'].map(i => fr(q(el, '#' + i).value)); const info = q(el, '#minfo');
+    if (inp.some(x => x === undefined)) { info.innerHTML = '<span style="color:var(--bad)">Giá trị không hợp lệ.</span>'; return; }
+    if (inp.every(x => x === null)) { info.innerHTML = '<span style="color:var(--bad)">Mặt không thể song song với cả ba trục.</span>'; return; }
+    if (inp.some(x => x && x.n === 0)) { info.innerHTML = '<span style="color:var(--bad)">Giao điểm bằng 0: hãy dời gốc toạ độ sang ô mạng kế bên.</span>'; return; }
+    const rec = inp.map(x => x ? { n: x.d, d: x.n } : { n: 0, d: 1 }).map(x => x.d < 0 ? { n: -x.n, d: -x.d } : x);
+    const L = rec.reduce((l, x) => lcm(l, x.d), 1); let idx = rec.map(x => x.n * L / x.d); const G = idx.reduce((a, b) => gcd(a, b), 0) || 1; idx = idx.map(v => v / G);
+    const fmt = v => v < 0 ? `<span class="ov">${-v}</span>` : v;
+    // vẽ khối
+    const V = [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0], [0, 0, 1], [1, 0, 1], [1, 1, 1], [0, 1, 1]];
+    const E = [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
+    g.strokeStyle = I; g.globalAlpha = .55; E.forEach(([i, j]) => { const a = proj(...V[i]), b = proj(...V[j]); g.beginPath(); g.moveTo(...a); g.lineTo(...b); g.stroke(); }); g.globalAlpha = 1;
+    g.fillStyle = I; g.font = 'bold 14px sans-serif'; g.fillText('a', ...proj(1.05, 0, 0)); g.fillText('b', ...proj(0.02, 1.08, 0)); g.fillText('c', ...proj(-.06, 0, 1.08)); g.fillText('O', ...proj(-.08, 0, -.05));
+    if (idx.some(v => v < 0)) { info.innerHTML = `<b>Chỉ số Miller: (${idx.map(fmt).join(' ')})</b><br>Có chỉ số âm – mặt nằm ở phía âm của trục nên không vẽ trong ô đơn vị này.`; return; }
+    const [h, k, l] = idx, pts = [];
+    const f = p => h * p[0] + k * p[1] + l * p[2] - 1;
+    E.forEach(([i, j]) => { const p = V[i], q_ = V[j], f0 = f(p), f1 = f(q_);
+      if (Math.abs(f0) < 1e-9) pts.push(p); if (Math.abs(f1) < 1e-9) pts.push(q_);
+      if (f0 * f1 < -1e-12) { const t = f0 / (f0 - f1); pts.push(p.map((v, m) => v + t * (q_[m] - v))); } });
+    const uniq = []; pts.forEach(p => { if (!uniq.some(u => Math.hypot(u[0] - p[0], u[1] - p[1], u[2] - p[2]) < 1e-6)) uniq.push(p); });
+    if (uniq.length >= 3) {
+      const sp = uniq.map(p => proj(...p)); const cx = sp.reduce((s, p) => s + p[0], 0) / sp.length, cy = sp.reduce((s, p) => s + p[1], 0) / sp.length;
+      sp.sort((a, b) => Math.atan2(a[1] - cy, a[0] - cx) - Math.atan2(b[1] - cy, b[0] - cx));
+      g.beginPath(); sp.forEach((p, i) => i ? g.lineTo(...p) : g.moveTo(...p)); g.closePath(); g.fillStyle = 'rgba(232,145,45,.45)'; g.fill(); g.strokeStyle = '#e8912d'; g.lineWidth = 2.5; g.stroke(); g.lineWidth = 1;
+    }
+    const ic = [h ? '1/' + h : '∞', k ? '1/' + k : '∞', l ? '1/' + l : '∞'].map(s => s === '1/1' ? '1' : s);
+    info.innerHTML = `<b>Chỉ số Miller: (${idx.map(fmt).join(' ')})</b><br>Giao điểm với a, b, c của mặt gần gốc nhất trong họ: ${ic.join(', ')}<br><span style="font-size:13px">Các bước: giao điểm → nghịch đảo (${rec.map(x => x.n + (x.d !== 1 ? '/' + x.d : '')).join(', ')}) → nhân mẫu chung ${L} → ước chung ${G}.</span><br><span style="font-size:12px;color:var(--muted)">Hình vẽ là mặt (${h}${k}${l}) trong ô đơn vị (mặt song song với các mặt cùng họ).</span>`;
+  };
+  qa(el, 'input').forEach(i => i.addEventListener('input', draw));
+  qa(el, '#pre button').forEach(b => b.onclick = () => { const s = b.dataset.h; ['ix', 'iy', 'iz'].forEach((id, i) => q(el, '#' + id).value = s[i] === '0' ? 'inf' : '1/' + s[i]); draw(); });
+  draw();
+};
+W.dg = el => {
+  mk(el, `<div class="mtab"><button class="on" data-k="d">💎 Kim cương</button><button data-k="g">✏ Graphite</button></div><div class="two"><canvas width="360" height="280" style="width:100%"></canvas><div id="dgi"></div></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d'); const st = { k: 'd', rx: -.4, ry: .4 };
+  const info = {
+    d: [['Cấu trúc', 'Hệ lập phương, nhóm không gian Fd3m; mỗi C liên kết cộng hoá trị với 4 C khác (sp³) – mạng 3 chiều tứ diện'], ['Độ cứng (Mohs)', 10, 10], ['Tỷ trọng (g/cm³)', 3.51, 4], ['Dẫn điện', 'Cách điện (không có electron tự do)'], ['Ánh', 'Ánh kim cương (adamantine)'], ['Cát khai', 'Hoàn toàn theo 4 phương {111} (bát diện)'], ['Ứng dụng', 'Trang sức, đá quý; mài cắt, khoan, gia công vật liệu cứng; cửa sổ quang học, tản nhiệt']],
+    g: [['Cấu trúc', 'Hệ lục phương, P6₃/mmc; mỗi C liên kết cộng hoá trị với 3 C (sp²) tạo lớp phẳng lục giác; giữa các lớp là lực Van der Waals'], ['Độ cứng (Mohs)', '1 – 2', 1.5], ['Tỷ trọng (g/cm³)', 2.26, 4], ['Dẫn điện', 'Dẫn điện tốt dọc theo lớp (electron π phi định xứ)'], ['Ánh', 'Ánh kim – xám đen; vết vạch đen'], ['Cát khai', 'Hoàn hảo theo (0001) → dễ tách lớp'], ['Ứng dụng', 'Ruột bút chì, chất bôi trơn rắn, điện cực, vật liệu chịu nhiệt (nhiệt độ thăng hoa rất cao)']]
+  };
+  const render = () => { const d = info[st.k]; q(el, '#dgi').innerHTML = `<table><tr><th>${d[0][0]}</th><td>${d[0][1]}</td></tr></table>` + [d[1], d[2]].map(r => `<div style="font-size:14px;margin-top:8px"><b>${r[0]}</b>: ${r[1]}</div><div class="bar"><i style="width:${r[2] / (r[0].includes('Mohs') ? 10 : 4) * 100}%"></i></div>`).join('') + `<table>${d.slice(3).map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('')}</table>`; };
+  const draw = () => {
+    if (!el.isConnected) return; g.clearRect(0, 0, 360, 280);
+    if (st.k === 'd') {
+      const tv = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]].map(p => p.map(x => x * 55));
+      const dirs = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
+      const atoms = [[0, 0, 0]]; tv.forEach(p => atoms.push(p));
+      // lớp thứ hai: mỗi đỉnh có thêm 3 lân cận
+      const sec = []; tv.forEach((p, i) => dirs.forEach((d, j) => { if (j !== i) { const q_ = p.map((v, m) => v + d[m] * 55 * (j === 0 || 1 ? 1 : 1)); sec.push([p, q_.map((v, m) => v - (dirs[i][m]) * 0)]); } }));
+      const T = p => { const r = rotXY(p, st.rx, st.ry); return [180 + r[0], 140 + r[1], r[2]]; };
+      g.strokeStyle = 'rgba(120,130,160,.7)'; g.lineWidth = 3;
+      tv.forEach(p => { const a = T([0, 0, 0]), b = T(p); g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke(); });
+      // các lân cận bậc hai
+      const outs = []; tv.forEach((p, i) => { dirs.forEach((d, j) => { if (j === i) return; const e = p.map((v, m) => v - d[m] * 55); outs.push([p, e]); }); });
+      g.lineWidth = 2; outs.forEach(([p, e]) => { const a = T(p), b = T(e); g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke(); });
+      const all = [[T([0, 0, 0]), 14, '#1f5fbf']]; tv.forEach(p => all.push([T(p), 11, '#3a3f52'])); outs.forEach(([, e]) => all.push([T(e), 8, '#8a90a6']));
+      all.sort((a, b) => a[0][2] - b[0][2]).forEach(([t, r, col]) => { g.beginPath(); g.arc(t[0], t[1], r, 0, 7); g.fillStyle = col; g.fill(); });
+      g.lineWidth = 1; g.fillStyle = ink(); g.font = '13px sans-serif'; g.fillText('Mỗi C nối 4 C (tứ diện) – kéo để xoay', 60, 270);
+    } else {
+      const layer = (yy, col) => {
+        for (let i = -3; i <= 3; i++) for (let j = -3; j <= 3; j++) {
+          const x = i * 36 + j * 18, y = j * 31; const cx = 180 + x * .9, cy = yy + y * .42;
+          if (Math.abs(cx - 180) > 150) continue;
+          [[0, 0], [24, 0]].forEach(([dx, dy], m) => { });
+        }
+      };
+      const hexs = (yy, col) => {
+        for (let i = -2; i <= 2; i++) for (let j = -2; j <= 2; j++) {
+          const cx0 = i * 62 + j * 31, cy0 = j * 54;
+          g.beginPath(); for (let k = 0; k < 6; k++) { const a = k * 60 * D2R, x = 180 + cx0 + 24 * Math.cos(a), y = yy + (cy0 + 24 * Math.sin(a)) * .42; k ? g.lineTo(x, y) : g.moveTo(x, y); }
+          g.closePath(); g.strokeStyle = col; g.lineWidth = 1.8; g.stroke();
+        }
+      };
+      hexs(200, '#3a3f52'); hexs(90, '#3a3f52');
+      g.setLineDash([3, 4]); g.strokeStyle = '#e8912d'; g.lineWidth = 1.5; [[-60, 0], [0, 30], [60, -20], [-100, 20]].forEach(([x, y]) => { g.beginPath(); g.moveTo(180 + x, 90 + y * .42 + 6); g.lineTo(180 + x, 200 + y * .42 - 6); g.stroke(); }); g.setLineDash([]);
+      g.fillStyle = ink(); g.font = '13px sans-serif'; g.fillText('lớp C (liên kết cộng hoá trị mạnh)', 10, 60); g.fillStyle = '#e8912d'; g.fillText('Van der Waals (yếu) giữa các lớp', 80, 148); g.fillStyle = ink(); g.fillText('Các lớp trượt lên nhau → mềm, cát khai hoàn hảo', 20, 268);
+    }
+  };
+  qa(el, '.mtab button').forEach(b => b.onclick = () => { st.k = b.dataset.k; qa(el, '.mtab button').forEach(x => x.classList.toggle('on', x === b)); render(); draw(); });
+  drag3(c, st, draw); render(); const loop = () => { if (!el.isConnected) return; if (st.k === 'd') { st.ry += .007; draw(); } requestAnimationFrame(loop); }; draw(); loop();
+};
+
+/* ============ CHƯƠNG 3 ============ */
+W.clarke = el => {
+  const E = [['O', 'Oxygen – Oxy', 46.6, 'Anion chủ yếu (O²⁻) trong silicat, oxit, carbonat…'], ['Si', 'Silicon – Silic', 27.7, 'Tứ diện SiO₄: thạch anh, feldspar, mica…'], ['Al', 'Aluminium – Nhôm', 8.1, 'Feldspar, mica, khoáng vật sét'], ['Fe', 'Iron – Sắt', 5.0, 'Olivine, pyroxene, magnetite, hematite, pyrite'], ['Ca', 'Calcium – Canxi', 3.6, 'Calcite, plagioclase, pyroxene, fluorite'], ['Na', 'Sodium – Natri', 2.8, 'Albite, halite'], ['K', 'Potassium – Kali', 2.6, 'K-feldspar, mica'], ['Mg', 'Magnesium – Magie', 2.1, 'Olivine, pyroxene, dolomite']];
+  mk(el, `<div>${E.map((e, i) => `<div class="lab" data-i="${i}" style="cursor:pointer;margin:4px 0"><b style="width:26px">${e[0]}</b><div class="bar" style="flex:1"><i style="width:${e[2] / 46.6 * 100}%"></i></div><span class="val">${e[2]}%</span></div>`).join('')}</div>
+  <div style="display:flex;height:26px;border-radius:8px;overflow:hidden;margin:8px 0;border:1px solid var(--line)">${E.map((e, i) => `<div title="${e[0]} ${e[2]}%" style="width:${e[2]}%;background:hsl(${i * 42},65%,55%)"></div>`).join('')}<div title="Còn lại ≈1,5%" style="width:1.5%;background:#999"></div></div>
+  <div style="font-size:13px;color:var(--muted)">Cả 8 nguyên tố = 98,5% · các nguyên tố khác ≈ 1,5%</div><div class="res" id="cl">Bấm vào một nguyên tố để xem vai trò.</div>`);
+  qa(el, '[data-i]').forEach(r => r.onclick = () => { const e = E[+r.dataset.i]; q(el, '#cl').innerHTML = `<b>${e[0]} – ${e[1]}: ${e[2]}%</b><br>${e[3]}`; });
+};
+const IONS = [['Si⁴⁺', 4, 'Tứ diện', .26, 'Tứ diện SiO₄ trong silicat', 4], ['Al³⁺', 4, 'Tứ diện', .39, 'Thay thế Si trong feldspar', 3], ['Al³⁺', 6, 'Bát diện', .535, 'Mica, khoáng vật sét', 3], ['Ti⁴⁺', 6, 'Bát diện', .605, 'Ilmenite, pyroxene', 4], ['Fe³⁺', 6, 'Bát diện, spin cao', .645, 'Oxide sắt, amphibole', 3], ['Mg²⁺', 6, 'Bát diện', .72, 'Olivine, pyroxene', 2], ['Fe²⁺', 6, 'Bát diện, spin cao', .78, 'Olivine, pyroxene', 2], ['Mn²⁺', 6, 'Bát diện, spin cao', .83, 'Garnet, carbonate', 2], ['Ca²⁺', 6, 'Bát diện', 1.0, 'Calcite, pyroxene', 2], ['Na⁺', 6, 'Bát diện', 1.02, 'Albite, pyroxene', 1], ['Ca²⁺', 8, 'Phối trí 8', 1.12, 'Anorthite, garnet', 2], ['Na⁺', 8, 'Phối trí 8', 1.18, 'Albite, feldspar', 1], ['K⁺', 8, 'Phối trí 8', 1.51, 'K-feldspar, mica', 1]];
+W.iso = el => {
+  mk(el, `<div class="mtab" id="cnf"><button class="on" data-c="0">Tất cả</button><button data-c="4">CN 4</button><button data-c="6">CN 6</button><button data-c="8">CN 8</button></div><div class="tw"><table id="it"></table></div>
+  <h4>Máy kiểm tra thay thế</h4><div class="lab">Ion A: <select id="ia"></select> Ion B: <select id="ib"></select></div><div class="res" id="ir"></div>`);
+  const tb = q(el, '#it'); let cn = 0;
+  const draw = () => tb.innerHTML = `<tr><th>Ion</th><th>CN</th><th>Hình phối trí</th><th>Bán kính (Å)</th><th></th><th>Vị trí / khoáng vật</th></tr>` + IONS.filter(i => !cn || i[1] === cn).map(i => `<tr><td><b>${i[0]}</b></td><td>${i[1]}</td><td>${i[2]}</td><td>${i[3]}</td><td style="width:35%"><div class="bar"><i style="width:${i[3] / 1.6 * 100}%"></i></div></td><td>${i[4]}</td></tr>`).join('');
+  draw();
+  qa(el, '#cnf button').forEach(b => b.onclick = () => { cn = +b.dataset.c; qa(el, '#cnf button').forEach(x => x.classList.toggle('on', x === b)); draw(); });
+  const opts = IONS.map((i, k) => `<option value="${k}">${i[0]} (CN ${i[1]}) ${i[3]} Å</option>`).join('');
+  q(el, '#ia').innerHTML = opts; q(el, '#ib').innerHTML = opts; q(el, '#ia').value = 5; q(el, '#ib').value = 6;
+  const chk = () => {
+    const a = IONS[+q(el, '#ia').value], b = IONS[+q(el, '#ib').value], r = q(el, '#ir');
+    if (a[1] !== b[1]) { r.innerHTML = '⚠ Hai ion có số phối trí khác nhau – không so sánh trực tiếp được (bán kính phụ thuộc CN). Hãy chọn cùng CN.'; return; }
+    const diff = Math.abs(a[3] - b[3]) / Math.min(a[3], b[3]) * 100, dq = Math.abs(a[5] - b[5]); let v;
+    if ((a[0] === 'Si⁴⁺' && b[0] === 'Al³⁺') || (b[0] === 'Si⁴⁺' && a[0] === 'Al³⁺')) v = '<b style="color:var(--accent)">Trường hợp đặc biệt</b>: chênh lệch bán kính lớn (~50%) và khác điện tích, nhưng Al³⁺ vẫn thay Si⁴⁺ trong tứ diện ở nhiệt độ cao, kèm thay thế ghép cặp (VD Na⁺ + Si⁴⁺ ↔ Ca²⁺ + Al³⁺ trong plagioclase).';
+    else if (a[0] === b[0]) v = 'Cùng một ion.';
+    else if (diff < 15) v = dq === 0 ? '<b style="color:var(--ok)">Thay thế dễ dàng, có thể tạo dung dịch rắn hoàn toàn</b> (cùng điện tích, bán kính gần nhau).' : '<b style="color:var(--accent)">Bán kính gần nhau nhưng khác điện tích</b> → cần thay thế ghép cặp (dị hoá trị) để cân bằng điện tích.';
+    else if (diff < 30) v = '<b style="color:var(--accent)">Thay thế hạn chế</b> (chênh lệch 15–30%): thường tạo dung dịch rắn không hoàn toàn, phụ thuộc nhiệt độ.';
+    else v = '<b style="color:var(--bad)">Gần như không thay thế được</b> (chênh lệch bán kính &gt; 30%).';
+    r.innerHTML = `Chênh lệch bán kính: <b>${diff.toFixed(1)}%</b> · chênh điện tích: <b>${dq}</b><br>${v}<br><span style="font-size:12px;color:var(--muted)">Quy tắc kinh nghiệm (Goldschmidt): &lt;15% dễ, 15–30% hạn chế, &gt;30% hiếm. Đây là hướng dẫn gần đúng, không phải định luật.</span>`;
+  };
+  q(el, '#ia').onchange = chk; q(el, '#ib').onchange = chk; chk();
+};
+W.solid = el => {
+  mk(el, `<div class="mtab"><button class="on" data-k="ol">Olivine: forsterite ↔ fayalite</button><button data-k="pl">Plagioclase: albite ↔ anorthite</button></div>` + slider('sx', '', 0, 100, 1, 20, '%') + `<div id="sbar"></div><div class="res" id="sinf"></div>`);
+  let k = 'ol'; const nm = an => an < 10 ? 'Albite' : an < 30 ? 'Oligoclase' : an < 50 ? 'Andesine' : an < 70 ? 'Labradorite' : an < 90 ? 'Bytownite' : 'Anorthite';
+  const draw = () => {
+    const x = +q(el, '#sx').value, f = x / 100;
+    if (k === 'ol') q(el, '#sinf').innerHTML = `<b>(Mg<sub>${(1 - f).toFixed(2)}</sub>Fe<sub>${f.toFixed(2)}</sub>)₂SiO₄</b> · Fa = ${x}% (Fe₂SiO₄), Fo = ${100 - x}% (Mg₂SiO₄)<br>Tỷ trọng ≈ <b>${(3.22 + (4.39 - 3.22) * f).toFixed(2)}</b> (Fo 3,22 → Fa 4,39) · Mg²⁺ ↔ Fe²⁺: thay đồng hoá trị, chênh lệch bán kính chỉ ≈ 8%.`;
+    else q(el, '#sinf').innerHTML = `<b>Na<sub>${(1 - f).toFixed(2)}</sub>Ca<sub>${f.toFixed(2)}</sub>Al<sub>${(1 + f).toFixed(2)}</sub>Si<sub>${(3 - f).toFixed(2)}</sub>O₈</b> · An = ${x}% → <b>${nm(x)}</b><br>Tỷ trọng ≈ <b>${(2.62 + (2.76 - 2.62) * f).toFixed(2)}</b> (albite 2,62 → anorthite 2,76) · thay thế ghép cặp Na⁺ + Si⁴⁺ ↔ Ca²⁺ + Al³⁺ (điện tích tổng không đổi).`;
+    q(el, '#sbar').innerHTML = `<div style="display:flex;height:26px;border-radius:8px;overflow:hidden;border:1px solid var(--line);margin:6px 0"><div style="width:${100 - x}%;background:#3aa27a;color:#fff;font-size:12px;padding:3px 8px;white-space:nowrap">${k === 'ol' ? 'Mg₂SiO₄ ' + (100 - x) + '%' : 'Ab ' + (100 - x) + '%'}</div><div style="width:${x}%;background:#c9722a;color:#fff;font-size:12px;padding:3px 8px;white-space:nowrap;overflow:hidden">${k === 'ol' ? 'Fe₂SiO₄ ' + x + '%' : 'An ' + x + '%'}</div></div>`;
+  };
+  bindSlider(el, 'sx', draw, '%'); qa(el, '.mtab button').forEach(b => b.onclick = () => { k = b.dataset.k; qa(el, '.mtab button').forEach(x => x.classList.toggle('on', x === b)); draw(); }); draw();
+};
+W.poly = el => {
+  mk(el, `<canvas width="560" height="360" style="width:100%;cursor:crosshair"></canvas><div class="res" id="pinf">Bấm vào giản đồ để chọn điều kiện T–P.</div><div style="font-size:12px;color:var(--muted)">Giản đồ định tính – vị trí điểm ba (≈ 500–550 °C, ≈ 4–4,5 kbar) và độ dốc thay đổi tuỳ nghiên cứu thực nghiệm.</div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const X = t => 60 + (t - 200) / 700 * 470, Y = p => 320 - p / 10 * 290;
+  const region = (T, P) => { if (T >= 500) { if (P >= 3.8 + .019 * (T - 500)) return 'Ky'; return P >= 3.8 - .011 * (T - 500) ? 'Sil' : 'And'; } return P >= 3.8 + .0165 * (T - 500) ? 'Ky' : 'And'; };
+  const N = { Ky: 'Kyanite (cấu trúc đặc nhất – áp suất cao)', Sil: 'Sillimanite (nhiệt độ cao)', And: 'Andalusite (áp suất thấp – “biến chất tiếp xúc”)' };
+  const col = { Ky: '#3a7bd5', Sil: '#e8912d', And: '#1b9a5b' };
+  let mk_ = null;
+  const draw = () => {
+    g.clearRect(0, 0, 560, 360);
+    // vùng
+    const poly = (pts, cc) => { g.beginPath(); pts.forEach(([t, p], i) => i ? g.lineTo(X(t), Y(p)) : g.moveTo(X(t), Y(p))); g.closePath(); g.fillStyle = cc; g.fill(); };
+    poly([[200, 10], [900, 10], [900, 3.8 + .019 * 400], [500, 3.8], [200, 3.8 - .0165 * 300]], 'rgba(58,123,213,.22)');
+    poly([[500, 3.8], [900, 3.8 + .019 * 400], [900, 3.8 - .011 * 400]], 'rgba(232,145,45,.25)');
+    poly([[200, 0], [900, 0], [900, 3.8 - .011 * 400], [500, 3.8], [200, 3.8 - .0165 * 300]], 'rgba(27,154,91,.22)');
+    g.strokeStyle = ink(); g.lineWidth = 1.2; g.strokeRect(60, 30, 470, 290);
+    g.lineWidth = 2.5; [[[500, 3.8], [900, 3.8 + .019 * 400]], [[500, 3.8], [900, 3.8 - .011 * 400]], [[500, 3.8], [200, 3.8 - .0165 * 300]]].forEach(([a, b]) => { g.beginPath(); g.moveTo(X(a[0]), Y(a[1])); g.lineTo(X(b[0]), Y(b[1])); g.stroke(); }); g.lineWidth = 1;
+    g.fillStyle = ink(); g.font = '13px sans-serif'; g.fillText('Nhiệt độ (°C) →', 240, 350); g.save(); g.translate(16, 200); g.rotate(-Math.PI / 2); g.fillText('Áp suất (kbar) →', 0, 0); g.restore();
+    [200, 400, 600, 800].forEach(t => g.fillText(t, X(t) - 10, 336)); [0, 2, 4, 6, 8, 10].forEach(p => g.fillText(p, 38, Y(p) + 4));
+    g.font = 'bold 15px sans-serif'; g.fillStyle = '#2f62b5'; g.fillText('KYANITE', 160, 90); g.fillStyle = '#c9722a'; g.fillText('SILLIMANITE', 400, 190); g.fillStyle = '#137a48'; g.fillText('ANDALUSITE', 210, 290);
+    g.beginPath(); g.arc(X(500), Y(3.8), 5, 0, 7); g.fillStyle = '#d24545'; g.fill(); g.fillStyle = ink(); g.font = '12px sans-serif'; g.fillText('điểm ba', X(500) - 44, Y(3.8) - 8);
+    if (mk_) { g.beginPath(); g.arc(mk_[0], mk_[1], 8, 0, 7); g.strokeStyle = '#000'; g.lineWidth = 3; g.stroke(); g.strokeStyle = '#fff'; g.lineWidth = 1.5; g.stroke(); g.lineWidth = 1; }
+  };
+  c.onclick = e => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left) * 560 / r.width, y = (e.clientY - r.top) * 360 / r.height; if (x < 60 || x > 530 || y < 30 || y > 320) return; mk_ = [x, y]; const T = 200 + (x - 60) / 470 * 700, P = (320 - y) / 290 * 10, R = region(T, P); draw(); q(el, '#pinf').innerHTML = `T ≈ <b>${T.toFixed(0)} °C</b>, P ≈ <b>${P.toFixed(1)} kbar</b> (≈ ${(P * 3.5).toFixed(0)} km độ sâu) → bền: <b style="color:${col[R]}">${N[R]}</b>`; };
+  draw();
+};
+W.colors = el => {
+  const C = [['Tạp chất cơ học', 'Các hạt nhỏ lạ bị bắt giữ trong tinh thể chủ (bao thể). VD: các bao thể hematite làm thạch anh có màu đỏ/vàng, dầu bẩn.'], ['Tạp chất hoá học', 'Ion nguyên tố vi lượng thay thế ion chủ trong mạng (ion nhuộm màu). VD: Cr³⁺ thay Al³⁺ trong corundum → ruby đỏ.'], ['Nguyên tố tạo màu', 'Ion kim loại chuyển tiếp (d-orbital) hấp thụ một số bước sóng, phần ánh sáng còn lại tạo màu. VD: Cr, Fe, Mn, Ti, Cu.'], ['Khuyết tật mạng', 'Nguyên tử bị thiếu (vacancy) hoặc electron bị mắc kẹt tạo “tâm màu” (color center) ở mức năng lượng hấp thụ ánh sáng thấy được.'], ['Bức xạ', 'Bức xạ (gamma…) tạo ra khuyết tật mạng, sinh ra tâm màu làm đổi màu tinh thể. VD: thạch anh khói, amethyst (Fe + bức xạ).']];
+  mk(el, `<div class="grid">${C.map((c, i) => `<div class="mini click" data-i="${i}"><h4>${i + 1}. ${c[0]}</h4><span style="display:none">${c[1]}</span></div>`).join('')}</div><div class="res" id="cc">Bấm vào từng thẻ.</div>
+  <h4>Ví dụ đá quý</h4><div class="grid"><div class="mini"><span class="sw" style="background:#c0203a"></span> <b>Ruby</b> – Cr³⁺ → đỏ</div><div class="mini"><span class="sw" style="background:#1f9a5a"></span> <b>Emerald</b> – Cr³⁺ hoặc V³⁺ → xanh lục</div><div class="mini"><span class="sw" style="background:#7a3fb8"></span> <b>Amethyst</b> – Fe + bức xạ → tím</div><div class="mini"><span class="sw" style="background:#e07a90"></span> <b>Rhodochrosite</b> – Mn²⁺ → hồng</div></div>`);
+  qa(el, '.mini.click').forEach(m => m.onclick = () => { qa(el, '.mini.click').forEach(x => x.classList.toggle('sel', x === m)); q(el, '#cc').innerHTML = `<b>${C[+m.dataset.i][0]}:</b> ${C[+m.dataset.i][1]}`; });
+};
+W.mohs = el => {
+  const M = [['Talc', 1], ['Gypsum', 2], ['Calcite', 3], ['Fluorite', 4], ['Apatite', 5], ['Orthoclase', 6], ['Quartz', 7], ['Topaz', 8], ['Corundum', 9], ['Diamond', 10]];
+  const T = [['Móng tay', 2.5], ['Đồng xu', 3.25], ['Kính', 5.5]];
+  mk(el, `<div style="display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:8px 0">${M.map(m => `<div style="background:hsl(${120 - m[1] * 9},60%,${85 - m[1] * 3}%);color:#111;border-radius:8px;text-align:center;padding:6px 2px;font-size:12px"><b style="font-size:16px">${m[1]}</b><br>${m[0]}</div>`).join('')}</div>
+  <h4>Thử vạch xước ảo</h4><div class="lab">Vật/khoáng vật A: <select id="ma">${M.map(m => `<option value="${m[1]}">${m[0]} (${m[1]})</option>`).join('')}${T.map(t => `<option value="${t[1]}">${t[0]} (≈${t[1] === 3.25 ? '3–3,5' : t[1]})</option>`).join('')}</select> cạ vào B: <select id="mb">${M.map(m => `<option value="${m[1]}">${m[0]} (${m[1]})</option>`).join('')}</select></div><div class="res" id="mr"></div>`);
+  q(el, '#ma').value = 7; q(el, '#mb').value = 3;
+  const f = () => { const a = +q(el, '#ma').value, b = +q(el, '#mb').value; q(el, '#mr').innerHTML = Math.abs(a - b) < .3 ? '⚖ Độ cứng xấp xỉ nhau → khó phân biệt, thường chỉ xước nhẹ hoặc không xước.' : a > b ? `✅ A <b>làm xước</b> B (A cứng hơn). Vết xước thật trên B, không phải vệt bột.` : `❌ A <b>không</b> làm xước được B (A mềm hơn); chỉ có thể để lại vệt bột của A.`; };
+  qa(el, 'select').forEach(s => s.onchange = f); f();
+};
+W.cleave = el => {
+  const C = [['Mica', '1 phương – hoàn toàn', [0], 'Tách thành lá mỏng'], ['Feldspar', '2 phương – gần 90°', [0, 90], 'Hai phương gần vuông góc'], ['Pyroxene', '2 phương – 87° và 93°', [0, 87], ''], ['Amphibole', '2 phương – 56° và 124°', [0, 56], ''], ['Calcite', '3 phương – không vuông góc', [0, 75], 'Mặt thoi (≈ 75°/105°)'], ['Halite', '3 phương – 90°', [0, 90], 'Hình khối lập phương'], ['Fluorite', '4 phương – cát khai bát diện', [0, 70.5], 'Bát diện (góc nhị diện ≈ 70,5° / 109,5°)']];
+  mk(el, `<div class="two"><div class="grid" style="grid-template-columns:1fr 1fr">${C.map((c, i) => `<div class="mini click ${i === 3 ? 'sel' : ''}" data-i="${i}"><h4>${c[0]}</h4><span style="font-size:13px">${c[1]}</span></div>`).join('')}</div><div><canvas width="340" height="300" style="width:100%"></canvas><div class="res" id="ci"></div></div></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const draw = i => {
+    const [n, d, angs] = C[i]; g.clearRect(0, 0, 340, 300); g.save(); g.beginPath(); g.roundRect(30, 30, 280, 220, 20); g.clip(); g.fillStyle = 'rgba(31,95,191,.10)'; g.fill();
+    g.strokeStyle = '#1f5fbf'; g.lineWidth = 1.4;
+    angs.forEach(a => { const r = a * D2R, dx = Math.cos(r), dy = Math.sin(r), sp = 26; for (let k = -12; k <= 12; k++) { const ox = 170 - dy * k * sp, oy = 140 + dx * k * sp; g.beginPath(); g.moveTo(ox - dx * 400, oy - dy * 400); g.lineTo(ox + dx * 400, oy + dy * 400); g.stroke(); } });
+    g.restore(); g.strokeStyle = ink(); g.strokeRect(30, 30, 280, 220);
+    if (angs.length === 2) { g.strokeStyle = '#e8912d'; g.lineWidth = 3; g.beginPath(); g.arc(170, 140, 42, angs[0] * D2R, angs[1] * D2R); g.stroke(); g.fillStyle = '#c9722a'; g.font = 'bold 15px sans-serif'; g.fillText(angs[1] + '°', 176 + 44 * Math.cos(angs[1] / 2 * D2R), 140 + 44 * Math.sin(angs[1] / 2 * D2R) + 5); }
+    g.fillStyle = ink(); g.font = '13px sans-serif'; g.fillText('Mặt cắt minh hoạ – các đường xanh = mặt cát khai', 30, 275);
+    q(el, '#ci').innerHTML = `<b>${n}</b>: ${d}${C[i][3] ? '<br>' + C[i][3] : ''}<br><span style="font-size:12px;color:var(--muted)">Số phương thứ 3, 4 nằm ngoài mặt cắt 2D.</span>`;
+  };
+  qa(el, '.mini.click').forEach(m => m.onclick = () => { qa(el, '.mini.click').forEach(x => x.classList.toggle('sel', x === m)); draw(+m.dataset.i); }); draw(3);
+};
+W.density = el => {
+  const D = [['Quartz', 2.65], ['Calcite', 2.71], ['Magnetite', 5.2], ['Galena', 7.5], ['Vàng', 19.3]];
+  mk(el, `${D.map(d => `<div class="lab"><b style="width:80px">${d[0]}</b><div class="bar" style="flex:1"><i style="width:${d[1] / 19.3 * 100}%"></i></div><span class="val" style="min-width:70px">${d[1]}</span></div>`).join('')}
+  <div style="font-size:13px;color:var(--muted)">Galena: 7,4–7,6 · magnetite ≈ 5,2 · nước = 1</div>
+  <h4>Đo tỷ trọng bằng cân (nguyên lý Archimedes)</h4><div class="lab">Khối lượng trong không khí W₁ (g): <input type="number" id="w1" value="26.5" step="0.1" style="width:90px"> W₂ khi nhúng trong nước (g): <input type="number" id="w2" value="16.5" step="0.1" style="width:90px"></div><div class="res" id="dr"></div>`);
+  const f = () => { const w1 = +q(el, '#w1').value, w2 = +q(el, '#w2').value; const sg = w1 / (w1 - w2); const near = D.map(d => [Math.abs(d[1] - sg), d[0]]).sort((a, b) => a[0] - b[0])[0]; q(el, '#dr').innerHTML = w1 > w2 ? `Tỷ trọng = W₁ / (W₁ − W₂) = <b>${sg.toFixed(2)}</b> → gần nhất với <b>${near[1]}</b>` : 'W₂ phải nhỏ hơn W₁.'; };
+  qa(el, 'input').forEach(i => i.oninput = f); f();
+};
+const MIN = [
+ ['Thạch anh (SiO₂)', 7, 2.65, 'phi', 'trắng', 0, 'Vỏ sò; hệ ba/sáu phương lăng trụ'], ['Calcite (CaCO₃)', 3, 2.71, 'phi', 'trắng', 3, 'Sủi bọt mạnh với HCl; khúc xạ kép'], ['Dolomite', 3.75, 2.85, 'phi', 'trắng', 3, 'Sủi yếu với HCl (hoặc khi nghiền bột)'],
+ ['Halite (NaCl)', 2.5, 2.16, 'phi', 'trắng', 3, 'Vị mặn; tan trong nước'], ['Gypsum', 2, 2.3, 'phi', 'trắng', 1, 'Cắt bằng dao, xước bằng móng tay'], ['Talc', 1, 2.75, 'phi', 'trắng', 1, 'Trơn như xà phòng'],
+ ['Fluorite (CaF₂)', 4, 3.18, 'phi', 'trắng', 4, 'Phát quang dưới UV; màu đa dạng'], ['Apatite', 5, 3.2, 'phi', 'trắng', 0, 'Cát khai kém'], ['Orthoclase (K-feldspar)', 6, 2.56, 'phi', 'trắng', 2, '2 phương ≈ 90°'],
+ ['Plagioclase', 6.25, 2.69, 'phi', 'trắng', 2, 'Vân song tinh đa hợp'], ['Topaz', 8, 3.5, 'phi', 'trắng', 1, 'Cứng; cát khai hoàn toàn 1 phương'], ['Corundum', 9, 4.0, 'phi', 'trắng', 0, 'Rất cứng (ruby, sapphire)'], ['Kim cương (C)', 10, 3.52, 'phi', 'trắng', 4, 'Ánh kim cương; cát khai bát diện'],
+ ['Muscovite', 2.25, 2.85, 'phi', 'trắng', 1, 'Lá đàn hồi, ánh ngọc trai'], ['Biotite', 2.75, 3.05, 'phi', 'trắng', 1, 'Nâu đen, đa sắc, lá đàn hồi'], ['Olivine', 6.75, 3.3, 'phi', 'trắng', 0, 'Xanh ô liu, vỏ sò'], ['Pyroxene (augite)', 5.5, 3.4, 'phi', 'trắng', 2, '87°/93°'], ['Amphibole (hornblende)', 5.5, 3.2, 'phi', 'trắng', 2, '56°/124°'],
+ ['Galena (PbS)', 2.5, 7.5, 'kim', 'đen', 3, 'Tỷ trọng rất cao; hình khối'], ['Pyrite (FeS₂)', 6.25, 5.0, 'kim', 'đen', 0, 'Vàng đồng, vạch đen hơi xanh (“vàng ngu”)'], ['Magnetite (Fe₃O₄)', 6, 5.2, 'kim', 'đen', 0, 'Từ tính mạnh'], ['Hematite (Fe₂O₃)', 5.5, 5.3, 'kim', 'đỏ', 0, 'Vết vạch đỏ nâu'], ['Graphite (C)', 1.5, 2.2, 'kim', 'đen', 1, 'Trơn, dẫn điện, để lại vệt đen'],
+ ['Malachite', 3.75, 3.9, 'phi', 'xanh', 0, 'Xanh lục, dạng thận; sủi với HCl'], ['Vàng tự nhiên (Au)', 2.75, 19.3, 'kim', 'vàng', 0, 'Dát mỏng; tỷ trọng rất lớn'], ['Sulfur (S)', 2, 2.07, 'phi', 'vàng', 0, 'Vàng, ánh nhựa; giòn']
+];
+W.ident = el => {
+  mk(el, `<div class="lab">Độ cứng: <select id="fh"><option value="">bất kỳ</option><option value="a">Móng tay xước được (H &lt; 2,5)</option><option value="b">Đồng xu xước được (H &lt; 3,5)</option><option value="c">Kính xước được (H &gt; 5,5)</option><option value="d">Xước được thạch anh (H &gt; 7)</option></select>
+  Ánh: <select id="fl"><option value="">bất kỳ</option><option value="kim">ánh kim / bán kim</option><option value="phi">phi kim</option></select>
+  Vết vạch: <select id="fs"><option value="">bất kỳ</option><option value="trắng">trắng / không màu</option><option value="đen">đen – xám</option><option value="đỏ">đỏ nâu</option><option value="xanh">xanh lục</option><option value="vàng">vàng</option></select>
+  Cát khai: <select id="fc"><option value="">bất kỳ</option><option value="0">không / kém</option><option value="1">1 phương</option><option value="2">2 phương</option><option value="3">3 phương</option><option value="4">4 phương</option></select>
+  Tỷ trọng: <select id="fd"><option value="">bất kỳ</option><option value="l">nhẹ (&lt; 2,9)</option><option value="m">trung bình (2,9–4,5)</option><option value="h">nặng (&gt; 4,5)</option></select></div><div id="fr"></div>`);
+  const f = () => {
+    const h = q(el, '#fh').value, l = q(el, '#fl').value, s = q(el, '#fs').value, c = q(el, '#fc').value, d = q(el, '#fd').value;
+    const r = MIN.filter(m => (!h || (h === 'a' ? m[1] < 2.5 : h === 'b' ? m[1] < 3.5 : h === 'c' ? m[1] > 5.5 : m[1] > 7)) && (!l || m[3] === l) && (!s || m[4] === s) && (!c || m[5] === +c) && (!d || (d === 'l' ? m[2] < 2.9 : d === 'm' ? m[2] >= 2.9 && m[2] <= 4.5 : m[2] > 4.5)));
+    q(el, '#fr').innerHTML = `<div style="margin:8px 0"><b>${r.length}</b> khoáng vật phù hợp</div><div class="grid">${r.map(m => `<div class="mini"><h4>${m[0]}</h4><span style="font-size:13px">H ≈ ${m[1]} · ρ ≈ ${m[2]} · ${m[3] === 'kim' ? 'ánh kim' : 'phi kim'} · vạch ${m[4]}<br>Cát khai: ${m[5] || 'không rõ'} · ${m[6]}</span></div>`).join('')}</div>`;
+  };
+  qa(el, 'select').forEach(s => s.onchange = f); f();
+};
+W.polar = el => {
+  mk(el, `<canvas width="620" height="220" style="width:100%"></canvas>` + slider('pt', 'Góc kính phân tích θ', 0, 180, 1, 30, '°') + `<div class="res" id="pri"></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const draw = th => {
+    g.clearRect(0, 0, 620, 220); const I = ink(); const f = Math.cos(th * D2R) ** 2;
+    g.fillStyle = '#f5c518'; g.beginPath(); g.arc(50, 110, 22, 0, 7); g.fill(); g.fillStyle = I; g.font = '12px sans-serif'; g.fillText('Nguồn', 30, 150); g.fillText('(dao động mọi phương)', 4, 166);
+    g.strokeStyle = '#f5c518'; g.lineWidth = 1; for (let k = 0; k < 8; k++) { const a = k * 22.5 * D2R; g.beginPath(); g.moveTo(190 - 24 * Math.cos(a), 110 - 24 * Math.sin(a)); g.lineTo(190 + 24 * Math.cos(a), 110 + 24 * Math.sin(a)); g.stroke(); }
+    const plate = (x, ang, lbl) => { g.save(); g.translate(x, 110); g.fillStyle = 'rgba(80,90,120,.35)'; g.fillRect(-9, -60, 18, 120); g.strokeStyle = I; g.strokeRect(-9, -60, 18, 120); g.strokeStyle = '#1f5fbf'; g.lineWidth = 2; g.rotate(ang * D2R); g.beginPath(); g.moveTo(0, -40); g.lineTo(0, 40); g.stroke(); g.restore(); g.fillStyle = I; g.fillText(lbl, x - 26, 190); };
+    g.beginPath(); g.moveTo(75, 110); g.lineTo(150, 110); g.strokeStyle = '#f5c518'; g.lineWidth = 3; g.stroke();
+    plate(250, 0, 'Kính phân cực'); g.strokeStyle = '#1f5fbf'; g.lineWidth = 2; g.beginPath(); g.moveTo(290, 80); g.lineTo(290, 140); g.stroke(); g.beginPath(); g.moveTo(275, 110); g.lineTo(400, 110); g.stroke();
+    plate(430, th, 'Kính phân tích');
+    const len = 40 * Math.cos(th * D2R); g.strokeStyle = `rgba(232,145,45,${.15 + .85 * f})`; g.lineWidth = 3; g.beginPath(); g.moveTo(520, 110 - len); g.lineTo(520, 110 + len); g.stroke();
+    g.beginPath(); g.moveTo(450, 110); g.lineTo(600, 110); g.strokeStyle = `rgba(245,197,24,${f})`; g.lineWidth = 3; g.stroke();
+    q(el, '#pri').innerHTML = `Cường độ sau kính phân tích: I/I₀ = cos²θ = <b>${(f * 100).toFixed(0)}%</b> ${th === 90 ? '· <b>hai nicol vuông góc → tối hoàn toàn (XPL)</b>' : th === 0 || th === 180 ? '· hai nicol song song → sáng nhất' : ''}<div class="bar" style="margin-top:6px"><i style="width:${f * 100}%"></i></div>`;
+  };
+  bindSlider(el, 'pt', draw, '°'); draw(30);
+};
+W.snell = el => {
+  mk(el, `<canvas width="560" height="320" style="width:100%"></canvas>` + slider('n1', 'n₁ (môi trường trên)', 1, 2.5, .01, 1) + slider('n2', 'n₂ (khoáng vật)', 1, 2.5, .01, 1.55) + slider('th', 'Góc tới i', 0, 89, 1, 40, '°') + `<div class="res" id="sn"></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const draw = () => {
+    const n1 = +q(el, '#n1').value, n2 = +q(el, '#n2').value, i = +q(el, '#th').value * D2R; g.clearRect(0, 0, 560, 320); const I = ink();
+    g.fillStyle = 'rgba(31,95,191,.10)'; g.fillRect(0, 160, 560, 160); g.strokeStyle = I; g.beginPath(); g.moveTo(0, 160); g.lineTo(560, 160); g.stroke(); g.setLineDash([5, 5]); g.beginPath(); g.moveTo(280, 20); g.lineTo(280, 300); g.stroke(); g.setLineDash([]);
+    g.fillStyle = I; g.font = '13px sans-serif'; g.fillText('n₁ = ' + n1.toFixed(2), 10, 30); g.fillText('n₂ = ' + n2.toFixed(2), 10, 300); g.fillText('pháp tuyến', 286, 30);
+    const s = n1 * Math.sin(i) / n2, L = 190; g.lineWidth = 3;
+    g.strokeStyle = '#e8912d'; g.beginPath(); g.moveTo(280 - L * Math.sin(i), 160 - L * Math.cos(i)); g.lineTo(280, 160); g.stroke();
+    g.strokeStyle = '#1b9a5b'; g.beginPath(); g.moveTo(280, 160); g.lineTo(280 + L * Math.sin(i), 160 - L * Math.cos(i)); g.stroke();
+    let txt;
+    if (s > 1) { txt = `<b style="color:var(--bad)">Phản xạ toàn phần</b> (i > góc tới hạn ${(Math.asin(n2 / n1) / D2R).toFixed(1)}°) – không có tia khúc xạ.`; }
+    else { const r = Math.asin(s); g.strokeStyle = '#d24545'; g.beginPath(); g.moveTo(280, 160); g.lineTo(280 + L * Math.sin(r), 160 + L * Math.cos(r)); g.stroke(); txt = `Góc khúc xạ r = <b>${(r / D2R).toFixed(1)}°</b> · n₁ sin i = n₂ sin r · tia ${n2 > n1 ? 'bẻ lại gần pháp tuyến (môi trường chiết suất lớn hơn, ánh sáng chậm hơn)' : n2 < n1 ? 'bẻ ra xa pháp tuyến' : 'đi thẳng (n bằng nhau → “tàng hình”, độ nổi = 0)'}. v₂/v₁ = ${(n1 / n2).toFixed(2)}`; }
+    g.lineWidth = 1; q(el, '#sn').innerHTML = txt + '<br><span style="font-size:12px;color:var(--muted)">Cam: tia tới · xanh: phản xạ (r = i) · đỏ: khúc xạ</span>';
+  };
+  ['n1', 'n2', 'th'].forEach(id => { const s = q(el, '#' + id); s.addEventListener('input', () => { q(el, '#' + id + 'v').textContent = (id === 'th' ? s.value + '°' : (+s.value).toFixed(2)); draw(); }); }); draw();
+};
+W.relief = el => {
+  const M = [['Fluorite', 1.434], ['Quartz', 1.544], ['Muscovite', 1.6], ['Olivine', 1.68], ['Garnet', 1.78], ['Kim cương', 2.417]];
+  mk(el, `<canvas width="560" height="200" style="width:100%"></canvas>` + slider('rn', 'n khoáng vật', 1.35, 2.45, .005, 1.544) + `<div class="mtab">${M.map(m => `<button data-n="${m[1]}">${m[0]} ${m[1]}</button>`).join('')}</div><div class="res" id="rr"></div><div style="font-size:12px;color:var(--muted)">Môi trường (keo gắn / epoxy) n ≈ 1,54.</div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const draw = () => {
+    const n = +q(el, '#rn').value, d = Math.abs(n - 1.54); g.clearRect(0, 0, 560, 200);
+    g.fillStyle = '#e9e2cf'; g.fillRect(0, 0, 560, 200);
+    const pts = [[170, 60], [300, 40], [380, 100], [340, 170], [210, 165], [140, 110]];
+    g.beginPath(); pts.forEach((p, i) => i ? g.lineTo(...p) : g.moveTo(...p)); g.closePath(); g.fillStyle = '#efe9d6'; g.fill();
+    g.lineJoin = 'round'; g.strokeStyle = `rgba(30,30,40,${Math.min(1, .08 + d * 2.2)})`; g.lineWidth = 1 + d * 16; g.stroke();
+    // bóng đổ / vân
+    if (d > .03) { g.strokeStyle = `rgba(30,30,40,${Math.min(.5, d)})`; g.lineWidth = 1; for (let k = 0; k < 6; k++) { g.beginPath(); g.moveTo(190 + k * 22, 80 + k * 6); g.lineTo(230 + k * 22, 140 - k * 4); g.stroke(); } }
+    q(el, '#rr').innerHTML = `|Δn| = <b>${d.toFixed(3)}</b> → độ nổi <b>${d < .02 ? 'rất thấp (viền gần như biến mất)' : d < .06 ? 'thấp – viền mờ' : d < .15 ? 'trung bình' : 'cao – viền đậm, hạt “nổi” hẳn lên'}</b> ${n < 1.54 ? '(độ nổi âm – n thấp hơn môi trường)' : ''}`;
+  };
+  bindSlider(el, 'rn', draw); qa(el, '.mtab button').forEach(b => b.onclick = () => { q(el, '#rn').value = b.dataset.n; q(el, '#rnv').textContent = b.dataset.n; draw(); }); draw();
+};
+W.indic = el => {
+  mk(el, `<div class="mtab"><button class="on" data-k="up">Một trục (+)  – quartz</button><button data-k="um">Một trục (−) – calcite</button><button data-k="b">Hai trục – olivine (+) / biotite (−)</button></div><canvas width="520" height="300" style="width:100%"></canvas>` + `<div id="v2w" style="display:none">${slider('v2', 'Góc 2V', 0, 90, 1, 40, '°')}</div><div class="res" id="ii"></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d'); let k = 'up';
+  const draw = () => {
+    g.clearRect(0, 0, 520, 300); const I = ink(); const cx = 260, cy = 150;
+    g.strokeStyle = I; g.lineWidth = 1; g.beginPath(); g.moveTo(cx, 10); g.lineTo(cx, 290); g.moveTo(60, cy); g.lineTo(460, cy); g.stroke();
+    g.fillStyle = I; g.font = 'bold 14px sans-serif'; g.fillText('Z', cx + 6, 20); g.fillText('X', 462, cy + 4);
+    let rx, ry, t;
+    if (k === 'up') { rx = 80; ry = 125; t = 'Elipsoid <b>kéo dài</b> theo trục quang: n<sub>e</sub> &gt; n<sub>o</sub> ⇒ dấu <b>(+)</b> (quartz: n<sub>o</sub> ≈ 1,544; n<sub>e</sub> ≈ 1,553). Mặt cắt vuông góc trục quang là hình tròn (n<sub>o</sub>).'; }
+    else if (k === 'um') { rx = 125; ry = 80; t = 'Elipsoid <b>dẹt</b> theo trục quang: n<sub>e</sub> &lt; n<sub>o</sub> ⇒ dấu <b>(−)</b> (calcite: n<sub>o</sub> ≈ 1,658; n<sub>e</sub> ≈ 1,486, lưỡng chiết rất mạnh).'; }
+    else { rx = 95; ry = 120; const v = +q(el, '#v2').value; t = `Hệ ba chiết suất chính n<sub>α</sub> &lt; n<sub>β</sub> &lt; n<sub>γ</sub> (X, Y, Z). Có <b>hai trục quang</b> hợp góc 2V = ${v}°. Nếu phân giác góc nhọn là Z ⇒ (+) (olivine), nếu là X ⇒ (−) (biotite). Khi 2V → 0° thì trở về một trục.`;
+      g.strokeStyle = '#d24545'; g.lineWidth = 2.5; [-1, 1].forEach(s => { const a = s * (v / 2) * D2R; g.beginPath(); g.moveTo(cx - 150 * Math.sin(a), cy + 150 * Math.cos(a)); g.lineTo(cx + 150 * Math.sin(a), cy - 150 * Math.cos(a)); g.stroke(); }); g.fillStyle = '#d24545'; g.fillText('trục quang', cx + 100, 40); }
+    g.beginPath(); g.ellipse(cx, cy, rx, ry, 0, 0, 7); g.fillStyle = 'rgba(31,95,191,.20)'; g.fill(); g.strokeStyle = '#1f5fbf'; g.lineWidth = 2.5; g.stroke();
+    g.fillStyle = '#1f5fbf'; g.font = '13px sans-serif'; g.fillText(k === 'b' ? 'nα (X)' : 'n_o', cx + rx + 4, cy - 6); g.fillText(k === 'b' ? 'nγ (Z)' : 'n_e', cx + 6, cy - ry - 4);
+    q(el, '#ii').innerHTML = t;
+  };
+  qa(el, '.mtab button').forEach(b => b.onclick = () => { k = b.dataset.k; qa(el, '.mtab button').forEach(x => x.classList.toggle('on', x === b)); q(el, '#v2w').style.display = k === 'b' ? 'block' : 'none'; draw(); });
+  bindSlider(el, 'v2', draw, '°'); draw();
+};
+// --- màu giao thoa (xấp xỉ CIE) ---
+const gg = (l, m, s1, s2) => Math.exp(-.5 * Math.pow((l - m) / (l < m ? s1 : s2), 2));
+function xyz(l) { return [1.056 * gg(l, 599.8, 37.9, 31) + .362 * gg(l, 442, 16, 26.7) - .065 * gg(l, 501.1, 20.4, 26.2), .821 * gg(l, 568.8, 46.9, 40.5) + .286 * gg(l, 530.9, 16.3, 31.1), 1.217 * gg(l, 437, 11.8, 36) + .681 * gg(l, 459, 26, 13.8)]; }
+const M_ = [[3.2406, -1.5372, -.4986], [-.9689, 1.8758, .0415], [.0557, -.204, 1.057]];
+function rgbOf(Iof) {
+  let X = 0, Y = 0, Z = 0; for (let l = 400; l <= 700; l += 5) { const c = xyz(l), i = Iof(l); X += c[0] * i; Y += c[1] * i; Z += c[2] * i; }
+  return M_.map(r => r[0] * X + r[1] * Y + r[2] * Z);
+}
+const WHITE = rgbOf(() => 1);
+function interfColor(R, bright = 1) {
+  const lin = rgbOf(l => Math.sin(Math.PI * R / l) ** 2).map((v, i) => Math.max(0, Math.min(1, v / WHITE[i] * bright)));
+  return 'rgb(' + lin.map(v => Math.round(255 * Math.pow(v, 1 / 2.2))).join(',') + ')';
+}
+W.xpl = el => {
+  const MN = [['Quartz', .009], ['Plagioclase', .008], ['Gypsum', .009], ['Pyroxene (augite)', .025], ['Olivine', .035], ['Muscovite', .04], ['Calcite', .172], ['Garnet (đẳng hướng)', 0]];
+  mk(el, `<canvas width="560" height="240" style="width:100%"></canvas><div class="lab">Khoáng vật: <select id="xm">${MN.map((m, i) => `<option value="${i}">${m[0]} (Δn ≈ ${m[1]})</option>`).join('')}</select></div>` + slider('xr', 'Xoay bàn kính', 0, 360, 1, 45, '°') + slider('xt', 'Bề dày t (µm)', 10, 60, 1, 30, '') + `<div class="res" id="xi"></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const draw = () => {
+    const m = MN[+q(el, '#xm').value], th = +q(el, '#xr').value, t = +q(el, '#xt').value; const R = t * 1000 * m[1]; const f = Math.sin(2 * th * D2R) ** 2;
+    g.clearRect(0, 0, 560, 240); g.fillStyle = '#000'; g.beginPath(); g.arc(120, 120, 105, 0, 7); g.fill();
+    g.save(); g.beginPath(); g.arc(120, 120, 105, 0, 7); g.clip(); g.translate(120, 120); g.rotate(th * D2R);
+    g.beginPath(); [[-60, -70], [50, -80], [80, 0], [40, 75], [-55, 60], [-85, -5]].forEach((p, i) => i ? g.lineTo(...p) : g.moveTo(...p)); g.closePath(); g.fillStyle = m[1] ? interfColor(R, f) : '#000'; g.fill(); g.strokeStyle = 'rgba(255,255,255,.25)'; g.stroke();
+    g.strokeStyle = 'rgba(255,255,255,.3)'; g.setLineDash([3, 3]); g.beginPath(); g.moveTo(-90, 0); g.lineTo(90, 0); g.stroke(); g.setLineDash([]); g.restore();
+    g.strokeStyle = ink(); g.globalAlpha = .4; g.beginPath(); g.moveTo(120, 5); g.lineTo(120, 235); g.moveTo(15, 120); g.lineTo(225, 120); g.stroke(); g.globalAlpha = 1;
+    // thang màu
+    const x0 = 260, w = 280; for (let x = 0; x < w; x++) { g.fillStyle = interfColor(x / w * 1650); g.fillRect(x0 + x, 40, 1.2, 40); }
+    g.fillStyle = ink(); g.font = '12px sans-serif'; g.fillText('Thang màu giao thoa (0 → 1650 nm)', x0, 30); [0, 550, 1100, 1650].forEach(v => { const x = x0 + v / 1650 * w; g.fillText(v, x - 8, 96); g.beginPath(); g.moveTo(x, 80); g.lineTo(x, 86); g.stroke(); }); g.fillText('bậc 1', x0 + 90, 118); g.fillText('bậc 2', x0 + 140 + 30, 118); g.fillText('bậc 3', x0 + 230, 118);
+    g.fillStyle = '#d24545'; const mx = x0 + Math.min(1650, R) / 1650 * w; g.beginPath(); g.moveTo(mx, 82); g.lineTo(mx - 6, 100); g.lineTo(mx + 6, 100); g.fill();
+    const ord = Math.floor(R / 550) + 1;
+    q(el, '#xi').innerHTML = m[1] ? `δ = t·Δn = ${t} µm × ${m[1]} = <b>${R.toFixed(0)} nm</b> → bậc màu giao thoa ≈ <b>${ord}</b> (${ord === 1 ? 'xám – trắng – vàng – cam – đỏ' : ord === 2 ? 'màu rực rỡ' : ord === 3 ? 'màu nhạt dần' : 'bậc rất cao: “trắng bậc cao”, nhạt – pastel'})<br>Độ sáng ∝ sin²(2θ) = <b>${(f * 100).toFixed(0)}%</b> ${f < .01 ? '· <b>đang ở vị trí TẮT</b> (0°, 90°, 180°, 270°)' : Math.abs(f - 1) < .01 ? '· sáng cực đại (45°)' : ''}` : 'Khoáng vật đẳng hướng: <b>luôn tối</b> dưới XPL dù xoay bàn kính (Δn = 0).';
+    q(el, '#xi').innerHTML += '<br><span style="font-size:12px;color:var(--muted)">Màu mô phỏng bằng công thức giao thoa + xấp xỉ CIE – gần đúng, có thể lệch so với thang Michel-Lévy in.</span>';
+  };
+  qa(el, 'select').forEach(s => s.onchange = draw); ['xr', 'xt'].forEach(id => bindSlider(el, id, draw, id === 'xr' ? '°' : '')); draw();
+};
+
+</script>
+<script>
+/* Khung ứng dụng: mục lục, định tuyến theo hash, tiến độ học, giao diện sáng/tối.
+   Đổi SITE.title / SITE.sub cho từng môn. Không chứa câu hỏi kiểm tra (quiz làm ở web khác). */
+const SITE = { title: 'Khoáng vật & Thạch học', sub: 'GE2079 · ĐH Bách Khoa TP.HCM · GV Đổng Uyên Thanh' };
+const CH = window.CHAPTERS;
+const $ = (s, r = document) => r.querySelector(s);
+const side = $('#side'), main = $('#main');
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('kvth:'+k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('kvth:'+k, JSON.stringify(v)); } catch (e) {} }
+};
+let done = store.get('done', {});
+const colors = ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--accent)'];
+const col = i => colors[i % colors.length];
+
+function buildSide() {
+  const total = CH.reduce((n, c) => n + c.sections.length, 0), got = Object.keys(done).length;
+  side.innerHTML = `<h1>${SITE.title}</h1><div class="sub">${SITE.sub}</div>
+  <div class="bar"><i style="width:${Math.round(got / total * 100)}%"></i></div>
+  <div class="sub" style="margin-top:4px">Đã học ${got}/${total} mục</div>
+  <div class="chap"><button data-go="home"><span class="num" style="background:var(--accent)">⌂</span>Trang chủ</button></div>` +
+    CH.map((c, i) => `<div class="chap" data-c="${c.id}"><button data-toggle="${c.id}"><span class="num" style="background:${col(i)}">${c.num}</span>${c.title}</button>
+    <div class="sec">${c.sections.map(s => `<a href="#${c.id}/${s.id}" data-s="${c.id}/${s.id}"><span>${s.title}</span><span class="tick">${done[c.id + '/' + s.id] ? '✓' : ''}</span></a>`).join('')}</div></div>`).join('') +
+    `<div class="tools"><button id="theme">🌓 Sáng/Tối</button><button id="reset">↺ Xoá tiến độ</button></div>`;
+}
+side.addEventListener('click', e => {
+  const t = e.target.closest('[data-toggle]');
+  if (t) { t.parentElement.classList.toggle('open'); return; }
+  const g = e.target.closest('[data-go]');
+  if (g) { location.hash = ''; side.classList.remove('on'); }
+  if (e.target.closest('a')) side.classList.remove('on');
+  if (e.target.id === 'theme') { const d = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = d ? '' : 'dark'; store.set('theme', d ? '' : 'dark'); }
+  if (e.target.id === 'reset' && confirm('Xoá toàn bộ tiến độ học?')) { done = {}; store.set('done', done); buildSide(); route(); }
+});
+$('#menuBtn').onclick = () => side.classList.toggle('on');
+document.documentElement.dataset.theme = store.get('theme', '');
+
+function mark(key) { if (!done[key]) { done[key] = 1; store.set('done', done); buildSide(); openActive(); } }
+function openActive() {
+  const h = location.hash.slice(1), cid = h.split('/')[0];
+  document.querySelectorAll('.chap').forEach(c => c.classList.toggle('open', c.dataset.c === cid));
+  document.querySelectorAll('.sec a').forEach(a => a.classList.toggle('active', a.dataset.s === h));
+}
+function home() {
+  main.innerHTML = `<div class="hero"><span class="pill">Web học tập tương tác</span><h2>${SITE.title}</h2><p>Bài giảng từng chương với hình minh hoạ tương tác: tinh thể, khoáng vật, tính chất vật lý và quang học.</p></div>
+  <div class="grid">${CH.map((c, i) => `<a class="mini click" style="text-decoration:none;color:inherit;border-top:5px solid ${col(i)}" href="#${c.id}/${c.sections[0].id}"><h4>Chương ${c.num}. ${c.title}</h4><div style="font-size:14px;color:var(--muted)">${c.blurb || ''}</div><div style="margin-top:8px;font-size:13px"><b>${c.sections.length}</b> bài</div></a>`).join('')}</div>`;
+  mountWidgets(main); openActive();
+}
+function chapterPage(c, s) {
+  const i = c.sections.indexOf(s), prev = c.sections[i - 1], next = c.sections[i + 1];
+  main.innerHTML = `<div class="crumb">Chương ${c.num} · ${c.title}</div><h2 class="st">${s.title}</h2>${s.html}
+  <div class="pager">${prev ? `<a class="btn" href="#${c.id}/${prev.id}">← ${prev.title}</a>` : '<span></span>'}${next ? `<a class="btn primary" href="#${c.id}/${next.id}">${next.title} →</a>` : '<span></span>'}</div>`;
+  mountWidgets(main); mark(c.id + '/' + s.id);
+}
+function route() {
+  const h = location.hash.slice(1); window.scrollTo(0, 0);
+  if (!h) home();
+  else {
+    const [cid, sid] = h.split('/'), c = CH.find(x => x.id === cid);
+    if (!c) home(); else chapterPage(c, c.sections.find(x => x.id === sid) || c.sections[0]);
+  }
+  openActive();
+}
+window.addEventListener('hashchange', route);
+buildSide(); route();
+
+</script>
+</body>
+</html>
