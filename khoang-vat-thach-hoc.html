@@ -343,7 +343,7 @@ window.CHAPTERS.push({
 </script>
 <script>
 window.CHAPTERS.push({
- id:'c3', num:3, title:'Khoáng vật học (Phần 1)',
+ id:'c3', num:3, title:'Khoáng vật học',
  blurb:'Thành phần hoá học, thay thế đồng hình, dung dịch rắn, đa hình; toàn bộ tính chất vật lý; tính chất quang học cơ bản, PPL – XPL.',
  sections:[
  {id:'thanh-phan', title:'1. Thành phần hoá học (1.1–1.3)', html:`
@@ -352,7 +352,7 @@ window.CHAPTERS.push({
  <li>Giải thích mối liên hệ giữa cấu trúc tinh thể, liên kết hoá học và tính chất khoáng vật.</li>
  <li>Nhận biết khoáng vật dựa trên tính chất vật lý cơ bản; mô tả tính chất quang học cơ bản.</li>
  <li>Giải thích quá trình hình thành, biến đổi, phá huỷ; phân loại theo thành phần hoá học và anion chủ đạo; nhận diện khoáng vật tạo đá và khoáng vật quặng phổ biến.</li></ul>
- <div class="note"><b>Phạm vi</b>Hiện có mục 1, 2, 3 (Phần 1). Các mục 4–6 (hình thành – biến đổi; phân loại; khoáng vật phổ biến) sẽ bổ sung sau.</div></div>
+ </div>
  <h3>1.1. Khái niệm thành phần hoá học</h3>
  <ul><li>Nguyên tố hoá học cấu tạo nên khoáng vật.</li><li>Công thức hoá học của khoáng vật.</li><li>Thành phần <b>lý tưởng</b> và thành phần <b>thực tế</b> (thường lệch vì thay thế đồng hình, tạp chất).</li>
  <li>Khoáng vật <b>đơn chất</b> (vàng Au, kim cương C, than chì C) và <b>hợp chất</b> (calcite CaCO₃, orthoclase KAlSi₃O₈, thạch anh SiO₂).</li></ul>
@@ -529,8 +529,348 @@ window.CHAPTERS.push({
  <div class="mini"><h4>Sắp xếp nguyên tử theo phương</h4>Mật độ nguyên tử và liên kết khác nhau theo phương → dị hướng → nhiều chiết suất; liên kết yếu / mạnh khác nhau.</div>
  <div class="mini"><h4>Thành phần hoá học</h4>Loại ion, hàm lượng và khả năng phân cực electron chi phối chiết suất, màu sắc, lưỡng chiết suất (Fe/Mg → chiết suất; Cr/Fe → màu).</div>
  <div class="mini"><h4>Biến đổi khoáng vật</h4>Sản phẩm thứ sinh, vi khe nứt làm thay đổi độ trong, màu, độ nổi.</div></div>
- <div class="check"><b>Kết luận</b>Cấu trúc + thành phần + mức độ biến đổi → đặc điểm nhận diện dưới kính hiển vi.</div>
- <div class="key"><b>Hết Phần 1.</b> Phần 2 (mục 4–6: hình thành – biến đổi, phân loại, khoáng vật phổ biến) sẽ bổ sung khi có tài liệu.</div>`}
+ <div class="check"><b>Kết luận</b>Cấu trúc + thành phần + mức độ biến đổi → đặc điểm nhận diện dưới kính hiển vi.</div>`}
+ ]
+});
+
+</script>
+<script>
+/* Chương 3 – Phần 2: mục 4–7 (hình thành & biến đổi, phân loại, khoáng vật phổ biến, nhận biết) */
+(function () {
+  const ch = window.CHAPTERS.find(c => c.id === 'c3');
+  ch.title = 'Khoáng vật học';
+  ch.blurb = 'Thành phần hoá học, thay thế đồng hình, đa hình; tính chất vật lý và quang học; sự hình thành – biến đổi; phân loại; khoáng vật phổ biến và quy trình nhận biết.';
+  ch.sections.push(
+    { id: 'hinh-thanh', title: '13. Sự hình thành khoáng vật (4.1–4.2)', html: `
+ <p>Khoáng vật không tự nhiên xuất hiện: mỗi khoáng vật là kết quả của một quá trình cụ thể trong một môi trường cụ thể. Bài này trả lời: <b>khoáng vật hình thành bằng những con đường nào, và điều gì quyết định khoáng vật nào xuất hiện?</b></p>
+ <h3>4.1. Sáu con đường hình thành khoáng vật</h3>
+ <p>Bấm vào từng thẻ để xem cơ chế và ví dụ:</p>
+ <div class="card"><div data-w="pick" data-k="formation"></div></div>
+ <div class="key"><b>Nhớ nhanh</b>Magma → kết tinh · Dung dịch nhiệt dịch/nước → kết tủa khi quá bão hoà · Biến chất → tái kết tinh ở thể rắn · Phong hoá → khoáng vật thứ sinh (sét, oxide sắt…) · Sinh vật → CaCO₃, phosphate Ca.</div>
+ <h3>Kết tinh từ magma: dãy phản ứng Bowen</h3>
+ <p>Khi magma nguội, các khoáng vật không kết tinh cùng lúc mà theo một <b>trình tự</b>. Khoáng vật kết tinh sớm ở nhiệt độ cao (~1200 °C) là các khoáng vật giàu Mg, Fe; khoáng vật kết tinh muộn ở nhiệt độ thấp (~650 °C) giàu Si, Na, K. Kéo thanh trượt để “làm nguội” magma:</p>
+ <div class="card"><h3>Dãy phản ứng Bowen</h3><div data-w="bowen"></div></div>
+ <div class="note"><b>Mở rộng</b>Dãy Bowen là mô hình khái quát; trình tự kết tinh thực tế phức tạp hơn (phụ thuộc nhiệt độ, áp suất, thành phần và tốc độ nguội của magma). Nhánh không liên tục: olivine → pyroxene → amphibole → biotite (khoáng vật này phản ứng với magma còn lại để tạo khoáng vật mới). Nhánh liên tục: plagioclase đổi dần từ giàu Ca sang giàu Na. Hai nhánh hội tụ ở các khoáng vật kết tinh muộn: K-feldspar, muscovite, quartz.</div>
+ <h3>4.2. Điều kiện chi phối sự hình thành khoáng vật</h3>
+ <div class="tw"><table><tr><th>Nhóm điều kiện</th><th>Yếu tố</th><th>Vai trò</th></tr>
+ <tr><td rowspan="3"><b>Vật lý</b></td><td>Nhiệt độ</td><td>Chi phối độ bền và phản ứng khoáng vật</td></tr>
+ <tr><td>Áp suất</td><td>Chi phối pha khoáng và cấu trúc tinh thể</td></tr>
+ <tr><td>Thời gian</td><td>Quyết định mức độ phản ứng và phát triển tinh thể</td></tr>
+ <tr><td rowspan="4"><b>Môi trường hoá học</b></td><td>Thành phần hoá học</td><td>Quy định các nguyên tố có thể tạo khoáng vật</td></tr>
+ <tr><td>pH</td><td>Chi phối độ tan và kết tủa</td></tr>
+ <tr><td>Eh</td><td>Chi phối trạng thái oxy hoá – khử (ví dụ Fe²⁺ ⇌ Fe³⁺)</td></tr>
+ <tr><td>Hoạt độ nước (a<sub>w</sub>)</td><td>Chi phối phản ứng hydrat hoá và khử nước</td></tr>
+ <tr><td rowspan="2"><b>Động học và không gian</b></td><td>Tốc độ nguội</td><td>Nguội chậm → tinh thể lớn; nguội nhanh → tinh thể nhỏ</td></tr>
+ <tr><td>Không gian kết tinh</td><td>Chi phối kích thước và hình dạng tinh thể (khoang rỗng → tinh thể phát triển tự do; khe nứt hẹp → bị hạn chế)</td></tr>
+ <tr><td><b>Sinh học</b></td><td>Hoạt động sinh vật</td><td>Tạo khoáng vật trực tiếp hoặc làm thay đổi môi trường kết tủa</td></tr></table></div>
+ <div class="warn"><b>Lưu ý</b>Các yếu tố tương tác với nhau; hiếm khi chỉ một yếu tố quyết định khoáng vật được hình thành. Tập hợp chúng quyết định độ bền, thành phần, kích thước và hình dạng của khoáng vật.</div>`},
+
+    { id: 'bien-doi', title: '14. Biến đổi khoáng vật: nguyên sinh – thứ sinh, độ bền, giả hình (4.3–4.6)', html: `
+ <p>Sau khi hình thành, khoáng vật có thể bị biến đổi khi điều kiện môi trường thay đổi. Bài này giải thích khoáng vật nào bị biến đổi, vì sao, và dấu vết để lại.</p>
+ <h3>4.3. Khoáng vật nguyên sinh và thứ sinh</h3>
+ <div class="tw"><table><tr><th></th><th>Khoáng vật nguyên sinh (primary)</th><th>Khoáng vật thứ sinh (secondary)</th></tr>
+ <tr><td><b>Hình thành</b></td><td>Cùng với đá ban đầu</td><td>Do biến đổi khoáng vật có trước</td></tr>
+ <tr><td><b>Nơi gặp</b></td><td>Phổ biến trong đá magma chưa biến đổi</td><td>Phổ biến trong đới phong hoá và đá biến đổi</td></tr>
+ <tr><td><b>Trạng thái</b></td><td>Còn tươi và giữ cấu trúc ban đầu</td><td>Phản ánh điều kiện hoá – lý sau khi đá hình thành</td></tr>
+ <tr><td><b>Ví dụ</b></td><td>Olivine, pyroxene, feldspar</td><td>Kaolinite, chlorite, serpentine, goethite</td></tr></table></div>
+ <div class="note"><b>Cách xác định</b>Khái niệm nguyên sinh – thứ sinh được xác định theo <b>lịch sử hình thành và biến đổi của đá</b>, không theo tên khoáng vật. (Cùng một khoáng vật, ví dụ quartz, có thể là nguyên sinh hay thứ sinh tuỳ nó hình thành khi nào.)</div>
+ <h3>4.4. Độ bền khoáng vật: dãy Goldich</h3>
+ <p>Khoáng vật bền khi điều kiện bề mặt <b>giống</b> điều kiện lúc nó kết tinh. Khoáng vật kết tinh ở nhiệt độ cao, sâu trong Trái Đất, khác nhiều so với bề mặt (nhiệt độ thấp, nhiều H₂O–O₂–CO₂) nên <b>dễ phong hoá hơn</b>. Điều này được thể hiện trong <b>dãy bền phong hoá Goldich</b>, ngược chiều với dãy Bowen:</p>
+ <div class="tw"><table><tr><th>Dãy Bowen (khoáng vật kết tinh)</th><th>Kết tinh</th><th>Độ bền phong hoá (Goldich)</th></tr>
+ <tr><td>Olivine, plagioclase giàu Ca</td><td>Sớm, nhiệt độ cao</td><td>Kém bền, phong hoá nhanh</td></tr>
+ <tr><td>Pyroxene, amphibole, plagioclase giàu Na</td><td>Trung gian</td><td>Trung bình</td></tr>
+ <tr><td>Biotite, K-feldspar, muscovite</td><td>Muộn</td><td>Bền hơn</td></tr>
+ <tr><td>Quartz</td><td>Muộn nhất, nhiệt độ thấp</td><td>Bền nhất, phong hoá chậm</td></tr></table></div>
+ <div class="warn"><b>Chú ý</b>Goldich phản ánh xu hướng tương đối. Tốc độ phong hoá thực tế còn phụ thuộc khí hậu, khe nứt và thời gian. Ví dụ: olivine kết tinh nhiệt độ cao → dễ phong hoá thành sản phẩm phong hoá (nâu, vụn); quartz kết tinh nhiệt độ thấp → bền, hạt thạch anh bền vững trong môi trường bề mặt.</div>
+ <h3>4.5. Các dạng biến đổi khoáng vật phổ biến</h3>
+ <div class="card"><div data-w="pick" data-k="alter"></div></div>
+ <div class="key"><b>Phản ứng thuỷ phân khái quát</b>Feldspar + H⁺ + H₂O → khoáng vật sét + ion hoà tan.<br>Sản phẩm biến đổi phụ thuộc nhiệt độ, thành phần dung dịch, pH–Eh và khoáng vật ban đầu.</div>
+ <h3>4.6. Giả hình khoáng vật</h3>
+ <p><b>Giả hình (pseudomorph)</b> xảy ra khi một khoáng vật mới <b>thay thế</b> khoáng vật cũ nhưng vẫn <b>giữ hình dạng bên ngoài</b> của khoáng vật ban đầu. Thành phần và cấu trúc bên trong đã đổi.</p>
+ <div class="two"><div class="mini"><h4>Ví dụ: pyrite → goethite/limonite</h4>Pyrite (FeS₂) dạng lập phương bị oxy hoá và thay thế dần bởi goethite/limonite nhưng vẫn giữ hình lập phương.</div>
+ <div class="mini"><h4>Ý nghĩa địa chất</h4><ol><li>Nhận biết khoáng vật có trước.</li><li>Xác định trình tự các giai đoạn biến đổi.</li><li>Suy luận điều kiện dung dịch, oxy hoá và phong hoá.</li></ol></div></div>
+ <div class="tw"><table><tr><th>Phân biệt</th><th>Đặc điểm</th></tr>
+ <tr><td><b>Giả hình</b></td><td>Khoáng vật mới thay khoáng vật cũ; giữ hình dạng ngoài của khoáng vật ban đầu; thành phần/cấu trúc đã đổi.</td></tr>
+ <tr><td><b>Song tinh</b></td><td>Hai hoặc nhiều cá thể cùng khoáng vật; định hướng đối xứng theo quy luật; không phải quá trình thay thế thành khoáng vật khác.</td></tr>
+ <tr><td><b>Biến dạng tinh thể</b></td><td>Tinh thể bị uốn, nứt hoặc méo do ứng suất; vật liệu khoáng vật vẫn là khoáng vật ban đầu; hình dạng ngoài bị biến đổi.</td></tr></table></div>
+ <div class="note"><b>Mẹo nhận diện giả hình</b>So sánh hình dạng ngoài với thành phần, cấu trúc và khoáng vật còn sót lại bên trong.</div>`},
+
+    { id: 'phan-loai', title: '15. Phân loại khoáng vật (mục 5)', html: `
+ <p>Có hàng nghìn khoáng vật; nhà địa chất xếp chúng thành các <b>lớp, nhóm và loài</b> dựa trên bản chất hoá học và cấu trúc. Bài này trả lời: <b>tiêu chí nào dùng để phân loại, và các lớp khoáng vật chính là gì?</b></p>
+ <h3>5.1. Nguyên tắc phân loại</h3>
+ <div class="grid">
+ <div class="mini"><h4>1. Thành phần hoá học</h4>Xác định các nguyên tố và tỷ lệ trong khoáng vật (quartz: SiO₂; calcite: CaCO₃).</div>
+ <div class="mini"><h4>2. Nhóm anion chủ đạo</h4>Cơ sở chính để chia các lớp: SiO₄⁴⁻ → silicate; CO₃²⁻ → carbonate; SO₄²⁻ → sulfate; S²⁻ → sulfide; O²⁻/OH⁻ → oxide–hydroxide.</div>
+ <div class="mini"><h4>3. Cấu trúc tinh thể</h4>Cách nguyên tố và đa diện phối trí liên kết trong không gian. Silicate: đảo → chuỗi → lớp → khung.</div>
+ <div class="mini"><h4>4. Quan hệ hoá học – cấu trúc</h4>Giải thích các nhóm, chuỗi và biến thể khoáng vật: thay thế đồng hình (Mg²⁺ ⇌ Fe²⁺), đa hình (C: kim cương ⇌ graphite), dung dịch rắn (forsterite ⇌ fayalite).</div></div>
+ <div class="key"><b>Công thức phân loại</b>Thành phần hoá học + nhóm anion + cấu trúc tinh thể → lớp, nhóm và loài khoáng vật.</div>
+ <div class="note"><b>Ý nghĩa địa chất và kinh tế</b>Địa chất: chỉ thị môi trường thành tạo và giải thích lịch sử đá và các quá trình địa chất. Kinh tế: khoáng sản kim loại (Fe, Cu, Au…), khoáng sản công nghiệp (kaolin, thạch anh…), vật liệu xây dựng (đá vôi, granite…), khoáng sản cho công nghệ cao (đất hiếm, Li, Si…). Ý nghĩa địa chất – kinh tế là lớp ứng dụng; nền tảng phân loại vẫn là hoá học và cấu trúc.</div>
+ <h3>5.2. Các lớp khoáng vật chính</h3>
+ <p>Phân loại chủ yếu theo anion hoặc nhóm anion đặc trưng.</p>
+ <div class="tw"><table><tr><th>Lớp</th><th>Anion / nhóm anion</th><th>Ví dụ</th></tr>
+ <tr><td><b>Nguyên tố tự sinh</b></td><td>Không có anion riêng</td><td>Au, Cu, S, C</td></tr>
+ <tr><td><b>Sulfide</b></td><td>S²⁻ (kim loại liên kết chủ yếu với sulfur)</td><td>Pyrite, galena, sphalerite</td></tr>
+ <tr><td><b>Halide</b></td><td>Cl⁻, F⁻ (anion halogen)</td><td>Halite, fluorite</td></tr>
+ <tr><td><b>Oxide và hydroxide</b></td><td>O²⁻, OH⁻ (oxygen hoặc hydroxyl là anion chính)</td><td>Hematite, magnetite, goethite</td></tr>
+ <tr><td><b>Carbonate</b></td><td>CO₃²⁻</td><td>Calcite, dolomite</td></tr>
+ <tr><td><b>Sulfate</b></td><td>SO₄²⁻</td><td>Gypsum, barite</td></tr>
+ <tr><td><b>Phosphate</b></td><td>PO₄³⁻</td><td>Apatite</td></tr>
+ <tr><td><b>Silicate</b></td><td>SiO₄⁴⁻ (cấu tạo từ các tứ diện SiO₄)</td><td>Olivine, feldspar, quartz</td></tr></table></div>
+ <div class="warn"><b>Chú ý</b>Quartz có công thức SiO₂ nhưng vẫn thuộc lớp silicate, vì cấu trúc của nó được xây dựng từ các tứ diện SiO₄ liên kết thành khung.</div>
+ <h3>5.3. Phân loại silicate theo cấu trúc</h3>
+ <p>Silicate là lớp khoáng vật quan trọng nhất của vỏ Trái Đất. Tất cả đều dựa trên <b>tứ diện SiO₄</b>; cách các tứ diện nối với nhau (dùng chung O) cho ra các kiểu cấu trúc. Mức độ liên kết giữa các tứ diện tăng dần từ đảo đến khung, còn tỷ lệ O/Si giảm dần.</p>
+ <div class="card"><h3>Các kiểu cấu trúc silicate (bấm để xem)</h3><div data-w="silicate"></div></div>
+ <div class="tw"><table><tr><th>Kiểu cấu trúc</th><th>Cách liên kết</th><th>Khoáng vật tiêu biểu</th></tr>
+ <tr><td>Silicate đảo</td><td>Tứ diện độc lập</td><td>Olivine, garnet</td></tr>
+ <tr><td>Silicate nhóm</td><td>Hai hoặc một nhóm nhỏ tứ diện</td><td>Epidote</td></tr>
+ <tr><td>Silicate vòng</td><td>Liên kết thành vòng</td><td>Beryl, tourmaline</td></tr>
+ <tr><td>Silicate mạch đơn</td><td>Chuỗi đơn</td><td>Pyroxene</td></tr>
+ <tr><td>Silicate mạch kép</td><td>Chuỗi kép</td><td>Amphibole</td></tr>
+ <tr><td>Silicate lớp</td><td>Liên kết thành lớp</td><td>Mica, talc, khoáng vật sét</td></tr>
+ <tr><td>Silicate khung</td><td>Mạng không gian ba chiều</td><td>Feldspar, quartz</td></tr></table></div>
+ <h4>Liên hệ cấu trúc – tính chất (cát khai)</h4>
+ <ul><li><b>Silicate lớp:</b> thường có <b>một phương</b> cát khai hoàn toàn (mica tách thành lá mỏng).</li>
+ <li><b>Silicate mạch:</b> thường có <b>hai phương</b> cát khai (pyroxene ≈ 90°, amphibole 56°/124°).</li>
+ <li><b>Silicate khung:</b> bền, độ cứng tương đối cao, cát khai thay đổi tuỳ khoáng vật: feldspar có hai phương cát khai; quartz không có cát khai.</li></ul>`},
+
+    { id: 'pho-bien', title: '16. Khoáng vật phổ biến (mục 6)', html: `
+ <p>Bài này tổng hợp các khoáng vật bạn gặp nhiều nhất khi học đá: nhóm silicate tạo đá và các khoáng vật không silicate (carbonate, sulfate, halide, oxide, sulfide, phosphate). Với mỗi khoáng vật, chú ý <b>tổ hợp tính chất nhận diện</b>.</p>
+ <h3>6.1. Khoáng vật tạo đá silicate</h3>
+ <div class="tw"><table><tr><th>Khoáng vật</th><th>Công thức / cấu trúc</th><th>Nhận diện</th><th>Nơi gặp</th></tr>
+ <tr><td><b>Olivine</b></td><td>(Mg,Fe)₂SiO₄</td><td>Xanh olive; độ cứng 6,5–7; không cát khai rõ, nhiều khe nứt</td><td>Đá magma mafic và siêu mafic; dễ biến đổi thành serpentine</td></tr>
+ <tr><td><b>Pyroxene</b></td><td>Silicate mạch đơn</td><td>Xanh đen hoặc đen; hai phương cát khai gần 90°; tinh thể ngắn, chắc</td><td>Phổ biến trong basalt và gabbro</td></tr>
+ <tr><td><b>Amphibole</b></td><td>Silicate mạch kép</td><td>Xanh đậm hoặc đen; tinh thể dạng trụ dài; hai phương cát khai 56° và 124°</td><td>Andesite, diorite và đá biến chất</td></tr>
+ <tr><td><b>Mica</b></td><td>Silicate lớp</td><td>Một phương cát khai hoàn toàn; tách thành lá mỏng đàn hồi; muscovite sáng màu, biotite nâu đến đen</td><td>Đá magma intermediate/felsic, đá biến chất</td></tr>
+ <tr><td><b>Feldspar</b></td><td>K-feldspar và plagioclase</td><td>Hai phương cát khai ≈ 90°; độ cứng ≈ 6; plagioclase có song tinh đa hợp</td><td>Nhóm phổ biến nhất trong vỏ Trái Đất; biến đổi thành sericite hoặc khoáng vật sét</td></tr>
+ <tr><td><b>Quartz</b></td><td>SiO₂</td><td>Độ cứng 7; không cát khai, vết vỡ vỏ sò; ánh thuỷ tinh</td><td>Đá magma felsic, biến chất, trầm tích</td></tr>
+ <tr><td><b>Garnet</b></td><td>Silicate đảo</td><td>Thường tạo tinh thể đẳng thước; không có cát khai; độ cứng cao</td><td>Đặc trưng trong nhiều đá biến chất</td></tr>
+ <tr><td><b>Khoáng vật sét</b></td><td>Kaolinite, illite, smectite, chlorite</td><td>Hạt rất nhỏ; diện tích bề mặt lớn; khả năng trao đổi ion khác nhau</td><td>Quan trọng trong địa chất, địa kỹ thuật và môi trường</td></tr></table></div>
+ <div class="key"><b>Nhận diện nhanh</b>Hình dạng tinh thể + số phương cát khai + góc cát khai (và vết vỡ, độ cứng, kích thước hạt).</div>
+ <h3>6.2. Khoáng vật không silicate</h3>
+ <div class="tw"><table><tr><th>Khoáng vật</th><th>Công thức</th><th>Nhận diện</th></tr>
+ <tr><td><b>Calcite</b></td><td>CaCO₃</td><td>Sủi bọt mạnh với HCl loãng; độ cứng 3; ba phương cát khai không vuông góc; khoáng vật chính của đá vôi và đá hoa</td></tr>
+ <tr><td><b>Dolomite</b></td><td>CaMg(CO₃)₂</td><td>Phản ứng với HCl yếu ở dạng khối, rõ hơn khi nghiền thành bột; thành phần chính của đá dolomite</td></tr>
+ <tr><td><b>Gypsum</b></td><td>CaSO₄·2H₂O</td><td>Độ cứng 2 (móng tay cào được); có thể bị mài mỏng; phổ biến trong môi trường bốc hơi</td></tr>
+ <tr><td><b>Halite</b></td><td>NaCl</td><td>Ba phương cát khai vuông góc, hình khối lập phương; vị mặn; dễ hoà tan; hình thành trong môi trường bốc hơi</td></tr>
+ <tr><td><b>Magnetite</b></td><td>Fe₃O₄</td><td>Từ tính mạnh; màu và vết vạch đen; quặng sắt quan trọng</td></tr>
+ <tr><td><b>Goethite</b></td><td>FeO(OH)</td><td>Nâu vàng đến nâu đen; phổ biến trong đới phong hoá; thành phần quan trọng của laterite và limonite</td></tr>
+ <tr><td><b>Pyrite</b></td><td>FeS₂</td><td>Vàng đồng, ánh kim; thường có tinh thể lập phương; cứng hơn chalcopyrite; oxy hoá tạo nước acid</td></tr>
+ <tr><td><b>Chalcopyrite</b></td><td>CuFeS₂</td><td>Vàng đồng; mềm hơn pyrite; quặng đồng quan trọng</td></tr>
+ <tr><td><b>Galena</b></td><td>PbS</td><td>Màu xám chì; ánh kim mạnh; tỷ trọng cao; ba phương cát khai vuông góc; quặng chì quan trọng</td></tr>
+ <tr><td><b>Sphalerite</b></td><td>ZnS</td><td>Vàng nâu đến đen; ánh nhựa đến ánh kim cương; quặng kẽm quan trọng</td></tr>
+ <tr><td><b>Apatite</b></td><td>Ca₅(PO₄)₃(F,Cl,OH)</td><td>Độ cứng Mohs = 5; khoáng vật phosphate phổ biến; nguồn nguyên liệu sản xuất phân lân</td></tr></table></div>
+ <div class="note"><b>Mở rộng (giá trị chuẩn bổ sung)</b>Độ cứng Mohs thường gặp: halite ≈ 2,5; galena ≈ 2,5; chalcopyrite ≈ 3,5–4; sphalerite ≈ 3,5–4; goethite ≈ 5–5,5; magnetite ≈ 5,5–6,5; pyrite ≈ 6–6,5. Tỷ trọng: galena ≈ 7,5; magnetite ≈ 5,2; pyrite ≈ 5,0.</div>
+ <h3>Tra cứu nhanh – lọc theo nhóm</h3>
+ <div class="card"><div data-w="mincards"></div></div>
+ <div class="note"><b>Khi cần phân biệt cặp dễ nhầm</b><br><b>Pyrite ↔ chalcopyrite:</b> cùng vàng đồng; pyrite cứng hơn, thường lập phương; chalcopyrite mềm hơn, có thể có màu óng ánh.<br><b>Calcite ↔ dolomite:</b> dùng HCl loãng: calcite sủi mạnh, dolomite yếu (nhất là dạng khối).<br><b>Pyroxene ↔ amphibole:</b> góc cát khai ≈ 90° (87°/93°) và tinh thể ngắn, chắc ↔ 56°/124° và tinh thể dạng trụ dài.<br><b>Feldspar ↔ quartz:</b> feldspar có cát khai ≈ 90°, độ cứng ≈ 6; quartz không cát khai, độ cứng 7, vết vỡ vỏ sò.</div>`},
+
+    { id: 'quy-trinh', title: '17. Quy trình nhận biết khoáng vật (mục 7)', html: `
+ <p>Nhận biết khoáng vật là kỹ năng thực hành quan trọng: bạn dùng <b>tổ hợp</b> các tính chất, đi từ quan sát đến thử nghiệm, rồi đối chiếu. Mười bước dưới đây thành một quy trình:</p>
+ <div class="card"><h3>Quy trình 10 bước (bấm từng bước)</h3><div data-w="pick" data-k="idflow"></div></div>
+ <div class="tw"><table><tr><th>Giai đoạn</th><th>Các bước</th></tr>
+ <tr><td><b>Quan sát</b></td><td>1. Màu sắc & độ trong → 2. Ánh → 3. Hình dạng</td></tr>
+ <tr><td><b>Kiểm tra</b></td><td>4. Độ cứng → 5. Vết vạch → 6. Cát khai & vết vỡ → 7. Tỷ trọng → 8. Tính chất đặc biệt (từ tính, HCl, phát quang…)</td></tr>
+ <tr><td><b>Đối chiếu & kết luận</b></td><td>9. So sánh với bảng nhận diện → 10. Kết luận tên và nhóm khoáng vật</td></tr></table></div>
+ <div class="key"><b>Nguyên tắc</b>Quan sát trước → thử không phá huỷ → thử đặc biệt sau. Không dựa vào một tính chất duy nhất (đặc biệt là màu).</div>
+ <p>Hãy luyện ngay với công cụ lọc ở bài thực hành (bài 9): chọn các tính chất quan sát được và xem khoáng vật còn phù hợp.</p>`}
+  );
+})();
+
+</script>
+<script>
+window.CHAPTERS.push({
+ id:'c4', num:4, title:'Đá magma (Phần 1)',
+ blurb:'Nguồn gốc magma, cơ chế tạo magma, tiến hoá và phân hoá magma; thành phần hoá học và khoáng vật; kiến trúc và cấu tạo của đá magma.',
+ sections:[
+ {id:'magma-la-gi', title:'1. Magma và nguồn gốc magma', html:`
+ <div class="card"><h3>Mục tiêu chương</h3><ul>
+ <li>Giải thích magma là gì và magma hình thành như thế nào.</li>
+ <li>Mô tả quá trình magma nguội và kết tinh.</li>
+ <li>Nhận biết các thành phần hoá học chính của magma/đá magma và liên hệ với thành phần khoáng vật.</li>
+ <li>Phân biệt các kiến trúc và cấu tạo phổ biến của đá magma.</li>
+ <li>Dựa vào kiến trúc, cấu tạo và khoáng vật để suy luận sơ bộ điều kiện thành tạo.</li></ul></div>
+ <h3>Magma là gì?</h3>
+ <p><b>Magma</b> là vật chất nóng chảy tự nhiên tồn tại bên dưới bề mặt Trái Đất, gồm <b>ba pha chính: lỏng, rắn và khí</b>. Magma <b>không đơn thuần là chất lỏng nóng chảy</b> mà là một hệ đa pha.</p>
+ <div class="tw"><table><tr><th>Pha</th><th>Đặc điểm</th><th>Tỷ lệ</th></tr>
+ <tr><td><b>Pha lỏng (melt)</b></td><td>Silicate nóng chảy (dung thể magma); chứa các nguyên tố hoà tan (Si, Al, Mg, Ca, Na, K…)</td><td>Chiếm tỷ lệ lớn nhất (thường 70–90%)</td></tr>
+ <tr><td><b>Pha rắn (crystals)</b></td><td>Tinh thể khoáng vật (olivine, pyroxene, plagioclase…); hình thành khi magma nguội dần</td><td>Thường 0–30%</td></tr>
+ <tr><td><b>Pha khí (volatiles)</b></td><td>Các chất dễ bay hơi: H₂O, CO₂, SO₂, HCl, HF… Tồn tại dưới dạng bọt khí và khí hoà tan trong magma</td><td>Nhỏ (thường 0–10%)</td></tr></table></div>
+ <div class="note"><b>Magma và dung nham</b>Magma ở dưới mặt đất; khi phun lên mặt đất, phần lỏng gọi là dung nham (lava). Magma nguội kết tinh thành đá magma: đá xâm nhập (nguội chậm ở sâu) hoặc đá phun trào (nguội nhanh gần/trên bề mặt).</div>
+ <h3>Magma hình thành ở đâu?</h3>
+ <p>Magma hình thành ở <b>thạch quyển và manti trên (quyển mềm)</b>, nhiều nhất ở ba môi trường kiến tạo. Bấm từng thẻ:</p>
+ <div class="card"><div data-w="pick" data-k="setting"></div></div>
+ <div class="tw"><table><tr><th></th><th>Ria tách giãn</th><th>Đới hút chìm</th><th>Điểm nóng</th></tr>
+ <tr><td><b>Bối cảnh tạo</b></td><td>Các mảng tách nhau</td><td>Mảng đại dương hút chìm</td><td>Cột manti nóng</td></tr>
+ <tr><td><b>Cơ chế nóng chảy</b></td><td>Giảm áp suất</td><td>Thêm chất bay hơi</td><td>Tăng nhiệt độ</td></tr>
+ <tr><td><b>Thành phần magma chủ yếu</b></td><td>Mafic</td><td>Đa dạng (mafic → felsic)</td><td>Mafic</td></tr>
+ <tr><td><b>Sản phẩm địa chất tiêu biểu</b></td><td>Sống núi giữa đại dương</td><td>Cung núi lửa</td><td>Chuỗi núi lửa điểm nóng</td></tr></table></div>
+ <h3>Cơ chế tạo magma</h3>
+ <p>Đá manti và vỏ nóng chảy <b>từng phần</b> (không phải toàn bộ). Có ba cách làm đá nóng chảy:</p>
+ <div class="card"><div data-w="pick" data-k="origin"></div></div>
+ <div class="key"><b>Tóm lại</b>Giảm áp → nóng chảy giảm áp · Thêm H₂O/CO₂ → hạ nhiệt độ nóng chảy · Tăng nhiệt độ → nóng chảy do truyền nhiệt. Cả ba đều dẫn đến <b>nóng chảy từng phần</b>.</div>`},
+
+ {id:'tien-hoa', title:'2. Các loại magma và tiến hoá magma', html:`
+ <p>Magma ban đầu không đứng yên: nó nguội, kết tinh, tương tác với đá vây quanh và có thể biến đổi thành phần. Bài này trả lời: <b>có những loại magma nào, và magma thay đổi thành phần như thế nào?</b></p>
+ <h3>Các loại magma chính</h3>
+ <div class="tw"><table><tr><th></th><th>Basalt (mafic)</th><th>Andesite (intermediate)</th><th>Rhyolite (felsic)</th></tr>
+ <tr><td><b>Hàm lượng SiO₂</b></td><td>Thấp (≈ 45–52%)</td><td>Trung bình (≈ 52–63%)</td><td>Cao (≈ 63–77%)</td></tr>
+ <tr><td><b>Giàu</b></td><td>Fe, Mg, Ca</td><td>Al, Ca, Na, K</td><td>K, Na, Al</td></tr>
+ <tr><td><b>Nhiệt độ</b></td><td>Cao (≈ 1100–1200 °C)</td><td>Trung bình (≈ 800–1000 °C)</td><td>Thấp (≈ 650–800 °C)</td></tr>
+ <tr><td><b>Độ nhớt</b></td><td>Thấp</td><td>Trung bình</td><td>Cao</td></tr>
+ <tr><td><b>Hàm lượng khí</b></td><td>Ít khí hoà tan</td><td>Vừa phải</td><td>Nhiều</td></tr>
+ <tr><td><b>Kiểu phun trào</b></td><td>Dễ (dung nham chảy xa)</td><td>Cả phun trào dễ và nổ; thường tạo núi lửa tầng (stratovolcano)</td><td>Thường là phun trào nổ mạnh, tạo tro, dòng pyroclastic</td></tr></table></div>
+ <h3>Quá trình tiến hoá magma</h3>
+ <p>Magma ban đầu có thể đổi thành phần theo nhiều cơ chế:</p>
+ <div class="card"><div data-w="pick" data-k="evolve"></div></div>
+ <h4>Hướng tiến hoá chung và kết quả</h4>
+ <ul><li>Hướng chung: <b>Mafic → Felsic</b>: hàm lượng SiO₂ tăng, nhiệt độ giảm, độ nhớt tăng.</li>
+ <li>Thành phần hoá học thay đổi (thường giàu SiO₂ hơn), nhiệt độ giảm, độ nhớt tăng, kiểu phun trào chuyển từ phun trào dễ → nổ mạnh.</li>
+ <li>Tạo các loại đá magma khác nhau: <b>basalt – andesite – dacite – rhyolite</b> (từ mafic đến felsic).</li></ul>
+ <div class="note"><b>Chuỗi tiến hoá ví dụ</b>Basalt (mafic: giàu Fe, Mg, Ca) → Andesite (trung gian) → Dacite (trung gian – giàu SiO₂ hơn) → Rhyolite (felsic: giàu SiO₂, K, Na).</div>
+ <h3>Dãy phản ứng Bowen – nguyên tắc và ý nghĩa</h3>
+ <p>(Hình tương tác ở bài 13 của Chương 3.) Dãy Bowen mô tả thứ tự kết tinh khoáng vật khi magma nguội từ từ ở điều kiện áp suất thấp (môi trường bề mặt).</p>
+ <ul><li>Khoáng vật kết tinh sớm ở nhiệt độ cao, khoáng vật kết tinh muộn ở nhiệt độ thấp hơn.</li>
+ <li>Hai nhánh: <b>không liên tục</b> (olivine → pyroxene → amphibole → biotite) và <b>liên tục</b> (plagioclase đổi từ giàu Ca → giàu Na).</li>
+ <li>Các khoáng vật muộn: K-feldspar, quartz và muscovite.</li></ul>
+ <div class="tw"><table><tr><th>Ý nghĩa địa chất</th></tr>
+ <tr><td>Giải thích sự thay đổi thành phần khoáng vật của đá magma từ mafic đến felsic.</td></tr>
+ <tr><td>Khoáng vật kết tinh sớm có nhiệt độ cao, giàu Mg, Fe (dễ bị phong hoá); khoáng vật kết tinh muộn nhiệt độ thấp, giàu Si, Na, K (ổn định hơn).</td></tr>
+ <tr><td>Có thể dùng để dự đoán trình tự kết tinh khoáng vật, thành phần đá và quá trình phân hoá magma.</td></tr></table></div>
+ <div class="card"><h3>Dãy phản ứng Bowen – kéo để làm nguội magma</h3><div data-w="bowen"></div></div>`},
+
+ {id:'thanh-phan-hoa-hoc', title:'3. Thành phần hoá học của đá magma', html:`
+ <p>Thành phần hoá học của magma/đá magma được biểu diễn chủ yếu bằng <b>các oxit</b>. Bài này trả lời: <b>có những oxit nào, chiếm bao nhiêu, và SiO₂ quyết định điều gì?</b></p>
+ <h3>Các oxit chính trong đá magma</h3>
+ <div class="tw"><table><tr><th>Oxit</th><th>Trung bình vỏ Trái Đất (%)</th><th>Trong đá magma điển hình (%)</th></tr>
+ <tr><td>SiO₂</td><td>59,7</td><td>45–77</td></tr><tr><td>Al₂O₃</td><td>15,4</td><td>12–18</td></tr>
+ <tr><td>FeO + Fe₂O₃ (tổng Fe)</td><td>7,7</td><td>2–15</td></tr><tr><td>MgO</td><td>4,9</td><td>0,5–12</td></tr>
+ <tr><td>CaO</td><td>3,6</td><td>1–12</td></tr><tr><td>Na₂O</td><td>2,8</td><td>1–6</td></tr>
+ <tr><td>K₂O</td><td>2,6</td><td>0,1–6</td></tr><tr><td>TiO₂</td><td>0,4</td><td>0,1–3</td></tr>
+ <tr><td>MnO</td><td>0,1</td><td>0–0,3</td></tr><tr><td>P₂O₅</td><td>0,1</td><td>0–1</td></tr>
+ <tr><td>Các oxit khác</td><td>2,7</td><td>&lt; 1</td></tr></table></div>
+ <p>Cột trung bình cộng đủ 100%: 59,7 + 15,4 + 7,7 + 4,9 + 3,6 + 2,8 + 2,6 + 0,4 + 0,1 + 0,1 + 2,7 = 100,0%. SiO₂ chiếm tỷ lệ lớn nhất (gần 60%), tiếp theo là Al₂O₃.</p>
+ <h3>Các nhóm nguyên tố trong đá magma</h3>
+ <div class="tw"><table><tr><th>Nhóm</th><th>Hàm lượng</th><th>Nguyên tố</th></tr>
+ <tr><td><b>Nguyên tố chính (major)</b></td><td>&gt; 1%</td><td>Si, Al, Fe, Mg, Ca, Na, K</td></tr>
+ <tr><td><b>Nguyên tố thứ yếu (minor)</b></td><td>0,1–1%</td><td>Ti, Mn, P, …</td></tr>
+ <tr><td><b>Nguyên tố vi lượng (trace)</b></td><td>&lt; 0,1%</td><td>Rb, Sr, Ba, Zr, Nb, Y, Th, U, REE, …</td></tr>
+ <tr><td><b>Nguyên tố không động (immobile)</b></td><td>–</td><td>Ít bị di chuyển trong quá trình phong hoá (nhóm HFSE): Zr, Ti, Nb, Y, …</td></tr></table></div>
+ <h3>Thành phần hoá học theo loại magma (trung bình, % khối lượng)</h3>
+ <div class="card"><div data-w="oxides"></div></div>
+ <div class="tw"><table><tr><th>Loại magma</th><th>SiO₂</th><th>Al₂O₃</th><th>FeO+Fe₂O₃</th><th>MgO</th><th>CaO</th><th>Na₂O+K₂O</th></tr>
+ <tr><td>Ultramafic</td><td>&lt; 45</td><td>2–8</td><td>8–18</td><td>18–38</td><td>6–14</td><td>&lt; 2</td></tr>
+ <tr><td>Mafic</td><td>45–52</td><td>12–18</td><td>8–14</td><td>4–12</td><td>8–14</td><td>2–6</td></tr>
+ <tr><td>Intermediate</td><td>52–63</td><td>15–18</td><td>5–10</td><td>2–6</td><td>4–8</td><td>4–8</td></tr>
+ <tr><td>Felsic</td><td>63–77</td><td>12–16</td><td>1–6</td><td>&lt; 2</td><td>1–4</td><td>6–10</td></tr></table></div>
+ <div class="key"><b>Xu hướng mafic → felsic</b>SiO₂, Na₂O + K₂O tăng; FeO + Fe₂O₃, MgO, CaO giảm. Tính chất: mafic giàu Fe–Mg–Ca; felsic giàu Si–Na–K; intermediate ở giữa.</div>
+ <div class="note"><b>Biểu đồ TAS (Total Alkali–Silica)</b>Phân loại đá phun trào theo SiO₂ (trục ngang) và tổng kiềm Na₂O + K₂O (trục dọc): các trường basalt, andesite, dacite, rhyolite xếp từ thấp đến cao theo SiO₂.</div>`},
+
+ {id:'sio2', title:'4. Hàm lượng SiO₂ và tính chất magma', html:`
+ <p>SiO₂ là “chìa khoá” để hiểu magma. Bài này trả lời: <b>SiO₂ quyết định tên gọi, độ nhớt, nhiệt độ và kiểu phun trào của magma như thế nào?</b></p>
+ <h3>Vai trò của SiO₂</h3>
+ <ul><li>SiO₂ là oxit chính, chiếm tỷ lệ lớn nhất trong hầu hết các đá magma.</li>
+ <li>Ảnh hưởng đến <b>độ nhớt, nhiệt độ kết tinh và kiểu phun trào</b>.</li>
+ <li>Quyết định thành phần khoáng vật chính và tên gọi của đá magma.</li>
+ <li>Hàm lượng SiO₂ càng cao → độ nhớt càng lớn, magma khó chảy hơn và dễ phun trào nổ.</li></ul>
+ <h3>Phân loại theo hàm lượng SiO₂</h3>
+ <div class="tw"><table><tr><th>Loại đá magma</th><th>SiO₂ (% khối lượng)</th><th>Ví dụ đá</th><th>Màu sắc</th></tr>
+ <tr><td>Ultramafic</td><td>&lt; 45</td><td>Peridotite, komatiite</td><td>Sẫm</td></tr>
+ <tr><td>Mafic</td><td>45–52</td><td>Basalt, gabbro</td><td>Sẫm</td></tr>
+ <tr><td>Intermediate</td><td>52–63</td><td>Andesite, diorite</td><td>Trung bình</td></tr>
+ <tr><td>Felsic</td><td>63–77</td><td>Dacite, rhyolite, granite</td><td>Sáng</td></tr></table></div>
+ <p>Cụ thể hơn: peridotite ≈ 40–44%, basalt ≈ 45–52%, andesite ≈ 52–63%, dacite ≈ 63–69%, granite/rhyolite ≈ 70–77%.</p>
+ <h3>Kéo thanh trượt để xem tính chất</h3>
+ <div class="card"><div data-w="silica"></div></div>
+ <h3>Tóm tắt mối quan hệ SiO₂ – tính chất magma</h3>
+ <div class="tw"><table><tr><th>Đặc điểm</th><th>Mafic (45–52% SiO₂)</th><th>Intermediate (52–63%)</th><th>Felsic (63–77%)</th></tr>
+ <tr><td>Độ nhớt</td><td>Thấp</td><td>Trung bình</td><td>Cao</td></tr>
+ <tr><td>Nhiệt độ magma (°C)</td><td>1100–1200</td><td>≈ 800–1000</td><td>650–800</td></tr>
+ <tr><td>Tính lưu động</td><td>Cao (dễ chảy)</td><td>Trung bình</td><td>Thấp (khó chảy)</td></tr>
+ <tr><td>Dễ thoát khí</td><td>Dễ</td><td>Hỗn hợp</td><td>Khó</td></tr>
+ <tr><td>Kiểu phun trào thường gặp</td><td>Trào chảy (effusive)</td><td>Hỗn hợp (mixed)</td><td>Nổ (explosive)</td></tr>
+ <tr><td>Ví dụ đá</td><td>Basalt</td><td>Andesite</td><td>Dacite, rhyolite</td></tr></table></div>
+ <p>Dạng dung nham: basalt (SiO₂ ≈ 45–52%) → dung nham pahoehoe, độ nhớt thấp, dễ chảy, rộng, dạng mỏng; andesite → dung nham aa dày hơn, độ nhớt trung bình; rhyolite/dacite (SiO₂ cao) → dung nham ngắn, dày, độ nhớt cao, khó chảy, thường tạo vòm dung nham (dome), dễ nổ. Kiểu phun trào từ nhẹ đến mạnh: <b>trào chảy → Strombolian → Vulcanian → Plinian</b>.</p>
+ <div class="warn"><b>Kết luận chính</b>SiO₂ càng cao → magma càng nhớt, nhiệt độ kết tinh thấp, dễ phun trào nổ. SiO₂ càng thấp → magma loãng, nhiệt độ kết tinh cao, thường phun trào trào chảy. Hàm lượng SiO₂ là tiêu chí quan trọng để phân loại đá magma.</div>`},
+
+ {id:'khoang-vat-magma', title:'5. Thành phần khoáng vật của đá magma', html:`
+ <p>Thành phần hoá học quyết định khoáng vật nào kết tinh. Bài này trả lời: <b>đá magma thường chứa những khoáng vật nào, và chúng thay đổi thế nào từ mafic đến felsic?</b></p>
+ <h3>1. Khoáng vật tạo đá (silicate chính)</h3>
+ <div class="tw"><table><tr><th>Nhóm</th><th>Khoáng vật · công thức</th><th>Ghi chú</th></tr>
+ <tr><td>Olivine</td><td>(Mg,Fe)₂SiO₄</td><td>Thường gặp ở đá mafic; nhiệt độ kết tinh cao</td></tr>
+ <tr><td>Pyroxene</td><td>(Ca,Mg,Fe)Si₂O₆</td><td>Phổ biến trong đá mafic và intermediate; nhiệt độ kết tinh cao đến trung bình</td></tr>
+ <tr><td>Amphibole</td><td>(Ca,Na)₂(Mg,Fe,Al)₅Si₈O₂₂(OH)₂</td><td>Phổ biến trong đá intermediate; nhiệt độ kết tinh trung bình</td></tr>
+ <tr><td>Mica (biotite)</td><td>K(Mg,Fe)₃AlSi₃O₁₀(OH)₂</td><td>Phổ biến trong đá intermediate và felsic; nhiệt độ kết tinh trung bình đến thấp</td></tr>
+ <tr><td>Feldspar</td><td>K-feldspar KAlSi₃O₈; plagioclase (Na,Ca)(Al,Si)₄O₈</td><td>Rất phổ biến trong hầu hết đá magma; plagioclase thay đổi từ giàu Ca (mafic) đến giàu Na (felsic)</td></tr>
+ <tr><td>Quartz</td><td>SiO₂</td><td>Đặc trưng của đá felsic; nhiệt độ kết tinh thấp</td></tr></table></div>
+ <h3>2. Khoáng vật phụ (accessory minerals)</h3>
+ <p>Magnetite (Fe₃O₄), ilmenite (FeTiO₃), apatite Ca₅(PO₄)₃(F,Cl,OH), zircon (ZrSiO₄), titanite (CaTiSiO₅), allanite…. Hàm lượng thường thấp (&lt; 5% thể tích); giàu các nguyên tố vết (Ti, Zr, P, REE…); có giá trị trong xác định nguồn gốc magma và quá trình kiến tạo.</p>
+ <h3>3. Thành phần khoáng vật điển hình theo loại đá</h3>
+ <div class="tw"><table><tr><th>Đá mafic (basalt)</th><th>Đá intermediate (andesite)</th><th>Đá felsic (dacite, rhyolite, granite)</th></tr>
+ <tr><td>Plagioclase giàu Ca 40–60%; pyroxene 20–40%; olivine 5–15%; khoáng vật phụ (magnetite, ilmenite…) &lt; 5%</td><td>Plagioclase trung gian 40–60%; amphibole 10–30%; pyroxene 0–20%; biotite (thường ít); khoáng vật phụ &lt; 5%</td><td>Quartz 20–35%; K-feldspar 20–40%; plagioclase giàu Na 20–40%; biotite, muscovite; khoáng vật phụ (zircon, apatite…) &lt; 5%</td></tr></table></div>
+ <h3>4. Xu hướng thay đổi theo SiO₂</h3>
+ <ul><li><b>Mafic (SiO₂ thấp):</b> olivine, pyroxene (đá điển hình: basalt, gabbro).</li>
+ <li><b>Intermediate:</b> amphibole (andesite, diorite).</li>
+ <li><b>Felsic (SiO₂ cao):</b> biotite, K-feldspar, quartz (dacite, rhyolite, granite).</li></ul>
+ <div class="key"><b>Kết luận</b>Thành phần khoáng vật của đá magma phụ thuộc chủ yếu vào thành phần hoá học (đặc biệt là SiO₂) và điều kiện kết tinh. Magma mafic giàu olivine, pyroxene; magma felsic giàu K-feldspar, plagioclase Na và quartz. Sự thay đổi thành phần khoáng vật là kết quả trực tiếp của quá trình kết tinh sớm → muộn (kết tinh phân đoạn magma theo chuỗi phản ứng Bowen).</div>
+ <h3>Sự thay đổi thành phần và tính chất: tổng hợp</h3>
+ <div class="tw"><table><tr><th></th><th>Felsic</th><th>Intermediate</th><th>Mafic</th><th>Ultramafic</th></tr>
+ <tr><td>Đá ví dụ</td><td>Granite / rhyolite (63–77% SiO₂)</td><td>Diorite / andesite (52–63%)</td><td>Gabbro / basalt (45–52%)</td><td>Peridotite (&lt; 45%)</td></tr>
+ <tr><td>Khoáng vật chính</td><td>Quartz, K-feldspar, mica (giàu khoáng vật sáng)</td><td>Plagioclase trung gian, amphibole, biotite (hỗn hợp sáng và tối)</td><td>Plagioclase giàu Ca, pyroxene, olivine (giàu khoáng vật tối)</td><td>Olivine, pyroxene (rất giàu khoáng vật tối)</td></tr>
+ <tr><td>Nhiệt độ kết tinh (°C)</td><td>650–800</td><td>≈ 800–1000</td><td>1100–1200</td><td>&gt; 1200</td></tr>
+ <tr><td>Độ nhớt</td><td>Cao</td><td>Trung bình</td><td>Thấp</td><td>Rất thấp</td></tr>
+ <tr><td>Kiểu phun trào</td><td>Nổ (explosive)</td><td>Hỗn hợp (mixed)</td><td>Trào chảy (effusive)</td><td>Trào chảy (hiếm; dung nham rất nóng)</td></tr></table></div>
+ <p>Theo hướng Felsic → Mafic → Ultramafic: SiO₂ và Na₂O + K₂O giảm dần, Fe, Mg, Ca tăng dần.</p>
+ <h3>Hai nhóm đá magma lớn</h3>
+ <div class="tw"><table><tr><th>Đặc điểm</th><th>Đá felsic (granite, rhyolite)</th><th>Đá mafic (gabbro, basalt)</th></tr>
+ <tr><td>Hàm lượng SiO₂</td><td>Cao (63–77%)</td><td>Thấp (45–52%)</td></tr>
+ <tr><td>Màu sắc</td><td>Sáng (trắng, xám, hồng)</td><td>Sẫm (xám, đen)</td></tr>
+ <tr><td>Khoáng vật chính</td><td>Quartz, K-feldspar, plagioclase Na, mica (muscovite, biotite)</td><td>Plagioclase Ca, pyroxene, olivine, amphibole</td></tr>
+ <tr><td>Khoáng vật phụ</td><td>Zircon, apatite, magnetite, ilmenite…</td><td>Magnetite, ilmenite, apatite, chrome spinel…</td></tr>
+ <tr><td>Độ nhớt magma</td><td>Cao</td><td>Thấp</td></tr>
+ <tr><td>Nhiệt độ kết tinh</td><td>650–800 °C</td><td>1100–1200 °C</td></tr>
+ <tr><td>Kiểu phun trào thường gặp</td><td>Nổ (explosive)</td><td>Trào chảy (effusive)</td></tr></table></div>
+ <div class="note"><b>Phân bố trong vỏ Trái Đất</b>Theo diện tích bề mặt vỏ Trái Đất, đá mafic chiếm phần lớn (~70%), chủ yếu ở vỏ đại dương; đá felsic chiếm khoảng 30%, chủ yếu ở vỏ lục địa. Sự khác biệt này phản ánh vai trò của thành phần hoá học magma và quá trình tiến hoá vỏ Trái Đất.</div>`},
+
+ {id:'kien-truc', title:'6. Kiến trúc của đá magma', html:`
+ <p><b>Kiến trúc (texture)</b> là đặc điểm về <b>kích thước, hình dạng và quan hệ giữa các tinh thể</b> trong đá. Nó cho biết magma đã nguội như thế nào: nhanh hay chậm, sâu hay nông. Bài này trả lời: <b>có những kiến trúc nào và mỗi kiến trúc nói lên điều gì?</b></p>
+ <div class="card"><h3>Sáu kiến trúc chính (bấm để xem minh hoạ)</h3><div data-w="texture"></div></div>
+ <div class="tw"><table><tr><th>Kiến trúc</th><th>Đặc điểm chính</th><th>Ví dụ đá</th></tr>
+ <tr><td><b>Hiển tinh (phaneritic)</b></td><td>Tinh thể lớn (&gt; 1 mm), dễ quan sát bằng mắt thường; hình thành do magma nguội chậm ở sâu</td><td>Granite, diorite, gabbro, peridotite</td></tr>
+ <tr><td><b>Ẩn tinh (aphanitic)</b></td><td>Tinh thể rất nhỏ (&lt; 1 mm), không quan sát được bằng mắt thường; do magma nguội nhanh gần bề mặt. Có thể có một khối ẩn tinh hoàn toàn hoặc chứa các tinh thể lớn rải rác</td><td>Basalt, andesite, rhyolite, scoria</td></tr>
+ <tr><td><b>Nổi ban (porphyritic)</b></td><td>Hai cỡ hạt rõ rệt: tinh thể lớn (phenocryst) trong nền hạt mịn (groundmass). Do thay đổi tốc độ nguội: nguội chậm ở sâu (tạo phenocryst), sau đó magma lên gần bề mặt và nguội nhanh (tạo nền mịn)</td><td>Andesite porphyritic, granite porphyry, basalt porphyritic, rhyolite porphyritic</td></tr>
+ <tr><td><b>Thuỷ tinh (glassy)</b></td><td>Không có tinh thể (vô định hình); bề mặt nhẵn, bóng; vết vỡ vỏ sò; thường có màu sẫm (đen, nâu, xám). Magma nguội cực nhanh ngay tại bề mặt</td><td>Obsidian, thuỷ tinh núi lửa, tachylite</td></tr>
+ <tr><td><b>Lỗ hổng (vesicular)</b></td><td>Có rất nhiều lỗ rỗng (vesicle) hình thành trong đá do khí thoát ra khi magma nguội nhanh gần bề mặt. Lỗ rỗng thường tròn, bầu dục hoặc không đều; có thể được lấp đầy bởi khoáng vật thứ sinh (calcite, zeolite, thạch anh…)</td><td>Scoria, pumice, vesicular basalt, vesicular andesite</td></tr>
+ <tr><td><b>Mảnh vụn núi lửa (pyroclastic)</b></td><td>Cấu tạo từ các mảnh vụn núi lửa phun trào trong các vụ nổ; sau đó rơi xuống, lắng đọng và kết dính hoặc hàn kết, chứ không phải kết tinh trực tiếp từ magma</td><td>Tuff, tuff hàn kết, breccia núi lửa</td></tr></table></div>
+ <div class="key"><b>Liên hệ tốc độ nguội</b>Tinh thể lớn (&gt; 1 mm) ← nguội chậm (ở sâu) · Tinh thể rất nhỏ/không có tinh thể ← nguội nhanh (gần bề mặt) · Mảnh vụn núi lửa ← nổ núi lửa.</div>
+ <h4>Kích thước mảnh vụn núi lửa</h4>
+ <div class="tw"><table><tr><th>Loại</th><th>Kích thước</th></tr><tr><td>Tro núi lửa (ash)</td><td>&lt; 2 mm</td></tr><tr><td>Lapilli</td><td>2–64 mm</td></tr><tr><td>Bom núi lửa (volcanic bomb)</td><td>&gt; 64 mm (thường tròn/thoi)</td></tr><tr><td>Khối núi lửa (block)</td><td>&gt; 64 mm (thường góc cạnh)</td></tr></table></div>
+ <p>Đá mảnh vụn núi lửa thường có thành phần khoáng vật giống magma nguồn, có thể gồm các mảnh với kích thước khác nhau; mức độ gắn kết thay đổi (rời rạc → kết dính → hàn kết). Nó giúp nhận biết kiểu phun trào và mức độ nổ của núi lửa, môi trường lắng đọng và đánh giá nguy cơ núi lửa.</p>
+ <h3>Ý nghĩa của kiến trúc</h3>
+ <ul><li><b>Phản ánh tốc độ nguội:</b> hiển tinh (chậm) → ẩn tinh (nhanh) → thuỷ tinh (cực nhanh).</li>
+ <li><b>Chỉ thị môi trường:</b> hiển tinh gặp trong đá xâm nhập; ẩn tinh, thuỷ tinh, lỗ hổng gặp trong đá phun trào.</li>
+ <li><b>Lỗ hổng</b> cho biết magma có khí hoà tan; <b>nổi ban</b> cho biết lịch sử nguội hai giai đoạn; <b>mảnh vụn</b> cho biết núi lửa phun nổ.</li></ul>
+ <div class="note"><b>Tổng hợp</b>Kích thước hạt và tốc độ nguội: tinh thể lớn (&gt; 1 mm) – nguội chậm (ở sâu); tinh thể nhỏ (&lt; 1 mm) đến không có tinh thể – nguội nhanh (gần bề mặt); mảnh vụn có kích thước khác nhau – phun nổ (núi lửa).</div>`},
+
+ {id:'cau-tao', title:'7. Cấu tạo của đá magma', html:`
+ <p><b>Cấu tạo (structure)</b> mô tả cách các thành phần của đá phân bố trong không gian ở quy mô lớn hơn (mẫu tay, lộ đá). Nếu kiến trúc là chuyện “cỡ hạt”, thì cấu tạo là chuyện “hình thái và sự sắp xếp”. Bài này trả lời: <b>10 cấu tạo phổ biến của đá magma là gì?</b></p>
+ <div class="card"><h3>Mười cấu tạo (bấm để xem)</h3><div data-w="pick" data-k="struct"></div></div>
+ <div class="tw"><table><tr><th>#</th><th>Cấu tạo</th><th>Đá thường gặp</th></tr>
+ <tr><td>1</td><td>Hạt đều (equigranular)</td><td>Đá xâm nhập như granite</td></tr>
+ <tr><td>2</td><td>Không đều (inequigranular)</td><td>Đá xâm nhập như diorite, gabbro</td></tr>
+ <tr><td>3</td><td>Porphyritic (hai pha hạt)</td><td>Andesite, basalt porphyritic</td></tr>
+ <tr><td>4</td><td>Thuỷ tinh (glassy)</td><td>Obsidian</td></tr>
+ <tr><td>5</td><td>Lỗ hổng (vesicular)</td><td>Scoria, pumice, vesicular basalt</td></tr>
+ <tr><td>6</td><td>Mảnh vụn núi lửa (pyroclastic)</td><td>Tuff, tuff hàn kết, breccia núi lửa</td></tr>
+ <tr><td>7</td><td>Dòng (flow structure)</td><td>Basalt, rhyolite</td></tr>
+ <tr><td>8</td><td>Amygdaloidal (hốc thạch anh)</td><td>Basalt</td></tr>
+ <tr><td>9</td><td>Tầng (layering)</td><td>Gabbro, complex xâm nhập dạng tầng</td></tr>
+ <tr><td>10</td><td>Cột (columnar jointing)</td><td>Basalt</td></tr></table></div>
+ <h3>Cách “đọc” đá magma: tổng hợp</h3>
+ <div class="key"><b>Dựa vào kiến trúc, cấu tạo và khoáng vật để suy luận sơ bộ điều kiện thành tạo</b>
+ <ol><li><b>Khoáng vật + màu sắc</b> → thuộc loại felsic, intermediate hay mafic (và SiO₂ khoảng bao nhiêu).</li>
+ <li><b>Kiến trúc (cỡ hạt)</b> → tốc độ nguội: sâu hay nông; có hai giai đoạn nguội (porphyritic) hay không.</li>
+ <li><b>Cấu tạo (lỗ hổng, dòng, mảnh vụn, cột…)</b> → phun trào hay xâm nhập, có khí hay không, kiểu phun trào (trào chảy hay nổ).</li></ol></div>
+ <p><b>Ví dụ suy luận:</b> một mẫu đá màu sẫm, nhiều lỗ hổng, nền ẩn tinh, có olivine và pyroxene → magma <b>mafic</b>, nguội nhanh gần/trên mặt đất, giàu khí → khả năng là <b>basalt lỗ hổng/scoria</b>, từ dung nham trào chảy hoặc phun trào nhẹ.</p>`}
  ]
 });
 
@@ -1197,15 +1537,239 @@ W.xpl = el => {
 
 </script>
 <script>
+/* Hình minh hoạ cho Chương 3 (mục 4–7) và Chương 4 (Đá magma – Phần 1) */
+
+/* ---------- Bộ thẻ chọn chung: nhấp thẻ → hiện nội dung ---------- */
+const PICK = {
+  formation: [
+    ['Từ magma', 'Magma nguội dần → <b>tinh thể mầm</b> xuất hiện rồi lớn lên. Trình tự kết tinh phụ thuộc nhiệt độ, áp suất, thành phần magma và <b>tốc độ nguội</b> (xem dãy phản ứng Bowen).<br>Magma nguội chậm ở sâu → tinh thể lớn; nguội nhanh gần mặt đất → tinh thể nhỏ.'],
+    ['Từ dung dịch nhiệt dịch', 'Dung dịch giàu nước, ion và chất bốc (H₂O, ion kim loại, SiO₂, S, CO₂…) từ nguồn nhiệt magma đi lên qua <b>khe nứt</b>. Khi dung dịch trở nên <b>quá bão hoà</b> – do nhiệt độ giảm, áp suất giảm/sôi, hoặc thay đổi thành phần, pH–Eh – khoáng vật lắng đọng thành <b>mạch khoáng nhiệt dịch</b>.<br><b>Thường gặp:</b> quartz, calcite, fluorite, galena, sphalerite, chalcopyrite.'],
+    ['Kết tủa từ dung dịch', 'Dung dịch chứa ion hoà tan trở nên quá bão hoà → ion liên kết tạo mầm tinh thể → tinh thể phát triển và lắng xuống. Nguyên nhân: <b>bốc hơi</b> (nồng độ tăng), <b>đổi pH</b> (CO₂ thoát ra → CaCO₃ kết tủa), <b>đổi nhiệt độ</b>, <b>phản ứng hoá học</b> (Ba²⁺ + SO₄²⁻ → BaSO₄), <b>hoạt động sinh học</b>.<br><b>Ví dụ:</b> halite NaCl và gypsum CaSO₄·2H₂O (chủ yếu do bốc hơi); calcite CaCO₃ (pH, CO₂, phản ứng và sinh học).'],
+    ['Biến chất', 'Khoáng vật hình thành/đổi mới <b>ở trạng thái rắn</b>, không nóng chảy hoàn toàn: <b>tái kết tinh</b> (hạt nhỏ → hạt lớn khi nhiệt độ, áp suất tăng), và <b>phản ứng giữa các khoáng vật</b> (A + B → khoáng vật mới, có thể thải H₂O). Mỗi khoáng vật chỉ bền trong một miền P–T nhất định.<br><b>Ví dụ:</b> garnet, staurolite (trung bình–cao); kyanite (áp suất cao); sillimanite (nhiệt độ cao); talc (nhiệt độ thấp, đá giàu Mg).'],
+    ['Phong hoá', 'Đá mẹ + H₂O + O₂ + CO₂ → <b>hoà tan, biến đổi và tạo khoáng vật thứ sinh</b>. Các quá trình: phong hoá hoá học, <b>hoà tan</b>, <b>thuỷ phân</b> (feldspar → khoáng vật sét), <b>oxy hoá–khử</b> (Fe²⁺ → Fe³⁺ tạo oxide/hydroxide sắt), <b>hydrat hoá</b>.<br><b>Sản phẩm:</b> kaolinite (thuỷ phân feldspar), goethite (oxy hoá & hydrat hoá sắt), gibbsite (rửa trôi mạnh, tích tụ Al), oxide sắt (oxy hoá khoáng vật chứa Fe).'],
+    ['Hoạt động sinh vật', 'Sinh vật <b>tạo khoáng vật trực tiếp</b> (vỏ sò, san hô: CaCO₃; xương, răng: phosphate Ca) hoặc <b>làm thay đổi môi trường</b> để khoáng vật kết tủa (quang hợp làm tăng pH cục bộ → CaCO₃ kết tủa). Có cả <b>sinh khoáng có kiểm soát</b> (biomineralization) nhờ nền hữu cơ định hướng vị trí, hình dạng và hướng phát triển tinh thể.<br><b>Ví dụ:</b> calcite (dạng thoi), aragonite (dạng trực thoi), apatite – hydroxyapatite (dạng lục giác) trong xương và răng.']
+  ],
+  alter: [
+    ['Serpentine hoá', 'Olivine, pyroxene → <b>serpentine</b>.'],
+    ['Chlorite hoá', 'Biotite, amphibole → <b>chlorite</b>.'],
+    ['Sericite hoá', 'Feldspar → <b>sericite</b> (mica trắng hạt mịn).'],
+    ['Kaolin hoá', 'Feldspar → <b>kaolinite</b> (khoáng vật sét).'],
+    ['Saussurite hoá', 'Plagioclase → tập hợp <b>saussurite</b> (nhiều khoáng vật hạt mịn).'],
+    ['Carbonate hoá', 'CO₂ được cố định trong khoáng vật <b>carbonate</b> (đá bị thay thế/lấp đầy bởi carbonate).'],
+    ['Silic hoá', 'Bổ sung SiO₂ → <b>quartz thứ sinh</b> (đá bị silic hoá).'],
+    ['Oxy hoá khoáng vật chứa sắt', 'Fe²⁺ → Fe³⁺; tạo <b>oxide – hydroxide sắt</b> (màu nâu đỏ).'],
+    ['Hydrat hoá & mất nước', 'Khoáng vật khan + H₂O ⇌ khoáng vật hydrat. Nước tham gia hoặc rời khỏi cấu trúc tinh thể (ví dụ anhydrite ⇌ gypsum).']
+  ],
+  idflow: [
+    ['1. Màu sắc & độ trong', 'Quan sát mẫu dưới ánh sáng trắng. Nhớ rằng màu chỉ là chỉ thị phụ (tạp chất làm đổi màu).'],
+    ['2. Ánh', 'Kim loại, thuỷ tinh, nhựa, ngọc trai… Phân biệt ánh kim và phi kim.'],
+    ['3. Hình dạng', 'Tinh thể (lăng trụ, khối, tấm…) hay tập hợp (hạt, thận, sợi, nhũ…).'],
+    ['4. Độ cứng', 'Thử vạch xước theo thang Mohs (móng tay ≈ 2,5; đồng xu ≈ 3–3,5; kính ≈ 5,5).'],
+    ['5. Vết vạch', 'Dùng tấm sứ không tráng men; vết vạch là màu của bột khoáng vật, ổn định hơn màu mẫu.'],
+    ['6. Cát khai & vết vỡ', 'Quan sát mặt phẳng hoặc bề mặt vỡ: số phương cát khai, góc giữa các phương, vết vỡ vỏ sò, nhám…'],
+    ['7. Tỷ trọng', 'Ước lượng bằng cảm giác nặng – nhẹ khi cầm mẫu.'],
+    ['8. Tính chất đặc biệt', 'Từ tính, thử HCl loãng (sủi bọt → carbonate), phát quang dưới tia UV… (lưu ý an toàn khi dùng hoá chất và UV).'],
+    ['9. Đối chiếu', 'So sánh tổ hợp tính chất với bảng nhận diện khoáng vật.'],
+    ['10. Kết luận', 'Ghi tên và nhóm khoáng vật. <b>Nguyên tắc:</b> quan sát trước → thử không phá huỷ → thử đặc biệt sau.']
+  ],
+  origin: [
+    ['Giảm áp suất (decompression melting)', 'Khi áp suất giảm, <b>nhiệt độ nóng chảy</b> của đá giảm tương đối → đá nóng chảy từng phần (không cần thêm nhiệt). Xảy ra khi manti nóng dâng lên.<br><b>Thường gặp tại:</b> sống núi giữa đại dương, rift lục địa, mantle plume / hot spot.'],
+    ['Thêm chất bay hơi (flux melting)', 'Nước và các chất bay hơi (H₂O, CO₂…) làm <b>giảm nhiệt độ nóng chảy</b> của manti → đá nóng chảy từng phần.<br><b>Thường gặp tại:</b> đới hút chìm, cung núi lửa, ria lục địa hoạt động.'],
+    ['Tăng nhiệt độ (heat-transfer melting)', 'Nhiệt độ tăng lên (do magma xâm nhập nóng hơn, mantle plume) → đá nóng chảy từng phần. Magma nóng truyền nhiệt cho đá vỏ/manti xung quanh.<br><b>Thường gặp tại:</b> magma nóng xâm nhập vào đá vỏ, hot spot, một số môi trường kiến tạo đặc biệt.']
+  ],
+  setting: [
+    ['Ria tách giãn', 'Sống núi giữa đại dương: các mảng chuyển động tách xa nhau → áp suất giảm → manti nóng chảy giảm áp → magma chủ yếu <b>mafic</b> (thành phần như manti – basalt).<br><b>Sản phẩm điển hình:</b> sống núi giữa đại dương.'],
+    ['Đới hút chìm', 'Mảng đại dương hút chìm xuống manti, nước và chất bay hơi (H₂O, CO₂…) giải phóng khỏi mảng chìm làm giảm nhiệt độ nóng chảy của manti → magma <b>đa dạng (mafic → intermediate → felsic)</b>.<br><b>Sản phẩm điển hình:</b> cung núi lửa.'],
+    ['Điểm nóng (hot spot)', 'Cột manti nóng (mantle plume) trồi lên từ sâu trong Trái Đất, manti nóng bất thường nóng chảy một phần → magma chủ yếu <b>mafic</b> (basalt).<br><b>Sản phẩm điển hình:</b> chuỗi núi lửa điểm nóng.']
+  ],
+  evolve: [
+    ['Kết tinh phân đoạn', 'Các khoáng vật <b>kết tinh sớm</b> (giàu Mg, Fe, ít SiO₂) tách ra khỏi magma và lắng xuống đáy buồng magma → phần magma còn lại <b>ngày càng giàu SiO₂</b> (và Na, K). Nhờ vậy từ một magma ban đầu có thể sinh ra chuỗi magma mafic → intermediate → felsic.'],
+    ['Đồng hoá vỏ (contamination)', 'Magma tương tác và đồng hoá vật liệu vỏ Trái Đất (khoáng vật, đá vây quanh) → <b>thay đổi thành phần hoá học</b> của magma.'],
+    ['Trộn lẫn magma (magma mixing)', 'Hai magma có thành phần, nhiệt độ khác nhau (ví dụ magma mafic nhiệt độ cao + magma felsic nhiệt độ thấp) trộn lẫn → tạo magma mới có thành phần <b>trung gian</b>.'],
+    ['Tách pha hơi', 'Các chất dễ bay hơi (H₂O, CO₂, S, Cl…) tách ra khỏi magma, làm thay đổi tính chất (nhất là độ nhớt, kiểu phun trào) của magma còn lại.']
+  ],
+  struct: [
+    ['Cấu tạo hạt đều (equigranular)', 'Các tinh thể có kích thước tương đương, phân bố khá đều. Thường gặp trong đá xâm nhập như granite.'],
+    ['Cấu tạo không đều (inequigranular)', 'Các tinh thể có kích thước khác nhau rõ rệt. Thường gặp trong đá xâm nhập như diorite, gabbro.'],
+    ['Cấu tạo porphyritic (hai pha hạt)', 'Có hai cỡ hạt khác biệt: tinh thể lớn (phenocryst) trong nền hạt mịn (groundmass). Thường gặp trong andesite, basalt porphyritic.'],
+    ['Cấu tạo thuỷ tinh (glassy)', 'Không có tinh thể (vô định hình); bề mặt nhẵn, bóng, vỏ sò. Thường gặp trong đá phun trào nguội nhanh như obsidian.'],
+    ['Cấu tạo lỗ hổng (vesicular)', 'Có nhiều lỗ rỗng do khí thoát ra khi magma nguội nhanh. Thường gặp trong scoria, pumice, vesicular basalt.'],
+    ['Cấu tạo mảnh vụn núi lửa (pyroclastic)', 'Được tạo thành từ các mảnh vụn núi lửa (tro, lapilli, bom) do vụ nổ. Thường gặp trong tuff, tuff hàn kết và breccia núi lửa.'],
+    ['Cấu tạo dòng (flow structure)', 'Các tinh thể và mảnh khoáng bị sắp xếp song song theo hướng dòng chảy của magma. Thường gặp trong basalt, rhyolite.'],
+    ['Cấu tạo amygdaloidal (hốc thạch anh)', 'Các lỗ rỗng được lấp đầy bởi khoáng vật thứ sinh (thạch anh, calcite, zeolite…). Thường gặp trong basalt.'],
+    ['Cấu tạo tầng (layering)', 'Các lớp khoáng vật sáng – tối xen kẽ do sự phân dị magma. Thường gặp trong gabbro, complex xâm nhập dạng tầng.'],
+    ['Cấu tạo cột (columnar jointing)', 'Các khối đá nứt theo các khe thẳng đứng tạo thành cột (thường 4–6 cạnh) do co ngót khi nguội nhanh. Thường gặp trong basalt.']
+  ]
+};
+
+W.pick = el => {
+  const k = el.dataset.k, L = PICK[k];
+  mk(el, `<div class="grid">${L.map((x, i) => `<div class="mini click ${i === 0 ? 'sel' : ''}" data-i="${i}"><h4>${x[0]}</h4></div>`).join('')}</div><div class="res" id="pk">${L[0][1]}</div>`);
+  const show = i => { qa(el, '.mini.click').forEach((m, j) => m.classList.toggle('sel', j === i)); q(el, '#pk').innerHTML = `<b>${L[i][0]}</b><br>${L[i][1]}`; };
+  qa(el, '.mini.click').forEach(m => m.onclick = () => show(+m.dataset.i)); show(0);
+};
+
+/* ---------- Dãy phản ứng Bowen ---------- */
+W.bowen = el => {
+  // vị trí (0 = ~1200 °C, 100 = ~650 °C) mang tính minh hoạ theo sơ đồ
+  const D = [['Olivine', 5, '#7aa63a'], ['Pyroxene', 25, '#4e6b4a'], ['Amphibole', 45, '#2f4a3a'], ['Biotite', 65, '#5b3a29']];
+  const P = [['Plagioclase giàu Ca (anorthite)', 5], ['Plagioclase trung gian', 35], ['Plagioclase giàu Na (albite)', 65]];
+  const L = [['K-feldspar', 78, '#e8a58b'], ['Muscovite', 88, '#d9c9a0'], ['Quartz', 95, '#cfd6dd']];
+  mk(el, `<canvas width="640" height="330" style="width:100%"></canvas>` + slider('bt', 'Tiến trình nguội', 0, 100, 1, 0, '%') + `<div class="res" id="bi"></div>
+  <div style="font-size:12px;color:var(--muted)">Thang nhiệt độ ≈ 1200 → 650 °C. Vị trí các khoáng vật trên sơ đồ chỉ mang tính minh hoạ trình tự, không phải mốc nhiệt độ chính xác.</div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const draw = v => {
+    g.clearRect(0, 0, 640, 330); g.font = '13px sans-serif';
+    const y = p => 30 + p / 100 * 270;
+    const T = 1200 - v / 100 * 550;
+    // trục nhiệt độ
+    const gr = g.createLinearGradient(0, 30, 0, 300); gr.addColorStop(0, '#d24545'); gr.addColorStop(1, '#1f5fbf');
+    g.fillStyle = gr; g.fillRect(14, 30, 8, 270); g.fillStyle = ink(); g.fillText('~1200 °C', 28, 40); g.fillText('~650 °C', 28, 300);
+    g.fillText('Nhánh không liên tục', 150, 18); g.fillText('Nhánh liên tục (plagioclase)', 400, 18);
+    g.fillStyle = '#d24545'; const my = y(v); g.fillRect(8, my - 1, 20, 3);
+    const box = (x, yy, w, t, on, col) => { g.globalAlpha = on ? 1 : .28; g.fillStyle = col || '#888'; g.beginPath(); g.roundRect(x, yy - 14, w, 28, 8); g.fill(); g.globalAlpha = 1; g.fillStyle = on ? '#fff' : ink(); g.fillText(t, x + 10, yy + 5); };
+    D.forEach((m, i) => { box(120, y(m[1]) + 10, 130, m[0], v >= m[1], m[2]); if (i) { g.strokeStyle = ink(); g.globalAlpha = .4; g.beginPath(); g.moveTo(185, y(D[i - 1][1]) + 24); g.lineTo(185, y(m[1]) - 4); g.stroke(); g.globalAlpha = 1; } });
+    P.forEach(m => box(350, y(m[1]) + 10, 260, m[0], v >= m[1], '#3a7bd5'));
+    L.forEach(m => box(240, y(m[1]) + 10, 140, m[0], v >= m[1], m[2] === '#cfd6dd' ? '#8a96a3' : m[2] === '#d9c9a0' ? '#a8935a' : '#c8704e'));
+    g.fillStyle = ink(); g.font = '12px sans-serif'; g.fillText('Hội tụ → khoáng vật kết tinh muộn', 240, 322);
+    const on = [...D, ...L].filter(m => v >= m[1]).map(m => m[0]); const pi = P.filter(m => v >= m[1]).pop();
+    q(el, '#bi').innerHTML = `Nhiệt độ ≈ <b>${T.toFixed(0)} °C</b>. Đã kết tinh: <b>${on.length ? on.join(', ') : '(chưa có)'}</b>${pi ? '; plagioclase: <b>' + pi[0] + '</b>' : ''}.<br>Magma sớm giàu Mg, Fe, Ca (nhiệt độ cao); magma muộn giàu Si, Na, K (nhiệt độ thấp).`;
+  };
+  bindSlider(el, 'bt', draw, '%'); draw(0);
+};
+
+/* ---------- SiO₂ ↔ loại magma, tính chất ---------- */
+W.silica = el => {
+  const T = [
+    [0, 45, 'Ultramafic', 'Peridotite, komatiite', 'Sẫm', '> 1200', 'Rất thấp', 'Rất cao', 'Trào chảy (hiếm, dung nham rất nóng)', ['Olivine', 'Pyroxene'], 1],
+    [45, 52, 'Mafic', 'Basalt, gabbro', 'Sẫm', '1100–1200', 'Thấp', 'Cao', 'Trào chảy (effusive), dung nham chảy xa', ['Plagioclase giàu Ca', 'Pyroxene', 'Olivine'], 2],
+    [52, 63, 'Intermediate', 'Andesite, diorite', 'Trung bình', '≈ 800–1000', 'Trung bình', 'Trung bình', 'Hỗn hợp (mixed): trào chảy và nổ', ['Plagioclase trung gian', 'Amphibole', 'Pyroxene', 'Biotite'], 3],
+    [63, 78, 'Felsic', 'Dacite, rhyolite, granite', 'Sáng', '650–800', 'Cao', 'Thấp', 'Nổ (explosive), dễ tạo phun trào mạnh', ['Quartz', 'K-feldspar', 'Plagioclase giàu Na', 'Biotite, muscovite'], 4]];
+  mk(el, slider('sx', 'Hàm lượng SiO₂', 40, 77, 1, 50, '%') + `<div style="height:14px;border-radius:7px;margin:4px 0 10px;background:linear-gradient(90deg,#3a7bd5,#e8a58b,#d24545)"></div><div id="sr"></div>`);
+  const f = v => {
+    const t = T.find(x => v >= x[0] && v < x[1]) || T[3];
+    const k = (v - 40) / 37;
+    q(el, '#sr').innerHTML = `<div class="res"><b style="font-size:17px">${t[2]}</b> (SiO₂ ${t[0] === 0 ? '< 45' : t[0] + '–' + (t[1] === 78 ? 77 : t[1])}%) · ví dụ đá: <b>${t[3]}</b></div>
+    <div class="tw"><table><tr><th>Độ nhớt</th><th>Nhiệt độ kết tinh</th><th>Tính lưu động</th><th>Màu sắc đá</th><th>Kiểu phun trào</th></tr><tr><td>${t[6]}</td><td>${t[5]} °C</td><td>${t[10] <= 2 ? 'Dễ chảy' : t[10] === 3 ? 'Trung bình' : 'Khó chảy'}</td><td>${t[4]}</td><td>${t[8]}</td></tr></table></div>
+    <div class="lab"><b style="min-width:120px">Độ nhớt</b><div class="bar" style="flex:1"><i style="width:${(8 + k * 92).toFixed(0)}%"></i></div></div>
+    <div class="lab"><b style="min-width:120px">Dễ phun trào nổ</b><div class="bar" style="flex:1"><i style="width:${(6 + k * 94).toFixed(0)}%"></i></div></div>
+    <div class="lab"><b style="min-width:120px">Nhiệt độ kết tinh</b><div class="bar" style="flex:1"><i style="width:${(100 - k * 90).toFixed(0)}%"></i></div></div>
+    <div>Khoáng vật đặc trưng: <b>${t[9].join(', ')}</b></div><div style="font-size:12px;color:var(--muted)">Thanh minh hoạ xu hướng tương đối (không phải giá trị đo).</div>`;
+  };
+  bindSlider(el, 'sx', f, '%'); f(50);
+};
+
+/* ---------- Khoảng thành phần oxit theo loại magma ---------- */
+W.oxides = el => {
+  const O = ['SiO₂', 'Al₂O₃', 'FeO + Fe₂O₃', 'MgO', 'CaO', 'Na₂O + K₂O'];
+  const R = {
+    'Ultramafic': [[0, 45], [2, 8], [8, 18], [18, 38], [6, 14], [0, 2]],
+    'Mafic': [[45, 52], [12, 18], [8, 14], [4, 12], [8, 14], [2, 6]],
+    'Intermediate': [[52, 63], [15, 18], [5, 10], [2, 6], [4, 8], [4, 8]],
+    'Felsic': [[63, 77], [12, 16], [1, 6], [0, 2], [1, 4], [6, 10]]
+  };
+  mk(el, `<div class="lab">Loại magma: <select id="ot">${Object.keys(R).map(k => `<option ${k === 'Mafic' ? 'selected' : ''}>${k}</option>`).join('')}</select></div><div id="ob"></div><div style="font-size:12px;color:var(--muted)">Thanh xanh = khoảng % khối lượng của từng oxit trong loại magma đó (thang 0–80%).</div>`);
+  const f = () => {
+    const r = R[q(el, '#ot').value];
+    q(el, '#ob').innerHTML = O.map((o, i) => `<div class="lab"><b style="min-width:110px">${o}</b><div style="flex:1;position:relative;height:14px;background:var(--line);border-radius:7px"><i style="position:absolute;left:${r[i][0] / 80 * 100}%;width:${Math.max(1.5, (r[i][1] - r[i][0]) / 80 * 100)}%;height:14px;border-radius:7px;background:var(--brand)"></i></div><span class="val" style="min-width:70px">${r[i][0]}–${r[i][1]}</span></div>`).join('');
+  };
+  q(el, '#ot').onchange = f; f();
+};
+
+/* ---------- Silicate theo cấu trúc ---------- */
+W.silicate = el => {
+  const S = [
+    ['Silicate đảo (nesosilicate)', 'SiO₄⁴⁻', '4', 'Tứ diện độc lập', 'Olivine, garnet', 'island'],
+    ['Silicate nhóm (sorosilicate)', 'Si₂O₇⁶⁻', '3,5', 'Hai (hoặc một nhóm nhỏ) tứ diện liên kết', 'Epidote', 'group'],
+    ['Silicate vòng (cyclosilicate)', 'Si₆O₁₈¹²⁻', '3', 'Các tứ diện liên kết thành vòng', 'Beryl, tourmaline', 'ring'],
+    ['Silicate mạch đơn (inosilicate)', '(SiO₃)²⁻', '3', 'Chuỗi đơn', 'Pyroxene', 'chain'],
+    ['Silicate mạch kép (inosilicate)', '(Si₄O₁₁)⁶⁻', '2,75', 'Chuỗi kép', 'Amphibole', 'dchain'],
+    ['Silicate lớp (phyllosilicate)', '(Si₂O₅)²⁻', '2,5', 'Liên kết thành lớp (mạng 2 chiều)', 'Mica, talc, khoáng vật sét', 'sheet'],
+    ['Silicate khung (tectosilicate)', 'SiO₂ (trung hoà)', '2', 'Mạng không gian ba chiều', 'Feldspar, quartz', 'frame']];
+  mk(el, `<div class="two"><div class="grid" style="grid-template-columns:1fr">${S.map((s, i) => `<div class="mini click ${i === 3 ? 'sel' : ''}" data-i="${i}"><h4>${s[0]}</h4><span style="font-size:13px">${s[4]}</span></div>`).join('')}</div><div><canvas width="340" height="220" style="width:100%"></canvas><div class="res" id="si"></div></div></div>
+  <div style="font-size:12px;color:var(--muted)">Tỷ lệ O/Si và công thức đơn vị là kiến thức chuẩn bổ sung (mở rộng) để thấy xu hướng: liên kết giữa các tứ diện tăng dần → O/Si giảm dần.</div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  const tri = (x, y, s, col) => { g.beginPath(); g.moveTo(x, y - s); g.lineTo(x + s * .87, y + s * .5); g.lineTo(x - s * .87, y + s * .5); g.closePath(); g.fillStyle = col; g.globalAlpha = .75; g.fill(); g.globalAlpha = 1; g.strokeStyle = ink(); g.lineWidth = 1; g.stroke(); };
+  const draw = i => {
+    g.clearRect(0, 0, 340, 220); const t = S[i][5], col = '#1f5fbf', s = 17;
+    if (t === 'island') [[70, 110], [140, 80], [210, 130], [270, 90]].forEach(p => tri(p[0], p[1], s, col));
+    if (t === 'group') [[130, 110], [176, 110]].forEach(p => tri(p[0], p[1], s, col));
+    if (t === 'ring') for (let k = 0; k < 6; k++) { const a = k / 6 * 6.283; tri(170 + 60 * Math.cos(a), 110 + 60 * Math.sin(a), 15, col); }
+    if (t === 'chain') for (let k = 0; k < 7; k++) tri(40 + k * 42, 110 + (k % 2 ? 14 : -14), 17, col);
+    if (t === 'dchain') for (let r = 0; r < 2; r++) for (let k = 0; k < 7; k++) tri(40 + k * 42, 70 + r * 70 + (k % 2 ? 12 : -12), 17, col);
+    if (t === 'sheet') for (let r = 0; r < 4; r++) for (let k = 0; k < 7; k++) tri(30 + k * 44 + (r % 2) * 22, 40 + r * 44, 15, col);
+    if (t === 'frame') { for (let r = 0; r < 4; r++) for (let k = 0; k < 7; k++) tri(30 + k * 44 + (r % 2) * 22, 40 + r * 44, 15, col); g.fillStyle = ink(); g.font = '12px sans-serif'; g.fillText('(mạng liên kết cả ba chiều, hình chỉ là lát cắt)', 40, 214); }
+    q(el, '#si').innerHTML = `<b>${S[i][0]}</b><br>Đơn vị: ${S[i][1]} · O/Si ≈ <b>${S[i][2]}</b><br>${S[i][3]}<br>Khoáng vật tiêu biểu: <b>${S[i][4]}</b>`;
+  };
+  qa(el, '.mini.click').forEach(m => m.onclick = () => { qa(el, '.mini.click').forEach(x => x.classList.toggle('sel', x === m)); draw(+m.dataset.i); }); draw(3);
+};
+
+/* ---------- Thẻ khoáng vật phổ biến ---------- */
+W.mincards = el => {
+  const M = [
+    ['Olivine', '(Mg,Fe)₂SiO₄', 'silicate', 'Xanh olive; độ cứng 6,5–7; không cát khai rõ, nhiều khe nứt; đá magma mafic và siêu mafic; dễ biến đổi thành serpentine.'],
+    ['Pyroxene', '(Ca,Mg,Fe)Si₂O₆', 'silicate', 'Xanh đen hoặc đen; hai phương cát khai gần 90° (87°/93°); tinh thể ngắn, chắc; phổ biến trong basalt và gabbro.'],
+    ['Amphibole', '(Ca,Na)₂(Mg,Fe,Al)₅Si₈O₂₂(OH)₂', 'silicate', 'Xanh đậm hoặc đen; tinh thể dạng trụ dài; hai phương cát khai 56° và 124°; andesite, diorite và đá biến chất.'],
+    ['Mica (muscovite, biotite)', 'K(Mg,Fe)₃AlSi₃O₁₀(OH)₂ (biotite)', 'silicate', 'Một phương cát khai hoàn toàn; tách thành lá mỏng đàn hồi. Muscovite: sáng màu; biotite: nâu đến đen.'],
+    ['Feldspar (K-feldspar, plagioclase)', 'KAlSi₃O₈; (Na,Ca)(Al,Si)₄O₈', 'silicate', 'Hai phương cát khai ≈ 90°; độ cứng ≈ 6; nhóm phổ biến nhất trong vỏ Trái Đất. Plagioclase: song tinh đa hợp; biến đổi thành sericite hoặc khoáng vật sét.'],
+    ['Quartz', 'SiO₂', 'silicate', 'Độ cứng 7; không cát khai, vết vỡ vỏ sò; ánh thuỷ tinh; đá magma felsic và đá biến chất, trầm tích.'],
+    ['Garnet', 'silicate đảo (nhiều thành phần)', 'silicate', 'Thường tạo tinh thể đẳng thước; không có cát khai; độ cứng cao; đặc trưng trong nhiều đá biến chất.'],
+    ['Khoáng vật sét', 'kaolinite, illite, smectite, chlorite', 'silicate', 'Hạt rất nhỏ; diện tích bề mặt lớn; khả năng trao đổi ion khác nhau; quan trọng trong địa chất, địa kỹ thuật và môi trường.'],
+    ['Calcite', 'CaCO₃', 'carbonate', 'Sủi bọt mạnh với HCl loãng; độ cứng 3; ba phương cát khai không vuông góc; khoáng vật chính của đá vôi và đá hoa.'],
+    ['Dolomite', 'CaMg(CO₃)₂', 'carbonate', 'Phản ứng với HCl yếu ở dạng khối, rõ hơn khi nghiền thành bột; thành phần chính của đá dolomite.'],
+    ['Gypsum', 'CaSO₄·2H₂O', 'sulfate', 'Độ cứng 2 (móng tay cào được); có thể bị mài mỏng; phổ biến trong môi trường bốc hơi.'],
+    ['Halite', 'NaCl', 'halide', 'Ba phương cát khai vuông góc, hình khối lập phương; vị mặn, dễ hoà tan; hình thành trong môi trường bốc hơi.'],
+    ['Magnetite', 'Fe₃O₄', 'oxide', 'Từ tính mạnh; màu và vết vạch đen; quặng sắt quan trọng.'],
+    ['Goethite', 'FeO(OH)', 'oxide', 'Nâu vàng đến nâu đen; phổ biến trong đới phong hoá; thành phần quan trọng của laterite và limonite.'],
+    ['Pyrite', 'FeS₂', 'sulfide', 'Vàng đồng, ánh kim; thường có tinh thể lập phương; cứng hơn chalcopyrite; oxy hoá tạo nước acid.'],
+    ['Chalcopyrite', 'CuFeS₂', 'sulfide', 'Vàng đồng, mềm hơn pyrite; quặng đồng quan trọng.'],
+    ['Galena', 'PbS', 'sulfide', 'Màu xám chì; ánh kim mạnh; tỷ trọng cao; ba phương cát khai vuông góc; quặng chì quan trọng.'],
+    ['Sphalerite', 'ZnS', 'sulfide', 'Màu vàng nâu đến đen; ánh nhựa đến ánh kim cương; quặng kẽm quan trọng.'],
+    ['Apatite', 'Ca₅(PO₄)₃(F,Cl,OH)', 'phosphate', 'Độ cứng Mohs = 5; khoáng vật phosphate phổ biến; nguồn nguyên liệu sản xuất phân lân.']];
+  const cls = ['tất cả', 'silicate', 'carbonate', 'sulfate', 'halide', 'oxide', 'sulfide', 'phosphate'];
+  mk(el, `<div class="lab">Lọc theo nhóm: <select id="mf">${cls.map(c => `<option>${c}</option>`).join('')}</select></div><div id="mg"></div>`);
+  const f = () => { const s = q(el, '#mf').value; q(el, '#mg').innerHTML = `<div class="grid">${M.filter(m => s === 'tất cả' || m[2] === s).map(m => `<div class="mini"><h4>${m[0]}</h4><div style="font-size:12px;color:var(--muted)">${m[1]} · ${m[2]}</div><span style="font-size:13px">${m[3]}</span></div>`).join('')}</div>`; };
+  q(el, '#mf').onchange = f; f();
+};
+
+/* ---------- Kiến trúc đá magma ---------- */
+W.texture = el => {
+  const X = [
+    ['Hiển tinh (phaneritic)', 'Tinh thể lớn (> 1 mm), dễ quan sát bằng mắt thường; hình thành do magma nguội chậm ở sâu (đá xâm nhập).', 'Granite, diorite, gabbro, peridotite', 0.09, 1, 'slow'],
+    ['Ẩn tinh (aphanitic)', 'Tinh thể rất nhỏ (< 1 mm), không quan sát được bằng mắt thường; hình thành do magma nguội nhanh gần bề mặt hoặc trên bề mặt (đá phun trào).', 'Basalt, andesite, rhyolite', 0.02, 1, 'fast'],
+    ['Nổi ban (porphyr / porphyritic)', 'Hai cỡ hạt rõ rệt: tinh thể lớn (phenocryst) trong nền hạt mịn (groundmass). Hình thành do thay đổi tốc độ nguội: ban đầu nguội chậm ở sâu, sau đó magma lên gần bề mặt và nguội nhanh.', 'Andesite porphyritic, granite porphyry', 0.02, 1, 'two'],
+    ['Thuỷ tinh (glassy)', 'Không có tinh thể (vô định hình); bề mặt nhẵn, bóng; vết vỡ vỏ sò. Magma nguội cực nhanh ngay tại bề mặt, không đủ thời gian để nguyên tử sắp xếp thành mạng tinh thể.', 'Obsidian, tachylite, thuỷ tinh núi lửa dạng bọt (pumice thuỷ tinh)', 0, 0, 'glass'],
+    ['Lỗ hổng (vesicular)', 'Có nhiều lỗ rỗng (vesicle) do khí thoát ra khi magma nguội nhanh gần bề mặt (khí hoà tan H₂O, CO₂, SO₂… thoát ra thành bọt khí).', 'Scoria, pumice, vesicular basalt', 0.02, 1, 'vesic'],
+    ['Mảnh vụn núi lửa (pyroclastic)', 'Gồm các mảnh vụn núi lửa kích thước khác nhau (tro < 2 mm, lapilli 2–64 mm, bom/khối > 64 mm); hình thành từ vụ nổ núi lửa, sau đó rơi xuống, lắng đọng và kết dính (hoặc hàn kết); không phải kết tinh trực tiếp từ magma.', 'Tuff, tuff hàn kết, breccia núi lửa', 0, 0, 'clast']];
+  mk(el, `<div class="two"><div class="grid" style="grid-template-columns:1fr">${X.map((x, i) => `<div class="mini click ${i === 0 ? 'sel' : ''}" data-i="${i}"><h4>${x[0]}</h4></div>`).join('')}</div><div><canvas width="340" height="260" style="width:100%;background:#111;border-radius:10px"></canvas><div class="res" id="ti"></div></div></div>`);
+  const c = q(el, 'canvas'), g = c.getContext('2d');
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const blob = (x, y, r, col, rot) => { g.save(); g.translate(x, y); g.rotate(rot); g.beginPath(); const n = 6; for (let k = 0; k < n; k++) { const a = k / n * 6.283, rr = r * (.75 + rnd() * .5); k ? g.lineTo(rr * Math.cos(a), rr * Math.sin(a)) : g.moveTo(rr * Math.cos(a), rr * Math.sin(a)); } g.closePath(); g.fillStyle = col; g.fill(); g.restore(); };
+  const cols = ['#e8c9b0', '#cfd6dd', '#6e8f4a', '#2b2b2b', '#b98a6a'];
+  const draw = i => {
+    seed = 7 + i; g.clearRect(0, 0, 340, 260); const t = X[i][5];
+    if (t === 'slow') for (let k = 0; k < 70; k++) blob(rnd() * 340, rnd() * 260, 20 + rnd() * 14, cols[k % 5], rnd() * 6);
+    if (t === 'fast') { g.fillStyle = '#222'; g.fillRect(0, 0, 340, 260); for (let k = 0; k < 900; k++) blob(rnd() * 340, rnd() * 260, 2 + rnd() * 2.5, cols[k % 5], rnd() * 6); }
+    if (t === 'two') { g.fillStyle = '#222'; g.fillRect(0, 0, 340, 260); for (let k = 0; k < 900; k++) blob(rnd() * 340, rnd() * 260, 2 + rnd() * 2, cols[k % 5], rnd() * 6); for (let k = 0; k < 6; k++) blob(30 + rnd() * 280, 30 + rnd() * 200, 24 + rnd() * 8, '#e8c9b0', rnd() * 6); }
+    if (t === 'glass') { const gr = g.createLinearGradient(0, 0, 340, 260); gr.addColorStop(0, '#0a0a0a'); gr.addColorStop(1, '#2a2a30'); g.fillStyle = gr; g.fillRect(0, 0, 340, 260); g.strokeStyle = 'rgba(255,255,255,.2)'; g.beginPath(); g.arc(250, 200, 70, 3.3, 4.6); g.stroke(); g.beginPath(); g.arc(250, 200, 100, 3.3, 4.6); g.stroke(); }
+    if (t === 'vesic') { g.fillStyle = '#3a3a3a'; g.fillRect(0, 0, 340, 260); for (let k = 0; k < 28; k++) { g.beginPath(); g.arc(rnd() * 340, rnd() * 260, 6 + rnd() * 18, 0, 7); g.fillStyle = '#0c0c0c'; g.fill(); } }
+    if (t === 'clast') { g.fillStyle = '#4b4238'; g.fillRect(0, 0, 340, 260); for (let k = 0; k < 120; k++) blob(rnd() * 340, rnd() * 260, 4 + rnd() * 16, ['#8a7d6b', '#b8aa95', '#5a4f43', '#2f2b27'][k % 4], rnd() * 6); }
+    const x = X[i]; q(el, '#ti').innerHTML = `<b>${x[0]}</b><br>${x[1]}<br><b>Đá thường gặp:</b> ${x[2]}<div style="font-size:12px;color:var(--muted)">Hình vẽ minh hoạ sơ đồ (mô phỏng lát mỏng), không phải ảnh thật.</div>`;
+  };
+  qa(el, '.mini.click').forEach(m => m.onclick = () => { qa(el, '.mini.click').forEach(x => x.classList.toggle('sel', x === m)); draw(+m.dataset.i); }); draw(0);
+};
+
+</script>
+<script>
 /* Khung ứng dụng: mục lục, định tuyến theo hash, tiến độ học, giao diện sáng/tối.
    Đổi SITE.title / SITE.sub cho từng môn. Không chứa câu hỏi kiểm tra (quiz làm ở web khác). */
-const SITE = { title: 'Khoáng vật & Thạch học', sub: 'GE2079 · ĐH Bách Khoa TP.HCM · GV Đổng Uyên Thanh' };
+const SITE = { title: 'Khoáng vật & Thạch học', sub: 'GE2079 · ĐH Bách Khoa TP.HCM' };
 const CH = window.CHAPTERS;
 const $ = (s, r = document) => r.querySelector(s);
 const side = $('#side'), main = $('#main');
 const store = {
-  get(k, d) { try { const v = localStorage.getItem('kvth:'+k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
-  set(k, v) { try { localStorage.setItem('kvth:'+k, JSON.stringify(v)); } catch (e) {} }
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 };
 let done = store.get('done', {});
 const colors = ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--accent)'];
